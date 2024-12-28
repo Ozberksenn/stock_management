@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Stock',
+      title: 'Stock Management',
       theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
       routerConfig: router,

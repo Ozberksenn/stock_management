@@ -1,4 +1,5 @@
 import 'package:backofficestock/core/decoration/decoration.dart';
+import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/data/navigation_data.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
@@ -23,9 +24,9 @@ class NavigationBarWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const Text(
-              'Logo',
-              style: AppFonts.logoText,
+            Image.asset(
+              "logo/stock-light.png",
+              width: context.dynamicWidth(0.09),
             ),
             const CustomSizedBox.paddingHeight(heightValue: 20),
             ListView.builder(

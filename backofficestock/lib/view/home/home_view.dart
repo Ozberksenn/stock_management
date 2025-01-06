@@ -2,14 +2,17 @@ import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/core/widget/padding.dart';
 import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
+import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:backofficestock/view/home/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final HomeProivder homeProivder = context.watch();
     return Scaffold(
         body: Container(
       width: context.dynamicWidth(1),
@@ -26,7 +29,7 @@ class HomeView extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: AppColors.white,
                         borderRadius: CustomRadius.radius16),
-                    child: content("home"),
+                    child: content(homeProivder.menuId),
                   )))
         ],
       ),
@@ -34,11 +37,17 @@ class HomeView extends StatelessWidget {
   }
 }
 
-content(String menuName) {
-  switch (menuName) {
-    case "home":
-      return Container();
+content(int menuId) {
+  switch (menuId) {
+    case 1:
+      return Container(
+          child: Column(
+        children: [Text('data')],
+      ));
     default:
-      return const SizedBox();
+      return Container(
+          child: Column(
+        children: [Text('data')],
+      ));
   }
 }

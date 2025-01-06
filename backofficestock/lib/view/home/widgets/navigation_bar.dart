@@ -5,7 +5,9 @@ import 'package:backofficestock/data/navigation_data.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/model/navigation_model.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
+import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../core/widget/padding.dart';
 
 class NavigationBarWidget extends StatelessWidget {
@@ -83,7 +85,11 @@ class MenuCard extends StatelessWidget {
   const MenuCard({super.key, required this.item});
   @override
   Widget build(BuildContext context) {
+    final HomeProivder homeProvider = context.watch();
     return ListTile(
+        onTap: () {
+          homeProvider.changeMenu(item.id);
+        },
         contentPadding: const ConstEdgeInsets.padding0(),
         title: Text(item.title ?? ""),
         leading: CustomIcon(icon: item.icon));

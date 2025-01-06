@@ -26,9 +26,19 @@ class HomeView extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: AppColors.white,
                         borderRadius: CustomRadius.radius16),
+                    child: content("home"),
                   )))
         ],
       ),
     ));
+  }
+}
+
+content(String menuName) {
+  switch (menuName) {
+    case "home":
+      return Container();
+    default:
+      return const SizedBox();
   }
 }

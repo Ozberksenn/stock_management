@@ -1,5 +1,7 @@
 import 'package:backofficestock/product/theme/theme.dart';
+import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'product/routes/router.dart';
 
 void main() {
@@ -12,11 +14,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Stock Management',
-      theme: AppTheme.darkTheme,
-      debugShowCheckedModeBanner: false,
-      routerConfig: router,
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => HomeProivder())],
+      child: MaterialApp.router(
+        title: 'Stock Management',
+        theme: AppTheme.darkTheme,
+        debugShowCheckedModeBanner: false,
+        routerConfig: router,
+      ),
     );
   }
 }

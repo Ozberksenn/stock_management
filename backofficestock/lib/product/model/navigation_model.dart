@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class NavigationModel {
+  int id;
   String? title;
   IconData? icon;
 
-  NavigationModel({this.title, this.icon});
+  NavigationModel({required this.id, this.title, this.icon});
 }

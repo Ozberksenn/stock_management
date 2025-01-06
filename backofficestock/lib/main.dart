@@ -1,3 +1,4 @@
+import 'package:backofficestock/product/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'product/routes/router.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Stock Management',
-      theme: ThemeData(useMaterial3: true),
+      theme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       routerConfig: router,
     );

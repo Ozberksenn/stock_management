@@ -26,9 +26,9 @@ class NavigationBarWidget extends StatelessWidget {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Image.asset(
               "logo/stock-light.png",
-              width: context.dynamicWidth(0.09),
+              width: context.dynamicWidth(0.075),
             ),
-            const CustomSizedBox.paddingHeight(heightValue: 20),
+            const CustomSizedBox.paddingHeight(heightValue: 40),
             ListView.builder(
                 shrinkWrap: true,
                 itemCount: navigationData.length,
@@ -38,33 +38,43 @@ class NavigationBarWidget extends StatelessWidget {
                   );
                 })
           ]),
-          Container(
-            width: double.infinity,
-            padding: const ConstEdgeInsets.paddingSymetric(verticalPad: 24),
-            decoration: BoxDecoration(
-                color: AppColors.dark, borderRadius: CustomRadius.radius16),
-            child: Column(
-              children: [
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: CustomDecoration.circularImageDecoration(
-                      imageUrl: AppString.customProfileUrl),
-                ),
-                const CustomSizedBox.paddingHeight(heightValue: 8),
-                Text('Özberk Şen',
-                    style: Theme.of(context).textTheme.labelLarge),
-                const CustomSizedBox.paddingHeight(heightValue: 4),
-                Text(
-                  'Company: 1',
-                  style: Theme.of(context).textTheme.labelSmall,
-                )
-              ],
-            ),
-          ),
+          const NavigationProfileCard(),
         ],
       ),
     ));
+  }
+}
+
+class NavigationProfileCard extends StatelessWidget {
+  const NavigationProfileCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const ConstEdgeInsets.paddingSymetric(verticalPad: 24),
+      decoration: BoxDecoration(
+          color: AppColors.dark, borderRadius: CustomRadius.radius16),
+      child: Column(
+        children: [
+          Container(
+            width: 80,
+            height: 80,
+            decoration: CustomDecoration.circularImageDecoration(
+                imageUrl: AppString.customProfileUrl),
+          ),
+          const CustomSizedBox.paddingHeight(heightValue: 8),
+          Text('Özberk Şen', style: Theme.of(context).textTheme.labelLarge),
+          const CustomSizedBox.paddingHeight(heightValue: 4),
+          Text(
+            'Company: 1',
+            style: Theme.of(context).textTheme.labelSmall,
+          )
+        ],
+      ),
+    );
   }
 }
 

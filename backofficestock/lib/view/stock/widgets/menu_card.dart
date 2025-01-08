@@ -10,7 +10,7 @@ class MenuTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tab(
         child: Container(
-      padding: ConstEdgeInsets.paddingSymetric(
+      padding: const ConstEdgeInsets.paddingSymetric(
           verticalPad: 6.0, horizontalPad: 12.0),
       decoration: BoxDecoration(
           borderRadius: CustomRadius.radius6, color: AppColors.dark),

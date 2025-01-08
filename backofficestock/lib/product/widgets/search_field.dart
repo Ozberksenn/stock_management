@@ -16,9 +16,11 @@ class SearchField extends StatelessWidget {
         child: TextFormField(
           decoration: const InputDecoration(
               hintText: 'Search',
+              prefixIconConstraints:
+                  BoxConstraints(minHeight: 10, minWidth: 40),
               prefixIcon: CustomIcon(
                 icon: CupertinoIcons.search,
-                size: 16,
+                size: 18,
               )),
         ));
   }

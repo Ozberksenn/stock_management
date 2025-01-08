@@ -14,6 +14,7 @@ final class ConstEdgeInsets extends EdgeInsets {
   const ConstEdgeInsets.padding16() : super.all(16);
   const ConstEdgeInsets.padding12() : super.all(12);
   const ConstEdgeInsets.padding8() : super.all(8);
+  const ConstEdgeInsets.padding6() : super.all(6);
   const ConstEdgeInsets.padding4() : super.all(4);
   const ConstEdgeInsets.padding2() : super.all(2);
   const ConstEdgeInsets.padding0() : super.all(0);

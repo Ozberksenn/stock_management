@@ -21,7 +21,7 @@ class TabBarWidget extends StatelessWidget {
       dividerColor: AppColors.white,
       indicatorColor: AppColors.primaryColor,
       isScrollable: true,
-      labelPadding: const ConstEdgeInsets.paddingOnly(right: 24.0),
+      labelPadding: const ConstEdgeInsets.paddingOnly(right: 12.0),
       tabs: [
         MenuTab(),
         MenuTab(),

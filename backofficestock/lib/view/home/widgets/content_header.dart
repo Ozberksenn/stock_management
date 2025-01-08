@@ -1,4 +1,6 @@
+import 'package:backofficestock/core/widget/padding.dart';
 import 'package:flutter/material.dart';
+import '../../../product/widgets/custom_icon_button.dart';
 import '../../../product/widgets/search_field.dart';
 
 class ContentHeader extends StatelessWidget {
@@ -14,7 +16,11 @@ class ContentHeader extends StatelessWidget {
           title,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
-        const SearchField()
+        const Row(children: [
+          CustomIconButton(),
+          CustomSizedBox.paddingWidth(widthValue: 8.0),
+          SearchField()
+        ])
       ],
     );
   }

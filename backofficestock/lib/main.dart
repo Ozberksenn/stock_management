@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => HomeProivder())],
+      providers: [
+        ChangeNotifierProvider(create: (context) => HomeProivder()),
+      ],
       child: MaterialApp.router(
         title: 'Stock Management',
         theme: AppTheme.lightTheme,

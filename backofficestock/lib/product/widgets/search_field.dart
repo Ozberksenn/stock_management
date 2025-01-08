@@ -1,4 +1,5 @@
 import 'package:backofficestock/core/extension/context_extension.dart';
+import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,7 @@ class SearchField extends StatelessWidget {
               prefixIcon: CustomIcon(
                 icon: CupertinoIcons.search,
                 size: 18,
+                color: AppColors.primaryColor,
               )),
         ));
   }

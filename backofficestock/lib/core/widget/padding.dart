@@ -19,6 +19,13 @@ final class ConstEdgeInsets extends EdgeInsets {
   const ConstEdgeInsets.padding0() : super.all(0);
   const ConstEdgeInsets.paddingHorizontal6() : super.symmetric(horizontal: 6);
   const ConstEdgeInsets.paddingHorizontal12() : super.symmetric(horizontal: 12);
+  const ConstEdgeInsets.paddingOnly(
+      {double? left, double? right, double? top, double? bottom})
+      : super.only(
+            left: left ?? 0,
+            top: top ?? 0,
+            right: right ?? 0,
+            bottom: bottom ?? 0);
 
   const ConstEdgeInsets.paddingSymetric(
       {double? horizontalPad, double? verticalPad})

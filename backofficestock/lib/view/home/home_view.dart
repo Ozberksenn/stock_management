@@ -4,8 +4,10 @@ import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:backofficestock/view/home/widgets/navigation_bar.dart';
+import 'package:backofficestock/view/stock/stock_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'widgets/content_header.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -26,11 +28,18 @@ class HomeView extends StatelessWidget {
               child: CustomPaddings.customPadding(
                   value: 20,
                   child: Container(
-                    decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: CustomRadius.radius16),
-                    child: content(homeProivder.menuId),
-                  )))
+                      padding: const ConstEdgeInsets.padding12(),
+                      decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: CustomRadius.radius16),
+                      child: Column(
+                        children: [
+                          const ContentHeader(
+                            title: "Stock Management",
+                          ),
+                          content(homeProivder.menuId),
+                        ],
+                      ))))
         ],
       ),
     ));
@@ -40,14 +49,8 @@ class HomeView extends StatelessWidget {
 content(int menuId) {
   switch (menuId) {
     case 1:
-      return Container(
-          child: Column(
-        children: [Text('data')],
-      ));
+      return const StockView();
     default:
-      return Container(
-          child: Column(
-        children: [Text('data')],
-      ));
+      return Container();
   }
 }

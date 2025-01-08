@@ -1,3 +1,4 @@
+import 'package:backofficestock/product/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 @immutable
@@ -13,8 +14,15 @@ final class AppColors {
 final class AppFonts {
   const AppFonts._();
 
-  static const TextStyle logoText = TextStyle(
-      fontSize: 22, color: AppColors.white, fontWeight: FontWeight.w200);
+  static final TextStyle whiteHeadlineSmall = AppTheme
+      .lightTheme.textTheme.headlineMedium!
+      .copyWith(color: AppColors.white);
+  static final TextStyle whiteTitleLarge = AppTheme
+      .lightTheme.textTheme.titleLarge!
+      .copyWith(color: AppColors.white);
+  static final TextStyle whiteBodyMedium = AppTheme
+      .lightTheme.textTheme.bodyMedium!
+      .copyWith(color: AppColors.white);
 }
 
 @immutable

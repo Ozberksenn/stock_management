@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
       providers: [ChangeNotifierProvider(create: (context) => HomeProivder())],
       child: MaterialApp.router(
         title: 'Stock Management',
-        theme: AppTheme.darkTheme,
+        theme: AppTheme.lightTheme,
+        // darkTheme: AppTheme.darkTheme,
         debugShowCheckedModeBanner: false,
         routerConfig: router,
       ),

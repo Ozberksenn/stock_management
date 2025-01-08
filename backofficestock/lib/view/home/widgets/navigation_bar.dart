@@ -91,7 +91,10 @@ class MenuCard extends StatelessWidget {
           homeProvider.changeMenu(item.id);
         },
         contentPadding: const ConstEdgeInsets.padding0(),
-        title: Text(item.title ?? ""),
+        title: Text(
+          item.title ?? "",
+          style: AppFonts.whiteBodyMedium,
+        ),
         leading: CustomIcon(icon: item.icon));
   }
 }

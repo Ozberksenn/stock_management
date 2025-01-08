@@ -11,7 +11,7 @@ class ContentHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Stock Management',
+          title,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         const SearchField()

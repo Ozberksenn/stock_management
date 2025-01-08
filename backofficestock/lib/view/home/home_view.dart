@@ -34,10 +34,10 @@ class HomeView extends StatelessWidget {
                           borderRadius: CustomRadius.radius16),
                       child: Column(
                         children: [
-                          const ContentHeader(
-                            title: "Stock Management",
+                          ContentHeader(
+                            title: homeProivder.menu.title ?? "",
                           ),
-                          content(homeProivder.menuId),
+                          content(homeProivder.menu.id),
                         ],
                       ))))
         ],

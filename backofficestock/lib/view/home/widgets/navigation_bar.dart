@@ -88,13 +88,18 @@ class MenuCard extends StatelessWidget {
     final HomeProivder homeProvider = context.watch();
     return ListTile(
         onTap: () {
-          homeProvider.changeMenu(item.id);
+          homeProvider.changeMenu(item);
         },
         contentPadding: const ConstEdgeInsets.padding0(),
-        title: Text(
-          item.title ?? "",
-          style: AppFonts.whiteBodyMedium,
-        ),
-        leading: CustomIcon(icon: item.icon));
+        title: Text(item.title ?? "",
+            style: item.id == homeProvider.menu.id
+                ? AppFonts.whiteBodyMedium
+                : AppFonts.greyBodyMedium),
+        leading: CustomIcon(
+          icon: item.icon,
+          color: item.id == homeProvider.menu.id
+              ? AppColors.white
+              : AppColors.grey,
+        ));
   }
 }

@@ -8,6 +8,7 @@ final class AppColors {
   static const Color black = Color.fromRGBO(39, 42, 45, 1);
   static const Color dark = Color.fromRGBO(50, 52, 54, 1);
   static const Color white = Colors.white;
+  static const Color grey = Color.fromARGB(255, 203, 196, 196);
 }
 
 @immutable
@@ -23,6 +24,9 @@ final class AppFonts {
   static final TextStyle whiteBodyMedium = AppTheme
       .lightTheme.textTheme.bodyMedium!
       .copyWith(color: AppColors.white);
+  static final TextStyle greyBodyMedium = AppTheme
+      .lightTheme.textTheme.bodyMedium!
+      .copyWith(color: const Color.fromARGB(255, 160, 157, 157));
 }
 
 @immutable

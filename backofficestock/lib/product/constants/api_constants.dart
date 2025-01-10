@@ -28,6 +28,9 @@ final class AppFonts {
   static final TextStyle greyBodyMedium = AppTheme
       .lightTheme.textTheme.bodyMedium!
       .copyWith(color: const Color.fromARGB(255, 160, 157, 157));
+  static final TextStyle greylabelSmall = AppTheme
+      .lightTheme.textTheme.labelSmall!
+      .copyWith(color: const Color.fromARGB(255, 160, 157, 157));
 }
 
 @immutable
@@ -35,5 +38,7 @@ final class AppString {
   const AppString._();
   static const customProfileUrl =
       "https://cdn.pixabay.com/photo/2021/06/15/16/11/man-6339003_1280.jpg";
+  static const custumProductUrl =
+      "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-madebymath-90946.jpg&fm=jpg";
   static const logoUrl = '';
 }

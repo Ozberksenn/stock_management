@@ -1,4 +1,5 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../product/widgets/custom_icon_button.dart';
 import '../../../product/widgets/search_field.dart';
@@ -17,7 +18,10 @@ class ContentHeader extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         const Row(children: [
-          CustomIconButton(),
+          CustomIconButton(
+            icon: CupertinoIcons.add,
+            text: 'Add',
+          ),
           CustomSizedBox.paddingWidth(widthValue: 8.0),
           SearchField()
         ])

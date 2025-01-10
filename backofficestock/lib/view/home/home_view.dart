@@ -22,7 +22,7 @@ class HomeView extends StatelessWidget {
       color: AppColors.black,
       child: Row(
         children: [
-          const NavigationBarWidget(),
+          const CustomExpanded(flex: 1, child: NavigationBarWidget()),
           CustomExpanded(
               flex: 5,
               child: CustomPaddings.customPadding(
@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
                           ContentHeader(
                             title: homeProivder.menu.title ?? "",
                           ),
-                          content(homeProivder.menu.id),
+                          content(homeProivder.menu.id)
                         ],
                       ))))
         ],

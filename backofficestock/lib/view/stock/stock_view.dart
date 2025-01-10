@@ -27,12 +27,17 @@ class _StockViewState extends State<StockView>
       const CustomSizedBox.paddingHeight(heightValue: 10),
       TabBarWidget(stockProvider: stockProvider),
       const CustomSizedBox.paddingHeight(heightValue: 10),
-      ListView.builder(
-          shrinkWrap: true,
-          itemCount: 1,
-          itemBuilder: (context, index) {
-            return const StockProductCard();
-          }),
+      Expanded(
+        child: ListView.separated(
+            shrinkWrap: true,
+            itemCount: 50,
+            separatorBuilder: (context, index) {
+              return const CustomSizedBox.paddingHeight(heightValue: 16.0);
+            },
+            itemBuilder: (context, index) {
+              return const StockProductCard();
+            }),
+      ),
     ]);
   }
 }

@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
                           ContentHeader(
                             title: homeProivder.menu.title ?? "",
                           ),
-                          content(homeProivder.menu.id)
+                          Expanded(child: content(homeProivder.menu.id)),
                         ],
                       ))))
         ],

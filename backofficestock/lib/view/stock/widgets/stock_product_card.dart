@@ -18,7 +18,6 @@ class StockProductCard extends StatelessWidget {
         customDialog(context);
       },
       child: Container(
-          margin: const ConstEdgeInsets.paddingOnly(right: 6.0),
           decoration: BoxDecoration(
               borderRadius: CustomRadius.radius8,
               color: AppColors.white,

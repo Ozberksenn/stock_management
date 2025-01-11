@@ -31,7 +31,6 @@ class _StockViewState extends State<StockView>
     return Column(children: [
       const CustomSizedBox.paddingHeight(heightValue: 10),
       const StockMenuTitle(),
-      const CustomSizedBox.paddingHeight(heightValue: 2),
       TabBarWidget(stockProvider: stockProvider),
       const CustomSizedBox.paddingHeight(heightValue: 10),
       Expanded(

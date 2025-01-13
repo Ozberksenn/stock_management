@@ -1,4 +1,5 @@
 import 'package:backofficestock/product/theme/theme.dart';
+import 'package:backofficestock/view/form/form_provider.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => HomeProivder()),
+        ChangeNotifierProvider(create: (context) => FormProvider()),
       ],
       child: MaterialApp.router(
         title: 'Stock Management',

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants/api_constants.dart';
 
 Future<dynamic> customDialog(BuildContext context,
-    {double? width, double? height}) {
+    {double? width, double? height, Widget? widget}) {
   return showDialog(
       context: context,
       builder: (context) {
@@ -14,7 +14,7 @@ Future<dynamic> customDialog(BuildContext context,
                 borderRadius: BorderRadius.all(Radius.circular(12.0))),
             width: width ?? context.dynamicWidth(0.8),
             height: height ?? context.dynamicWidth(0.5),
-            child: Container(),
+            child: widget ?? Container(),
           ),
         );
       });

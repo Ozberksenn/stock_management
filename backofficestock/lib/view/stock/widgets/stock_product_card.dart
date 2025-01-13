@@ -1,4 +1,5 @@
 import 'package:backofficestock/product/widgets/custom_icon_button.dart';
+import 'package:backofficestock/view/form/form_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../core/widget/padding.dart';
@@ -15,7 +16,10 @@ class StockProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        customDialog(context);
+        customDialog(context,
+            widget: FormView(
+              title: 'Deneme',
+            ));
       },
       child: Container(
           decoration: BoxDecoration(

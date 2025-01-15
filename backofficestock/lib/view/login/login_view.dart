@@ -1,3 +1,4 @@
+import 'package:backofficestock/core/widget/padding.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatelessWidget {
@@ -5,8 +6,11 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Column(children: []),
+    return Scaffold(
+      body: Row(children: [
+        const CustomExpanded(flex: 1, child: Text('data')),
+        CustomExpanded(flex: 3, child: Container())
+      ]),
     );
   }
 }

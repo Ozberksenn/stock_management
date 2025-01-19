@@ -4,11 +4,10 @@ class AppService {
   late final Dio dio;
   AppService._init() {
     dio = Dio(BaseOptions(
-      baseUrl: "https://api.example.com", // Temel URL
-      // headers: {
-      //   "Authorization": "Bearer YOUR_TOKEN", // Gerekirse token
-      //   "Content-Type": "application/json", // Varsayılan header
-      // },
+      baseUrl: "http://192.168.1.43:8080", // URL
+      headers: {
+        "Content-Type": "application/json", // Varsayılan header
+      },
     ));
   }
 

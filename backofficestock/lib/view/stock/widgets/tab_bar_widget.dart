@@ -22,15 +22,9 @@ class TabBarWidget extends StatelessWidget {
       indicatorColor: AppColors.primaryColor,
       isScrollable: true,
       labelPadding: const ConstEdgeInsets.paddingOnly(right: 12.0),
-      tabs: [
-        MenuTab(),
-        MenuTab(),
-        MenuTab(),
-        MenuTab(),
-        MenuTab(),
-        MenuTab(),
-        MenuTab()
-      ],
+      tabs: stockProvider.menuTabList
+          .map((e) => MenuTab(text: e.menuName))
+          .toList(),
       controller: stockProvider.tabController,
     );
   }

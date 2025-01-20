@@ -7,16 +7,17 @@ class StockProvider extends ChangeNotifier {
   late TabController tabController;
   List<MenuModel> menuTabList = [];
   bool isMenuReady = false;
-  StockProvider(TickerProvider vsync) {
-    init(vsync);
+  bool isInitialized = false;
+  // StockProvider() {
+  // }
+
+  void init({TickerProvider? vsync}) {
+    if (isInitialized) return;
+    isInitialized = true;
+    getMenu(vsync);
   }
 
-  void init(TickerProvider vsync) {
-    tabController = TabController(length: 7, vsync: vsync);
-    getMenu();
-  }
-
-  Future<void> getMenu() async {
+  Future<void> getMenu(vsync) async {
     isMenuReady = false;
     Response response = await AppService.instance.getData("/getMenu");
     if (response.data != null) {
@@ -24,8 +25,9 @@ class StockProvider extends ChangeNotifier {
           .map((e) => MenuModel.fromMap(e))
           .toList()
           .cast<MenuModel>();
-      print(menuTabList[0].menuName);
+      tabController = TabController(length: menuTabList.length, vsync: vsync!);
     }
     isMenuReady = true;
+    notifyListeners();
   }
 }

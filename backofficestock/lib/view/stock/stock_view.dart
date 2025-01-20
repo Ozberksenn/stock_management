@@ -5,6 +5,7 @@ import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import 'stock_provider.dart';
 import 'widgets/stock_product_card.dart';
 import 'widgets/tab_bar_widget.dart';
@@ -16,35 +17,35 @@ class StockView extends StatefulWidget {
   State<StockView> createState() => _StockViewState();
 }
 
-class _StockViewState extends State<StockView>
-    with SingleTickerProviderStateMixin {
-  late StockProvider stockProvider;
-
-  @override
-  void initState() {
-    super.initState();
-    stockProvider = StockProvider(this);
-  }
-
+class _StockViewState extends State<StockView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      const CustomSizedBox.paddingHeight(heightValue: 10),
-      const StockMenuTitle(),
-      TabBarWidget(stockProvider: stockProvider),
-      const CustomSizedBox.paddingHeight(heightValue: 10),
-      Expanded(
-        child: ListView.separated(
-            shrinkWrap: true,
-            itemCount: 50,
-            separatorBuilder: (context, index) {
-              return const CustomSizedBox.paddingHeight(heightValue: 16.0);
-            },
-            itemBuilder: (context, index) {
-              return const StockProductCard();
-            }),
-      ),
-    ]);
+    return ChangeNotifierProvider(
+      create: (_) => StockProvider(),
+      builder: (context, child) {
+        final stockProvider = context.watch<StockProvider>();
+        stockProvider.init(vsync: this);
+        return Column(children: [
+          const CustomSizedBox.paddingHeight(heightValue: 10),
+          const StockMenuTitle(),
+          stockProvider.isMenuReady == true
+              ? TabBarWidget(stockProvider: stockProvider)
+              : const SizedBox(),
+          const CustomSizedBox.paddingHeight(heightValue: 10),
+          Expanded(
+            child: ListView.separated(
+                shrinkWrap: true,
+                itemCount: 50,
+                separatorBuilder: (context, index) {
+                  return const CustomSizedBox.paddingHeight(heightValue: 16.0);
+                },
+                itemBuilder: (context, index) {
+                  return const StockProductCard();
+                }),
+          ),
+        ]);
+      },
+    );
   }
 }
 

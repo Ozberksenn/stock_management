@@ -4,6 +4,7 @@ import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'product/routes/router.dart';
+import 'view/stock/stock_provider.dart';
 
 void main() {
   runApp(const MyApp());

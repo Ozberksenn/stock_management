@@ -16,7 +16,7 @@ class AppService {
   static AppService get instance => _instance;
 
   Future getData(String path) async {
-    final response = await dio.get(path);
+    final response = await dio.post(path);
     if (response.statusCode == 200) {
       return response;
     } else {
@@ -24,12 +24,21 @@ class AppService {
     }
   }
 
-  Future postData(String path, Object data) async {
-    final response = await dio.post(path, data: data);
-    if (response.statusCode == 200) {
-      return response;
-    } else {
-      return null;
+  Future postData(String path, Map<String, dynamic> parameters) async {
+    final defaultParams = {"COMPANYID": 1};
+    final mergedData = {
+      ...defaultParams,
+      ...parameters, // Gelen data sonradan yazılarak varsayılanları ezebilir
+    };
+    final response = await dio.post(path, data: mergedData);
+    try {
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
     }
   }
 }

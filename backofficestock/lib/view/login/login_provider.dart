@@ -4,17 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class LoginProvider extends ChangeNotifier {
-  Future<void> handleSave(GlobalKey<FormBuilderState> formKey) async {
+  bool isLoginButton = false;
+
+  Future<bool> handleSave(GlobalKey<FormBuilderState> formKey) async {
     if (formKey.currentState?.saveAndValidate() ?? false) {
-      Response response = await AppService.instance
-          .postData("/login", {"MAIL": "ad", "PASSWORD": "sdasd"});
-      if (response.statusCode == 200) {
+      isLoginButton = false;
+      Response response = await AppService.instance.postData(
+          "/login", {"MAIL": "aasdasdasdd", "PASSWORD": "sdasdasdasd"});
+      if (response.data['statusCode'] == 200) {
+        isLoginButton = true;
+        return true;
       } else {
-        print('error');
+        return false;
       }
-      debugPrint(formKey.currentState?.value.toString());
     } else {
       debugPrint('validation failed');
+      return false;
     }
   }
 }

@@ -1,3 +1,5 @@
+import 'package:backofficestock/product/widgets/custom_dialog.dart';
+import 'package:backofficestock/view/form/form_view.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../core/widget/padding.dart';
@@ -33,7 +35,14 @@ class StockMenuTitle extends StatelessWidget {
                           style: AppFonts.greylabelSmall,
                         )
                       ]),
-                  const CustomIcon(icon: Iconsax.edit)
+                  CustomIcon(
+                    icon: Iconsax.edit,
+                    onTap: () => customDialog(context,
+                        widget: FormView(
+                          title: "Menu",
+                          route: "menu",
+                        )),
+                  )
                 ]),
           )
         : const SizedBox();

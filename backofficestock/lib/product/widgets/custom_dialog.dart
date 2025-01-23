@@ -8,14 +8,18 @@ Future<dynamic> customDialog(BuildContext context,
       context: context,
       builder: (context) {
         return Dialog(
-          child: Container(
-            decoration: const BoxDecoration(
+            child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
                 color: AppColors.white,
-                borderRadius: BorderRadius.all(Radius.circular(12.0))),
-            width: width ?? context.dynamicWidth(0.8),
-            height: height ?? context.dynamicWidth(0.5),
-            child: widget ?? Container(),
-          ),
-        );
+                borderRadius: BorderRadius.all(Radius.circular(12.0)),
+              ),
+              width: width ?? context.dynamicWidth(0.5),
+              child: widget ?? Container(),
+            ),
+          ],
+        ));
       });
 }

@@ -1,3 +1,4 @@
+import 'package:backofficestock/view/stock/stock_form/menu_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'widgets/form_footer.dart';
@@ -12,7 +13,7 @@ class FormView extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormBuilder(
       key: _formKey,
-      child: Stack(children: [
+      child: Column(children: [
         SizedBox(
           child: Column(
             children: [
@@ -30,8 +31,8 @@ class FormView extends StatelessWidget {
 
 body(String formName) {
   switch (formName) {
-    case '':
-      return const SizedBox();
+    case 'menu':
+      return const MenuForm();
     default:
   }
 }

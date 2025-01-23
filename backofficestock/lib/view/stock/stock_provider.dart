@@ -6,10 +6,9 @@ import 'package:flutter/material.dart';
 class StockProvider extends ChangeNotifier {
   late TabController tabController;
   List<MenuModel> menuTabList = [];
-  bool isMenuReady = false;
+  bool isMenuReady = false; // tab listesi için tutulan.
   bool isInitialized = false;
-  // StockProvider() {
-  // }
+  MenuModel? selectedTab; // seçili tab bilgisi burada tutuluyor.
 
   void init({TickerProvider? vsync}) {
     if (isInitialized) return;
@@ -27,7 +26,13 @@ class StockProvider extends ChangeNotifier {
           .cast<MenuModel>();
       tabController = TabController(length: menuTabList.length, vsync: vsync!);
     }
+    selectedTab = menuTabList[0]; // seçili olan ilk menüyü burada belirliyoruz.
     isMenuReady = true;
+    notifyListeners();
+  }
+
+  handleTab(MenuModel tab) {
+    selectedTab = tab;
     notifyListeners();
   }
 }

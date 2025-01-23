@@ -25,6 +25,8 @@ class TabBarWidget extends StatelessWidget {
       tabs: stockProvider.menuTabList
           .map((e) => MenuTab(text: e.menuName))
           .toList(),
+      onTap: (value) =>
+          stockProvider.handleTab(stockProvider.menuTabList[value]),
       controller: stockProvider.tabController,
     );
   }

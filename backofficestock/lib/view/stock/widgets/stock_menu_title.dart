@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import '../../../core/widget/padding.dart';
+import '../../../core/widget/radius.dart';
+import '../../../product/constants/api_constants.dart';
+import '../../../product/widgets/custom_icon.dart';
+import '../stock_provider.dart';
+
+class StockMenuTitle extends StatelessWidget {
+  final StockProvider provider;
+  const StockMenuTitle({super.key, required this.provider});
+
+  @override
+  Widget build(BuildContext context) {
+    return provider.selectedTab != null
+        ? Container(
+            padding: const ConstEdgeInsets.padding8(),
+            decoration: BoxDecoration(
+                color: AppColors.lightGrey, borderRadius: CustomRadius.radius6),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          provider.selectedTab?.menuName ?? "",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        Text(
+                          provider.selectedTab?.menuDescription ?? "",
+                          style: AppFonts.greylabelSmall,
+                        )
+                      ]),
+                  const CustomIcon(icon: Iconsax.edit)
+                ]),
+          )
+        : const SizedBox();
+  }
+}

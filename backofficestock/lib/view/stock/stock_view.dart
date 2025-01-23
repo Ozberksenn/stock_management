@@ -1,12 +1,8 @@
 import 'package:backofficestock/core/widget/padding.dart';
-import 'package:backofficestock/core/widget/radius.dart';
-import 'package:backofficestock/product/constants/api_constants.dart';
-import 'package:backofficestock/product/widgets/custom_icon.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'stock_provider.dart';
+import 'widgets/stock_menu_title.dart';
 import 'widgets/stock_product_card.dart';
 import 'widgets/tab_bar_widget.dart';
 
@@ -27,7 +23,7 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
         stockProvider.init(vsync: this);
         return Column(children: [
           const CustomSizedBox.paddingHeight(heightValue: 10),
-          const StockMenuTitle(),
+          StockMenuTitle(provider: stockProvider),
           stockProvider.isMenuReady == true
               ? TabBarWidget(stockProvider: stockProvider)
               : const SizedBox(),
@@ -45,37 +41,6 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
           ),
         ]);
       },
-    );
-  }
-}
-
-class StockMenuTitle extends StatelessWidget {
-  const StockMenuTitle({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const ConstEdgeInsets.padding8(),
-      decoration: BoxDecoration(
-          color: AppColors.lightGrey, borderRadius: CustomRadius.radius6),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                'Menu Tab Name',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              Text(
-                'Menu Tab Description buraya gelecek ve burada yer alacak',
-                style: AppFonts.greylabelSmall,
-              )
-            ]),
-        const CustomIcon(icon: Iconsax.edit)
-      ]),
     );
   }
 }

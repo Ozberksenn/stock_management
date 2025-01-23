@@ -10,7 +10,7 @@ class LoginProvider extends ChangeNotifier {
     if (formKey.currentState?.saveAndValidate() ?? false) {
       isLoginButton = false;
       Response response = await AppService.instance.postData(
-          "/login", {"MAIL": "aasdasdasdd", "PASSWORD": "sdasdasdasd"});
+          "/login", {"MAIL": "test@gmail.com", "PASSWORD": "test123456"});
       if (response.data['statusCode'] == 200) {
         isLoginButton = true;
         return true;

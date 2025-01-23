@@ -33,6 +33,9 @@ final class AppFonts {
   static final TextStyle greylabelSmall = AppTheme
       .lightTheme.textTheme.labelSmall!
       .copyWith(color: const Color.fromARGB(255, 160, 157, 157));
+  static final TextStyle formLabelStyle = AppTheme
+      .lightTheme.textTheme.labelSmall!
+      .copyWith(fontSize: 12, color: const Color.fromARGB(255, 160, 157, 157));
 }
 
 @immutable

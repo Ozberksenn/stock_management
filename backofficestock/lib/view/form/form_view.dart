@@ -1,3 +1,4 @@
+import 'package:backofficestock/core/widget/padding.dart';
 import 'package:backofficestock/view/stock/stock_form/menu_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -16,10 +17,12 @@ class FormView extends StatelessWidget {
       child: Column(children: [
         SizedBox(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FormTitle(title: title),
               const Divider(),
-              body(route ?? '')
+              CustomPaddings.customPadding(
+                  value: 12.0, child: body(route ?? ''))
             ],
           ),
         ),

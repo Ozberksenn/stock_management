@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../product/constants/api_constants.dart';
 
 class FormFooter extends StatelessWidget {
-  const FormFooter({
-    super.key,
-  });
+  final void Function()? onTap;
+  const FormFooter({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class FormFooter extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             InkWell(
-              onTap: () {},
+              onTap: onTap,
               child: Padding(
                 padding: const ConstEdgeInsets.paddingSymetric(
                     horizontalPad: 12.0, verticalPad: 8.0),

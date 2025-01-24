@@ -4,12 +4,11 @@ import 'package:go_router/go_router.dart';
 import '../../../product/widgets/custom_icon.dart';
 
 class FormTitle extends StatelessWidget {
+  final String? title;
   const FormTitle({
     super.key,
     required this.title,
   });
-
-  final String? title;
 
   @override
   Widget build(BuildContext context) {

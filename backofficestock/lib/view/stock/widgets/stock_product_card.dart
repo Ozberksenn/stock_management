@@ -15,12 +15,10 @@ class StockProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        customDialog(context,
-            widget: FormView(
-              title: 'Deneme',
-            ));
-      },
+      onTap: () => customDialog(context,
+          widget: FormView(
+            dialogContext: context,
+          )),
       child: Container(
           decoration: BoxDecoration(
               borderRadius: CustomRadius.radius8,

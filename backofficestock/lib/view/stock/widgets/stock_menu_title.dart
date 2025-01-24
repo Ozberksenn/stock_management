@@ -39,8 +39,10 @@ class StockMenuTitle extends StatelessWidget {
                     icon: Iconsax.edit,
                     onTap: () => customDialog(context,
                         widget: FormView(
-                          title: "Menu",
+                          apiUrl: "/updateMenu",
+                          dialogContext: context,
                           route: "menu",
+                          title: 'Menu Edit',
                         )),
                   )
                 ]),

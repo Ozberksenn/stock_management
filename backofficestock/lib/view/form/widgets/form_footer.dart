@@ -21,7 +21,7 @@ class FormFooter extends StatelessWidget {
                 padding: const ConstEdgeInsets.paddingSymetric(
                     horizontalPad: 12.0, verticalPad: 8.0),
                 child: Text('Save'.toUpperCase(),
-                    style: AppFonts.whiteHeadlineSmall),
+                    style: Theme.of(context).textTheme.titleMedium),
               ),
             )
           ],

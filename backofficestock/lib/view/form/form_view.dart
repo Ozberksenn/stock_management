@@ -13,13 +13,16 @@ class FormView extends StatelessWidget {
   final String? title;
   final String? route;
   final String? apiUrl;
-  FormView({
-    super.key,
-    this.title,
-    this.route,
-    required this.dialogContext,
-    this.apiUrl,
-  });
+  final bool? edit;
+  final Map<String, dynamic>? parameters;
+  FormView(
+      {super.key,
+      this.title,
+      this.route,
+      required this.dialogContext,
+      this.apiUrl,
+      this.parameters,
+      this.edit});
   final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
@@ -41,8 +44,21 @@ class FormView extends StatelessWidget {
                     value: 12.0, child: body(route ?? ''))
               ],
             ),
-            FormFooter(
-                onTap: () => formProvider.handleSaveButton(_formKey, apiUrl))
+            FormFooter(onTap: () {
+              if (edit == true) {
+                formProvider.handleSaveButton(
+                    formKey: _formKey,
+                    url: apiUrl!,
+                    edit: true,
+                    parameters: parameters);
+              } else {
+                formProvider.handleSaveButton(
+                    formKey: _formKey,
+                    url: apiUrl!,
+                    edit: false,
+                    parameters: parameters);
+              }
+            })
           ]),
         );
       },

@@ -41,4 +41,22 @@ class AppService {
       print(e);
     }
   }
+
+  Future putData(String path, Map<String, dynamic> parameters) async {
+    final defaultParams = {"COMPANYID": 1};
+    final mergedData = {
+      ...defaultParams,
+      ...parameters, // Gelen data sonradan yazılarak varsayılanları ezebilir
+    };
+    final response = await dio.put(path, data: mergedData);
+    try {
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }

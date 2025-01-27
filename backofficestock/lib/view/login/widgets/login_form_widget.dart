@@ -1,4 +1,5 @@
 import 'package:backofficestock/product/constants/api_constants.dart';
+import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/widgets/custom_buttons.dart';
 import 'package:backofficestock/view/login/login_provider.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class LoginForm extends StatelessWidget {
                             ? CustomButton(
                                 text: "Login",
                                 onTap: () async {
-                                  var result =
+                                  ServiceResponse result =
                                       await provider.handleSave(_formKey);
                                   if (result.isSuccess == true) {
                                     context.go("/home");

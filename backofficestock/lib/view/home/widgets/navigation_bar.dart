@@ -4,9 +4,12 @@ import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/data/navigation_data.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/model/navigation_model.dart';
+import 'package:backofficestock/product/storage/app_storage.dart';
+import 'package:backofficestock/product/widgets/custom_elevated_button.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../core/widget/padding.dart';
 
@@ -55,7 +58,7 @@ class NavigationProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const ConstEdgeInsets.paddingSymetric(verticalPad: 24),
+      padding: const ConstEdgeInsets.paddingSymetric(verticalPad: 12),
       decoration: BoxDecoration(
           color: AppColors.dark, borderRadius: CustomRadius.radius16),
       child: Column(
@@ -66,13 +69,18 @@ class NavigationProfileCard extends StatelessWidget {
             decoration: CustomDecoration.circularImageDecoration(
                 imageUrl: AppString.customProfileUrl),
           ),
+          const CustomSizedBox.paddingHeight(heightValue: 2),
+          Text('Özberk Şen', style: AppFonts.whiteBodyMedium),
+          Text('Company: 1', style: AppFonts.formLabelStyle),
           const CustomSizedBox.paddingHeight(heightValue: 8),
-          Text('Özberk Şen', style: Theme.of(context).textTheme.labelLarge),
-          const CustomSizedBox.paddingHeight(heightValue: 4),
-          Text(
-            'Company: 1',
-            style: Theme.of(context).textTheme.labelSmall,
-          )
+          CustomElevatedButton(
+              text: "Log out",
+              onPressed: () async {
+                await StorageService().clearStorage();
+                if (StorageService().token == "") {
+                  context.go("/");
+                }
+              })
         ],
       ),
     );

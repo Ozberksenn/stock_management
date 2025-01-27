@@ -17,7 +17,7 @@ class LoginProvider extends ChangeNotifier {
       Response response = await AppService.instance.postData("/login",
           {"MAIL": mailController.text, "PASSWORD": passwordController.text});
       if (response.data['statusCode'] == 200) {
-        loginWriteStorage(response.data);
+        await loginWriteStorage(response.data);
         isActiveLoginButton = true;
         return ServiceResponse(isSuccess: true, message: "Login Success");
       } else {
@@ -28,10 +28,10 @@ class LoginProvider extends ChangeNotifier {
     }
   }
 
-  loginWriteStorage(data) {
+  loginWriteStorage(data) async {
     Map<String, dynamic> decodedToken = JwtDecoder.decode(data['token']);
     debugPrint(decodedToken.toString());
-    StorageService().token = data['token'];
-    StorageService().companyId = 1;
+    StorageService().companyId = await decodedToken['companyId'];
+    StorageService().token = await data['token'];
   }
 }

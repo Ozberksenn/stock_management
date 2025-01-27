@@ -31,24 +31,35 @@ class LoginForm extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const FormTextField(name: "mail", hintText: "Mail"),
+                    FormTextField(
+                        name: "mail",
+                        hintText: "Mail",
+                        textEditingController: provider.mailController),
                     const CustomSizedBox.paddingHeight(heightValue: 10),
-                    const FormTextField(
-                      name: "password",
-                      hintText: "Password",
-                      obscureText: true,
-                    ),
+                    FormTextField(
+                        name: "password",
+                        hintText: "Password",
+                        obscureText: true,
+                        textEditingController: provider.passwordController),
                     const CustomSizedBox.paddingHeight(heightValue: 20),
                     Align(
                         alignment: Alignment.centerRight,
-                        child: CustomButton(
-                            text: "Login",
-                            onTap: () async {
-                              var result = await provider.handleSave(_formKey);
-                              if (result == true) {
-                                context.go("/home");
-                              }
-                            }))
+                        child: provider.isActiveLoginButton == true
+                            ? CustomButton(
+                                text: "Login",
+                                onTap: () async {
+                                  var result =
+                                      await provider.handleSave(_formKey);
+                                  if (result.isSuccess == true) {
+                                    context.go("/home");
+                                  } else {
+                                    // todo : show error message
+                                  }
+                                })
+                            : const CustomButton(
+                                text: "Login",
+                                color: AppColors.lightGrey,
+                              ))
                   ])),
         ]),
         Text(

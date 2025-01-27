@@ -6,23 +6,25 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class LoginProvider extends ChangeNotifier {
-  bool isLoginButton = false;
+  bool isActiveLoginButton = true;
+  TextEditingController mailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-  Future<bool> handleSave(GlobalKey<FormBuilderState> formKey) async {
+  Future<ServiceResponse> handleSave(
+      GlobalKey<FormBuilderState> formKey) async {
     if (formKey.currentState?.saveAndValidate() ?? false) {
-      isLoginButton = false;
-      Response response = await AppService.instance.postData(
-          "/login", {"MAIL": "ozberksenn@gmail.com", "PASSWORD": "123456"});
+      isActiveLoginButton = false;
+      Response response = await AppService.instance.postData("/login",
+          {"MAIL": mailController.text, "PASSWORD": passwordController.text});
       if (response.data['statusCode'] == 200) {
-        isLoginButton = true;
         loginWriteStorage(response.data);
-        return true;
+        isActiveLoginButton = true;
+        return ServiceResponse(isSuccess: true, message: "Login Success");
       } else {
-        return false;
+        return ServiceResponse(isSuccess: false, message: "Login Failed");
       }
     } else {
-      debugPrint('validation failed');
-      return false;
+      return ServiceResponse(isSuccess: false, message: "Validation Error");
     }
   }
 

@@ -63,3 +63,11 @@ class AppService {
     }
   }
 }
+
+class ServiceResponse {
+  final bool isSuccess;
+  final Map<String, dynamic>? data;
+  final String? message;
+
+  ServiceResponse({required this.isSuccess, this.data, this.message});
+}

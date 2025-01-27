@@ -5,6 +5,7 @@ class FormTextField extends StatelessWidget {
   final String name;
   final String? hintText;
   final bool? obscureText;
+  final TextEditingController? textEditingController;
   final Function(String?)? onChanged;
   final TextInputType? keyboardType;
   const FormTextField(
@@ -13,11 +14,13 @@ class FormTextField extends StatelessWidget {
       this.onChanged,
       this.keyboardType,
       this.obscureText,
+      this.textEditingController,
       this.hintText});
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
+      controller: textEditingController,
       autovalidateMode: AutovalidateMode.always,
       name: name,
       decoration: InputDecoration(hintText: hintText),

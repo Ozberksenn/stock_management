@@ -33,5 +33,6 @@ class LoginProvider extends ChangeNotifier {
     debugPrint(decodedToken.toString());
     StorageService().companyId = await decodedToken['companyId'];
     StorageService().token = await data['token'];
+    StorageService().companyName = await decodedToken['companyName'];
   }
 }

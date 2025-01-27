@@ -70,8 +70,9 @@ class NavigationProfileCard extends StatelessWidget {
                 imageUrl: AppString.customProfileUrl),
           ),
           const CustomSizedBox.paddingHeight(heightValue: 2),
-          Text('Özberk Şen', style: AppFonts.whiteBodyMedium),
-          Text('Company: 1', style: AppFonts.formLabelStyle),
+          Text(StorageService().companyName, style: AppFonts.whiteBodyMedium),
+          Text('Company: ${StorageService().companyId}',
+              style: AppFonts.formLabelStyle),
           const CustomSizedBox.paddingHeight(heightValue: 8),
           CustomElevatedButton(
               text: "Log out",

@@ -33,12 +33,16 @@ class StorageService {
   String get token => _box.get(StorageKeys.token, defaultValue: "");
   set token(String value) => writeStorage(StorageKeys.token, value);
 
+  String get companyName => _box.get(StorageKeys.companyName, defaultValue: "");
+  set companyName(String value) => writeStorage(StorageKeys.companyName, value);
+
   int get companyId => _box.get(StorageKeys.companyId, defaultValue: "");
   set companyId(int value) => writeStorage(StorageKeys.companyId, value);
 }
 
 abstract class StorageKeys {
   static const String companyId = "companyId";
+  static const String companyName = "companyName";
   static const String token = "token";
 }
 

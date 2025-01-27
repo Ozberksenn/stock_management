@@ -2,10 +2,16 @@ import 'package:backofficestock/product/theme/theme.dart';
 import 'package:backofficestock/view/form/form_provider.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'product/routes/router.dart';
+import 'product/storage/app_storage.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox('box');
+  StorageService storageService = StorageService();
+  await storageService.init();
   runApp(const MyApp());
 }
 
@@ -30,3 +36,10 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+
+// sorularım : 
+// ngrog adresi ile istek attığmda cors hatası var.
+// swagger da login işlemi kabul etmiyor.

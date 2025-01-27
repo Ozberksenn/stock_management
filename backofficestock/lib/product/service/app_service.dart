@@ -1,12 +1,15 @@
+import 'package:backofficestock/product/storage/app_storage.dart';
 import 'package:dio/dio.dart';
 
 class AppService {
   late final Dio dio;
   AppService._init() {
     dio = Dio(BaseOptions(
-      baseUrl: "http://192.168.1.43:8080", // URL
+      baseUrl: "http://192.168.1.43:8080",
+      // baseUrl: "https://helped-pig-glad.ngrok-free.app", // URL
       headers: {
-        "Content-Type": "application/json", // Varsayılan header
+        'Content-Type': 'application/json',
+        "Authorization": "Bearer ${StorageService().token}"
       },
     ));
   }
@@ -16,7 +19,7 @@ class AppService {
   static AppService get instance => _instance;
 
   Future getData(String path) async {
-    final response = await dio.post(path);
+    final response = await dio.get(path);
     if (response.statusCode == 200) {
       return response;
     } else {

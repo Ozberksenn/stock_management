@@ -18,7 +18,7 @@ class StockProvider extends ChangeNotifier {
 
   Future<void> getMenu(vsync) async {
     isMenuReady = false;
-    Response response = await AppService.instance.postData("/getMenu", {});
+    Response response = await AppService.instance.getData("/getMenu");
     if (response.data != null) {
       menuTabList = (response.data['data'] as List)
           .map((e) => MenuModel.fromMap(e))

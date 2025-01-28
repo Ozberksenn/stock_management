@@ -29,15 +29,20 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
               : const SizedBox(),
           const CustomSizedBox.paddingHeight(heightValue: 10),
           Expanded(
-            child: ListView.separated(
-                shrinkWrap: true,
-                itemCount: 50,
-                separatorBuilder: (context, index) {
-                  return const CustomSizedBox.paddingHeight(heightValue: 16.0);
-                },
-                itemBuilder: (context, index) {
-                  return const StockProductCard();
-                }),
+            child: stockProvider.isProductReady == true
+                ? ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: stockProvider.productsList.length,
+                    separatorBuilder: (context, index) {
+                      return const CustomSizedBox.paddingHeight(
+                          heightValue: 16.0);
+                    },
+                    itemBuilder: (context, index) {
+                      return StockProductCard(
+                        product: stockProvider.productsList[index],
+                      );
+                    })
+                : Container(),
           ),
         ]);
       },

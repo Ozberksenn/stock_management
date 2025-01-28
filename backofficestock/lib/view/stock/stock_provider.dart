@@ -1,19 +1,31 @@
 import 'package:backofficestock/product/model/menu_model.dart';
+import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class StockProvider extends ChangeNotifier {
   late TabController tabController;
+  // Lists
   List<MenuModel> menuTabList = [];
+  List<ProductModel> productsList = [];
+  // is Ready Variables
   bool isMenuReady = false; // tab listesi için tutulan.
+  bool isProductReady = false; // ürünlerin listesi için tutulan.
   bool isInitialized = false;
+  // Selecteds
   MenuModel? selectedTab; // seçili tab bilgisi burada tutuluyor.
 
   void init({TickerProvider? vsync}) {
     if (isInitialized) return;
     isInitialized = true;
     getMenu(vsync);
+    getProduct();
+  }
+
+  handleTab(MenuModel tab) {
+    selectedTab = tab;
+    notifyListeners();
   }
 
   Future<void> getMenu(vsync) async {
@@ -31,8 +43,16 @@ class StockProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  handleTab(MenuModel tab) {
-    selectedTab = tab;
-    notifyListeners();
+  Future<void> getProduct() async {
+    // productlar burada çekilecek.
+    isProductReady = false;
+    Response response = await AppService.instance.getData("/getProducts");
+    if (response.data != null) {
+      productsList = (response.data['data'] as List)
+          .map((e) => ProductModel.fromMap(e))
+          .toList()
+          .cast<ProductModel>();
+    }
+    isProductReady = true;
   }
 }

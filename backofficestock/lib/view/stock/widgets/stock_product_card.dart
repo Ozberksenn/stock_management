@@ -1,6 +1,5 @@
-import 'package:backofficestock/product/widgets/custom_icon_button.dart';
+import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/view/form/form_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../core/widget/padding.dart';
 import '../../../core/widget/radius.dart';
@@ -8,8 +7,10 @@ import '../../../product/constants/api_constants.dart';
 import '../../../product/widgets/custom_dialog.dart';
 
 class StockProductCard extends StatelessWidget {
+  final ProductModel product;
   const StockProductCard({
     super.key,
+    required this.product,
   });
 
   @override
@@ -53,10 +54,10 @@ class StockProductCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Product Name - 20TL',
+                        '${product.productName} - ${product.price}TL',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      Text("Burada ürün ile ilgili açıklama yer alacak.",
+                      Text(product.productDescription ?? '',
                           style: AppFonts.greylabelSmall)
                     ],
                   )
@@ -64,9 +65,9 @@ class StockProductCard extends StatelessWidget {
               ),
               CustomPaddings.customPadding(
                   value: 6,
-                  child: const CustomIconButton(
-                    icon: CupertinoIcons.number_square,
-                    text: '245',
+                  child: Text(
+                    '${product.count}',
+                    style: Theme.of(context).textTheme.titleSmall,
                   ))
             ],
           )),

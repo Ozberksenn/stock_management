@@ -2,8 +2,8 @@ import 'package:backofficestock/core/widget/padding.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'stock_provider.dart';
+import 'widgets/product_list_widget.dart';
 import 'widgets/stock_menu_title.dart';
-import 'widgets/stock_product_card.dart';
 import 'widgets/tab_bar_widget.dart';
 
 class StockView extends StatefulWidget {
@@ -28,22 +28,7 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
               ? TabBarWidget(stockProvider: stockProvider)
               : const SizedBox(),
           const CustomSizedBox.paddingHeight(heightValue: 10),
-          Expanded(
-            child: stockProvider.isProductReady == true
-                ? ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: stockProvider.productsList.length,
-                    separatorBuilder: (context, index) {
-                      return const CustomSizedBox.paddingHeight(
-                          heightValue: 16.0);
-                    },
-                    itemBuilder: (context, index) {
-                      return StockProductCard(
-                        product: stockProvider.productsList[index],
-                      );
-                    })
-                : Container(),
-          ),
+          ProductsList(stockProvider: stockProvider),
         ]);
       },
     );

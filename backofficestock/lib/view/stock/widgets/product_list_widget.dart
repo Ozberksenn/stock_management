@@ -1,3 +1,5 @@
+import 'package:backofficestock/product/model/product_model.dart';
+import 'package:backofficestock/product/widgets/no_item_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/widget/padding.dart';
@@ -14,25 +16,25 @@ class ProductsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<ProductModel> filterProducList = stockProvider.productsList
+        .where((element) => element.menuId == stockProvider.selectedTab?.menuId)
+        .toList();
     return Expanded(
       child: stockProvider.isProductReady == true
-          ? ListView.separated(
-              shrinkWrap: true,
-              itemCount: stockProvider.productsList.length,
-              separatorBuilder: (context, index) {
-                return stockProvider.productsList[index].menuId ==
-                        stockProvider.selectedTab?.menuId
-                    ? const CustomSizedBox.paddingHeight(heightValue: 16.0)
-                    : const SizedBox();
-              },
-              itemBuilder: (context, index) {
-                return stockProvider.productsList[index].menuId ==
-                        stockProvider.selectedTab?.menuId
-                    ? StockProductCard(
-                        product: stockProvider.productsList[index],
-                      )
-                    : const SizedBox();
-              })
+          ? filterProducList.isNotEmpty
+              ? ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: filterProducList.length,
+                  separatorBuilder: (context, index) {
+                    return const CustomSizedBox.paddingHeight(
+                        heightValue: 16.0);
+                  },
+                  itemBuilder: (context, index) {
+                    return StockProductCard(
+                      product: filterProducList[index],
+                    );
+                  })
+              : const NoItemWidget()
           : Container(),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:backofficestock/core/widget/padding.dart';
 import 'package:backofficestock/view/form/form_provider.dart';
 import 'package:backofficestock/view/stock/stock_form/menu_form.dart';
-import 'package:backofficestock/view/stock/stock_provider.dart';
+import 'package:backofficestock/view/stock/stock_form/product_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +14,7 @@ class FormView extends StatelessWidget {
   final String? route;
   final String? apiUrl;
   final bool? edit;
+  Map<String, dynamic>? initialValue;
   final Map<String, dynamic>? parameters;
   FormView(
       {super.key,
@@ -21,6 +22,7 @@ class FormView extends StatelessWidget {
       this.route,
       required this.dialogContext,
       this.apiUrl,
+      this.initialValue,
       this.parameters,
       this.edit});
   final _formKey = GlobalKey<FormBuilderState>();
@@ -30,10 +32,9 @@ class FormView extends StatelessWidget {
       create: (_) => FormProvider(),
       builder: (context, child) {
         FormProvider formProvider = context.read();
-        StockProvider stockProvider = dialogContext.read<StockProvider>();
         return FormBuilder(
           key: _formKey,
-          initialValue: stockProvider.selectedTab?.toJson() ?? {},
+          initialValue: initialValue ?? {},
           child: Column(children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,6 +71,9 @@ body(String formName) {
   switch (formName) {
     case 'menu':
       return const MenuForm();
+    case 'product':
+      return const ProductForm();
     default:
+      return const SizedBox();
   }
 }

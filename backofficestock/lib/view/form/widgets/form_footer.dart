@@ -10,7 +10,7 @@ class FormFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: const BoxDecoration(
-            color: AppColors.grey,
+            color: AppColors.dark,
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(12.0))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -21,7 +21,7 @@ class FormFooter extends StatelessWidget {
                 padding: const ConstEdgeInsets.paddingSymetric(
                     horizontalPad: 12.0, verticalPad: 8.0),
                 child: Text('Save'.toUpperCase(),
-                    style: Theme.of(context).textTheme.titleMedium),
+                    style: AppFonts.whiteHeadlineSmall),
               ),
             )
           ],

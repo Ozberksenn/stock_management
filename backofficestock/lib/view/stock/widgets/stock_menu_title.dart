@@ -43,6 +43,7 @@ class StockMenuTitle extends StatelessWidget {
                           dialogContext: context,
                           route: "menu",
                           title: 'Menu Edit',
+                          initialValue: provider.selectedTab?.toJson(),
                           edit: true,
                           parameters: {"MENUID": provider.selectedTab?.menuId},
                         )),

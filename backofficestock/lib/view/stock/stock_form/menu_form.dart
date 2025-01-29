@@ -14,10 +14,10 @@ class MenuForm extends StatelessWidget {
         children: [
           FormLabel(text: "Menu Name"),
           FormTextField(name: "MENUNAME"),
-          CustomSizedBox.paddingHeight(heightValue: 10),
+          CustomSizedBox.paddingHeight(heightValue: 8),
           FormLabel(text: "Menu Description"),
           FormTextField(name: "MENUDESCRIPTION"),
-          CustomSizedBox.paddingHeight(heightValue: 10),
+          CustomSizedBox.paddingHeight(heightValue: 8),
           FormLabel(text: "Menu Image"),
           FormTextField(name: "MENUIMAGE"),
         ]);

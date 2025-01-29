@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 class FormTextField extends StatelessWidget {
   final String name;
   final String? hintText;
+  final int? maxLines;
   final bool? obscureText;
   final TextEditingController? textEditingController;
   final Function(String?)? onChanged;
@@ -13,6 +14,7 @@ class FormTextField extends StatelessWidget {
       required this.name,
       this.onChanged,
       this.keyboardType,
+      this.maxLines,
       this.obscureText,
       this.textEditingController,
       this.hintText});
@@ -23,6 +25,7 @@ class FormTextField extends StatelessWidget {
       controller: textEditingController,
       autovalidateMode: AutovalidateMode.always,
       name: name,
+      maxLines: maxLines,
       decoration: InputDecoration(hintText: hintText),
       obscureText: obscureText ?? false,
       onChanged: onChanged,

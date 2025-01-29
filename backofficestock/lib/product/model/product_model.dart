@@ -47,8 +47,8 @@ class ProductModel {
       'MENUID': menuId,
       'PRODUCTNAME': productName,
       'PRODUCTDESCRIPTION': productDescription,
-      'PRICE': price,
-      'COUNT': count,
+      'PRICE': price.toString(),
+      'COUNT': count.toString(),
       'IMAGE': image,
       'BANDID': bandId,
     };

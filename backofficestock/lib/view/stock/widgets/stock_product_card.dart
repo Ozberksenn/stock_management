@@ -19,6 +19,10 @@ class StockProductCard extends StatelessWidget {
       onTap: () => customDialog(context,
           widget: FormView(
             dialogContext: context,
+            edit: true,
+            route: "product",
+            title: "Product",
+            initialValue: product.toJson(),
           )),
       child: Container(
           decoration: BoxDecoration(

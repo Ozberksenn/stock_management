@@ -1,6 +1,8 @@
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/view/form/form_view.dart';
+import 'package:backofficestock/view/stock/stock_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../core/widget/padding.dart';
 import '../../../core/widget/radius.dart';
 import '../../../product/constants/api_constants.dart';
@@ -15,6 +17,7 @@ class StockProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    StockProvider stockProvider = context.read<StockProvider>();
     return GestureDetector(
       onTap: () => customDialog(context,
           widget: FormView(
@@ -22,6 +25,11 @@ class StockProductCard extends StatelessWidget {
             edit: true,
             route: "product",
             title: "Product",
+            apiUrl: "/updateProduct",
+            parameters: {
+              "ID": product.id,
+              "MENUID": stockProvider.selectedTab?.menuId
+            },
             initialValue: product.toJson(),
           )),
       child: Container(

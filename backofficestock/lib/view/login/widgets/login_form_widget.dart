@@ -41,6 +41,7 @@ class LoginForm extends StatelessWidget {
                         name: "password",
                         hintText: "Password",
                         obscureText: true,
+                        maxLines: 1,
                         textEditingController: provider.passwordController),
                     const CustomSizedBox.paddingHeight(heightValue: 20),
                     Align(

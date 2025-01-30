@@ -22,10 +22,14 @@ class ProductForm extends StatelessWidget {
           FormLabel(text: "Price"),
           FormTextField(
             name: "PRICE",
+            postDataType: "int",
           ),
           CustomSizedBox.paddingHeight(heightValue: 8),
           FormLabel(text: "Count"),
-          FormTextField(name: "COUNT"),
+          FormTextField(
+            name: "COUNT",
+            postDataType: "int",
+          ),
           CustomSizedBox.paddingHeight(heightValue: 8),
           FormLabel(text: "Image Url"),
           FormTextField(name: "IMAGE"),

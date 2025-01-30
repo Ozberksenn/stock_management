@@ -9,12 +9,16 @@ class FormTextField extends StatelessWidget {
   final TextEditingController? textEditingController;
   final Function(String?)? onChanged;
   final TextInputType? keyboardType;
+  final String? postDataType; // dataya gönderileek veri
+  final String? initialValue;
   const FormTextField(
       {super.key,
       required this.name,
       this.onChanged,
       this.keyboardType,
       this.maxLines,
+      this.postDataType,
+      this.initialValue,
       this.obscureText,
       this.textEditingController,
       this.hintText});
@@ -25,6 +29,13 @@ class FormTextField extends StatelessWidget {
       controller: textEditingController,
       autovalidateMode: AutovalidateMode.always,
       name: name,
+      valueTransformer: (value) {
+        if (postDataType == "int") {
+          return int.tryParse(value ?? '') ?? 0; // Sayı ise int olarak gönder
+        }
+        return value; // Diğer alanları string olarak bırak
+      },
+      initialValue: initialValue,
       maxLines: maxLines,
       decoration: InputDecoration(hintText: hintText),
       obscureText: obscureText ?? false,

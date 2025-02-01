@@ -55,4 +55,15 @@ class StockProvider extends ChangeNotifier {
     }
     isProductReady = true;
   }
+
+  Future<void> deleteMenu() async {
+    // menu silme
+    Response response = await AppService.instance
+        .deleteData("/deleteMenu", {"MENUID": selectedTab?.menuId});
+    if (response.data['statusCode'] == "200") {
+      print('başarılı');
+    } else {
+      print("error");
+    }
+  }
 }

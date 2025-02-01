@@ -5,10 +5,13 @@ class AppService {
   late final Dio dio;
   AppService._init() {
     dio = Dio(BaseOptions(
-      baseUrl: "http://192.168.1.43:8080",
-      // baseUrl: "https://helped-pig-glad.ngrok-free.app", // URL
+      // baseUrl: "http://192.168.1.43:8080",
+      baseUrl: "https://helped-pig-glad.ngrok-free.app", // URL
+      followRedirects: false, // Yönlendirmeyi izlemeyin
       headers: {
-        'Content-Type': 'application/json',
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "true", // Bu başlık önemli!
         "Authorization": "Bearer ${StorageService().token}"
       },
     ));
@@ -24,6 +27,24 @@ class AppService {
       return response;
     } else {
       return null;
+    }
+  }
+
+  Future deleteData(String path, Map<String, dynamic> parameters) async {
+    final defaultParams = {"COMPANYID": 1};
+    final mergedData = {
+      ...defaultParams,
+      ...parameters, // Gelen data sonradan yazılarak varsayılanları ezebilir
+    };
+    final response = await dio.delete(path, data: mergedData);
+    try {
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
     }
   }
 

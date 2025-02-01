@@ -1,5 +1,6 @@
 import 'package:backofficestock/product/widgets/custom_dialog.dart';
 import 'package:backofficestock/view/form/form_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../core/widget/padding.dart';
@@ -35,18 +36,28 @@ class StockMenuTitle extends StatelessWidget {
                           style: AppFonts.greylabelSmall,
                         )
                       ]),
-                  CustomIcon(
-                    icon: Iconsax.edit,
-                    onTap: () => customDialog(context,
-                        widget: FormView(
-                          apiUrl: "/updateMenu",
-                          dialogContext: context,
-                          route: "menu",
-                          title: 'Menu Edit',
-                          initialValue: provider.selectedTab?.toJson(),
-                          edit: true,
-                          parameters: {"MENUID": provider.selectedTab?.menuId},
-                        )),
+                  Row(
+                    children: [
+                      CustomIcon(
+                        icon: Iconsax.edit,
+                        onTap: () => customDialog(context,
+                            widget: FormView(
+                              apiUrl: "/updateMenu",
+                              dialogContext: context,
+                              route: "menu",
+                              title: 'Menu Edit',
+                              initialValue: provider.selectedTab?.toJson(),
+                              edit: true,
+                              parameters: {
+                                "MENUID": provider.selectedTab?.menuId
+                              },
+                            )),
+                      ),
+                      CustomIcon(
+                          icon: CupertinoIcons.delete,
+                          color: AppColors.error,
+                          onTap: () => provider.deleteMenu())
+                    ],
                   )
                 ]),
           )

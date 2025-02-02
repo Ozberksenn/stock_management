@@ -6,6 +6,7 @@ PopupMenuButton<dynamic> popupMenu({
 }) {
   return PopupMenuButton(
     position: PopupMenuPosition.under,
+    tooltip: '',
     child: widget,
     itemBuilder: (context) => (items ?? [])
         .map((e) => PopupMenuItem(child: e)) // e'yi doğrudan kullan

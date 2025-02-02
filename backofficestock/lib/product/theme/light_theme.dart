@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 ThemeData lightThemeData = ThemeData(
     useMaterial3: true,
+    popupMenuTheme:
+        const PopupMenuThemeData(color: AppColors.white, elevation: 2),
     inputDecorationTheme: InputDecorationTheme(
       isDense: true,
       hintStyle: const TextStyle(fontSize: 12, color: AppColors.dark),

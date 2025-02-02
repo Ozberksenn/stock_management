@@ -4,7 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import '../../product/service/app_service.dart';
 
 class FormProvider extends ChangeNotifier {
-  Future<void> handleSaveButton(
+  Future<ServiceResponse> handleSaveButton(
       {required GlobalKey<FormBuilderState> formKey,
       required String url,
       bool? edit,
@@ -21,14 +21,12 @@ class FormProvider extends ChangeNotifier {
         response = await AppService.instance.putData(url, formData);
       }
       if (response?.data['statusCode'] == 200) {
-        // todo : Success  mesajı
-        print("Başarılı.");
+        return ServiceResponse(isSuccess: true, message: "Success");
       } else {
-        // todo : Eror mesajı
-        print("Hatalı");
+        return ServiceResponse(isSuccess: false, message: "Error");
       }
     } else {
-      debugPrint('validation failed');
+      return ServiceResponse(isSuccess: false, message: "Validation Error");
     }
   }
 }

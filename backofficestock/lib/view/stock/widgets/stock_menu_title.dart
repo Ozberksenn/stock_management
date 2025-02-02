@@ -1,12 +1,13 @@
-import 'package:backofficestock/product/widgets/custom_dialog.dart';
-import 'package:backofficestock/view/form/form_view.dart';
+import 'package:backofficestock/product/widgets/custom_alert_dialog.dart';
+import 'package:backofficestock/product/widgets/popup_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import '../../../core/widget/padding.dart';
 import '../../../core/widget/radius.dart';
 import '../../../product/constants/api_constants.dart';
+import '../../../product/widgets/custom_dialog.dart';
 import '../../../product/widgets/custom_icon.dart';
+import '../../form/form_view.dart';
 import '../stock_provider.dart';
 
 class StockMenuTitle extends StatelessWidget {
@@ -36,31 +37,51 @@ class StockMenuTitle extends StatelessWidget {
                           style: AppFonts.greylabelSmall,
                         )
                       ]),
-                  Row(
-                    children: [
-                      CustomIcon(
-                        icon: Iconsax.edit,
-                        onTap: () => customDialog(context,
-                            widget: FormView(
-                              apiUrl: "/updateMenu",
-                              dialogContext: context,
-                              route: "menu",
-                              title: 'Menu Edit',
-                              initialValue: provider.selectedTab?.toJson(),
-                              edit: true,
-                              parameters: {
-                                "MENUID": provider.selectedTab?.menuId
-                              },
-                            )),
-                      ),
-                      CustomIcon(
-                          icon: CupertinoIcons.delete,
-                          color: AppColors.error,
-                          onTap: () => provider.deleteMenu())
-                    ],
-                  )
+                  ActionIcon(provider: provider)
                 ]),
           )
         : const SizedBox();
+  }
+}
+
+class ActionIcon extends StatelessWidget {
+  const ActionIcon({
+    super.key,
+    required this.provider,
+  });
+
+  final StockProvider provider;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const ConstEdgeInsets.paddingSymetric(horizontalPad: 12.0),
+      child: popupMenu(
+          widget: const CustomIcon(
+              icon: CupertinoIcons.ellipsis_vertical, size: 18),
+          items: [
+            PopupMenuItem(
+              child: const Text("Edit"),
+              onTap: () => customDialog(context,
+                  widget: FormView(
+                    apiUrl: "/updateMenu",
+                    dialogContext: context,
+                    route: "menu",
+                    title: 'Menu Edit',
+                    initialValue: provider.selectedTab?.toJson(),
+                    edit: true,
+                    parameters: {"MENUID": provider.selectedTab?.menuId},
+                  )),
+            ),
+            PopupMenuItem(
+              child: const Text("Delete"),
+              onTap: () => customAlertDialog(
+                  context: context,
+                  title: "Menu Delete",
+                  onPressed: () => provider.deleteMenu(),
+                  text: "Do you want to delete menu"),
+            )
+          ]),
+    );
   }
 }

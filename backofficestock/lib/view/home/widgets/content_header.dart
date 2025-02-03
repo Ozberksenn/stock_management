@@ -27,16 +27,26 @@ class ContentHeader extends StatelessWidget {
                 text: 'Add',
               ),
               items: [
-                PopupMenuItem(
-                    onTap: () => customDialog(context,
-                        widget: FormView(
-                            dialogContext: context,
-                            apiUrl: "/postMenu",
-                            edit: false,
-                            title: "Add Menu",
-                            route: "menu")),
-                    child: const Text('Add Menu')),
-                PopupMenuItem(onTap: () {}, child: const Text('Add Product'))
+                popupItem(
+                  name: "Menu",
+                  onTap: () => customDialog(context,
+                      widget: FormView(
+                          dialogContext: context,
+                          apiUrl: "/postMenu",
+                          edit: false,
+                          title: "Add Menu",
+                          route: "menu")),
+                ),
+                popupItem(
+                  name: "Product",
+                  onTap: () => customDialog(context,
+                      widget: FormView(
+                          dialogContext: context,
+                          apiUrl: "/createProduct",
+                          edit: false,
+                          title: "Add Product",
+                          route: "product")),
+                )
               ]),
           const CustomSizedBox.paddingWidth(widthValue: 8.0),
           const SearchField()

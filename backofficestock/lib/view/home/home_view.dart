@@ -7,7 +7,6 @@ import 'package:backofficestock/view/home/widgets/navigation_bar.dart';
 import 'package:backofficestock/view/stock/stock_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'widgets/content_header.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -32,14 +31,7 @@ class HomeView extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: AppColors.white,
                           borderRadius: CustomRadius.radius16),
-                      child: Column(
-                        children: [
-                          ContentHeader(
-                            title: homeProivder.menu.title ?? "",
-                          ),
-                          Expanded(child: content(homeProivder.menu.id)),
-                        ],
-                      ))))
+                      child: content(homeProivder.menu.id))))
         ],
       ),
     ));

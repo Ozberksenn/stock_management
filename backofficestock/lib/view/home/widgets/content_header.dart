@@ -1,8 +1,10 @@
 import 'package:backofficestock/core/widget/padding.dart';
 import 'package:backofficestock/product/widgets/custom_dialog.dart';
 import 'package:backofficestock/view/form/form_view.dart';
+import 'package:backofficestock/view/stock/stock_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../product/widgets/custom_icon_button.dart';
 import '../../../product/widgets/popup_menu.dart';
 import '../../../product/widgets/search_field.dart';
@@ -13,6 +15,7 @@ class ContentHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    StockProvider stockProvider = context.read<StockProvider>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -41,11 +44,15 @@ class ContentHeader extends StatelessWidget {
                   name: "Product",
                   onTap: () => customDialog(context,
                       widget: FormView(
-                          dialogContext: context,
-                          apiUrl: "/createProduct",
-                          edit: false,
-                          title: "Add Product",
-                          route: "product")),
+                        dialogContext: context,
+                        apiUrl: "/createProducts",
+                        edit: false,
+                        title: "Add Product",
+                        route: "product",
+                        parameters: {
+                          "MENUID": stockProvider.selectedTab?.menuId
+                        },
+                      )),
                 )
               ]),
           const CustomSizedBox.paddingWidth(widthValue: 8.0),

@@ -1,6 +1,4 @@
 import 'package:backofficestock/core/widget/padding.dart';
-import 'package:backofficestock/product/service/app_service.dart';
-import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
 import 'package:backofficestock/view/form/form_provider.dart';
 import 'package:backofficestock/view/stock/stock_form/menu_form.dart';
 import 'package:backofficestock/view/stock/stock_form/product_form.dart';
@@ -47,31 +45,21 @@ class FormView extends StatelessWidget {
                     value: 12.0, child: body(route ?? ''))
               ],
             ),
-            FormFooter(onTap: () async {
+            FormFooter(onTap: () {
               if (edit == true) {
-                ServiceResponse result = await formProvider.handleSaveButton(
+                formProvider.handleSaveButton(
+                    context: context,
                     formKey: _formKey,
                     url: apiUrl!,
                     edit: true,
                     parameters: parameters);
-                if (result.isSuccess == true) {
-                  successSnackbar(
-                      context: context, message: "Success Updated Form");
-                } else {
-                  errorSnackbar(context: context, message: "Error");
-                }
               } else {
-                ServiceResponse result = await formProvider.handleSaveButton(
+                formProvider.handleSaveButton(
+                    context: context,
                     formKey: _formKey,
                     url: apiUrl!,
                     edit: false,
                     parameters: parameters);
-                if (result.isSuccess == true) {
-                  successSnackbar(
-                      context: context, message: "Success Add Form");
-                } else {
-                  errorSnackbar(context: context, message: "Error");
-                }
               }
             })
           ]),

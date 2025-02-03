@@ -2,10 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import '../../product/service/app_service.dart';
+import '../../product/widgets/snackbar_widgets.dart';
 
 class FormProvider extends ChangeNotifier {
-  Future<ServiceResponse> handleSaveButton(
-      {required GlobalKey<FormBuilderState> formKey,
+  Future<void> handleSaveButton(
+      {required BuildContext context,
+      required GlobalKey<FormBuilderState> formKey,
       required String url,
       bool? edit,
       Map<String, dynamic>? parameters}) async {
@@ -21,12 +23,16 @@ class FormProvider extends ChangeNotifier {
         response = await AppService.instance.putData(url, formData);
       }
       if (response?.data['statusCode'] == 200) {
-        return ServiceResponse(isSuccess: true, message: "Success");
+        successSnackbar(context: context, message: "Success");
       } else {
-        return ServiceResponse(isSuccess: false, message: "Error");
+        errorSnackbar(context: context, message: "Error");
       }
     } else {
-      return ServiceResponse(isSuccess: false, message: "Validation Error");
+      errorSnackbar(context: context, message: "Validate Error");
     }
+  }
+
+  void refreshProductList() {
+    notifyListeners();
   }
 }

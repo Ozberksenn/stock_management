@@ -1,6 +1,8 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../home/widgets/content_header.dart';
 import 'stock_provider.dart';
 import 'widgets/product_list_widget.dart';
 import 'widgets/stock_menu_title.dart';
@@ -20,8 +22,13 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
       create: (_) => StockProvider(),
       builder: (context, child) {
         final stockProvider = context.watch<StockProvider>();
+        final homeProvider = context.read<HomeProivder>();
         stockProvider.init(vsync: this);
         return Column(children: [
+          const CustomSizedBox.paddingHeight(heightValue: 10),
+          ContentHeader(
+            title: homeProvider.menu.title ?? "",
+          ),
           const CustomSizedBox.paddingHeight(heightValue: 10),
           StockMenuTitle(provider: stockProvider),
           stockProvider.isMenuReady == true

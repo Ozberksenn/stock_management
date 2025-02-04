@@ -13,6 +13,7 @@ final class AppColors {
   static const Color primaryColor = Color.fromRGBO(124, 33, 36, 1);
   static const Color blue = Color.fromRGBO(32, 80, 153, 1);
   static const Color error = Colors.red;
+  static const Color red = Color.fromARGB(255, 195, 62, 53);
 }
 
 @immutable

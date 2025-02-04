@@ -1,6 +1,7 @@
 import 'package:backofficestock/product/model/menu_model.dart';
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
+import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -54,6 +55,7 @@ class StockProvider extends ChangeNotifier {
           .cast<ProductModel>();
     }
     isProductReady = true;
+    notifyListeners();
   }
 
   Future<void> deleteMenu() async {
@@ -61,9 +63,21 @@ class StockProvider extends ChangeNotifier {
     Response response = await AppService.instance
         .deleteData("/deleteMenu", {"MENUID": selectedTab?.menuId});
     if (response.data['statusCode'] == 200) {
-      print('başarılı');
+      print("başarılı");
     } else {
       print("error");
+    }
+  }
+
+  Future deleteProduct(int id, context) async {
+    Response response =
+        await AppService.instance.deleteData("/deleteProduct", {"ID": id});
+    if (response.data['statusCode'] == 200) {
+      getProduct();
+      successSnackbar(
+          context: context, message: "Success product ID :$id deleted");
+    } else {
+      errorSnackbar(context: context, message: "Error");
     }
   }
 }

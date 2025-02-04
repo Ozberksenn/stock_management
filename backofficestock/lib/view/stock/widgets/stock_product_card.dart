@@ -1,7 +1,9 @@
 import 'package:backofficestock/product/model/product_model.dart';
+import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/form/form_view.dart';
 import 'package:backofficestock/view/stock/stock_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../../core/widget/padding.dart';
 import '../../../core/widget/radius.dart';
@@ -77,9 +79,12 @@ class StockProductCard extends StatelessWidget {
               ),
               CustomPaddings.customPadding(
                   value: 6,
-                  child: Text(
-                    '${product.count}',
-                    style: Theme.of(context).textTheme.titleSmall,
+                  child: CustomIcon(
+                    icon: Iconsax.trash,
+                    color: AppColors.red,
+                    onTap: () {
+                      stockProvider.deleteProduct(product.id, context);
+                    },
                   ))
             ],
           )),

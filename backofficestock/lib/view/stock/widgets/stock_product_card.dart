@@ -28,6 +28,7 @@ class StockProductCard extends StatelessWidget {
             route: "product",
             title: "Product",
             apiUrl: "/updateProduct",
+            provider: stockProvider,
             parameters: {
               "ID": product.id,
               "MENUID": stockProvider.selectedTab?.menuId

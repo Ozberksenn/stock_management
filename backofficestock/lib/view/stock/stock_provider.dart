@@ -69,7 +69,7 @@ class StockProvider extends ChangeNotifier {
     }
   }
 
-  Future deleteProduct(int id, context) async {
+  Future<void> deleteProduct(int id, context) async {
     Response response =
         await AppService.instance.deleteData("/deleteProduct", {"ID": id});
     if (response.data['statusCode'] == 200) {

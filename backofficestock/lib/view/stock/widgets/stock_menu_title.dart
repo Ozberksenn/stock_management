@@ -70,6 +70,7 @@ class ActionIcon extends StatelessWidget {
                     title: 'Menu Edit',
                     initialValue: provider.selectedTab?.toJson(),
                     edit: true,
+                    provider: provider,
                     parameters: {"MENUID": provider.selectedTab?.menuId},
                   )),
             ),

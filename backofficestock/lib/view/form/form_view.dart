@@ -8,11 +8,12 @@ import 'package:provider/provider.dart';
 import 'widgets/form_footer.dart';
 import 'widgets/form_title_widget.dart';
 
-class FormView extends StatelessWidget {
+class FormView<T extends ChangeNotifier> extends StatelessWidget {
   final BuildContext dialogContext;
   final String? title;
   final String? route;
   final String? apiUrl;
+  final T provider;
   final bool? edit;
   Map<String, dynamic>? initialValue;
   final Map<String, dynamic>? parameters;
@@ -24,6 +25,7 @@ class FormView extends StatelessWidget {
       this.apiUrl,
       this.initialValue,
       this.parameters,
+      required this.provider,
       this.edit});
   final _formKey = GlobalKey<FormBuilderState>();
   @override
@@ -47,18 +49,20 @@ class FormView extends StatelessWidget {
             ),
             FormFooter(onTap: () {
               if (edit == true) {
-                formProvider.handleSaveButton(
+                formProvider.handleSaveButton<T>(
                     context: context,
                     formKey: _formKey,
                     url: apiUrl!,
                     edit: true,
+                    provider: provider,
                     parameters: parameters);
               } else {
-                formProvider.handleSaveButton(
+                formProvider.handleSaveButton<T>(
                     context: context,
                     formKey: _formKey,
                     url: apiUrl!,
                     edit: false,
+                    provider: provider,
                     parameters: parameters);
               }
             })

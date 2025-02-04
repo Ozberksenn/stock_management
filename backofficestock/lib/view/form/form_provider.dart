@@ -1,3 +1,4 @@
+import 'package:backofficestock/view/stock/stock_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -5,10 +6,11 @@ import '../../product/service/app_service.dart';
 import '../../product/widgets/snackbar_widgets.dart';
 
 class FormProvider extends ChangeNotifier {
-  Future<void> handleSaveButton(
+  Future<void> handleSaveButton<T extends ChangeNotifier>(
       {required BuildContext context,
       required GlobalKey<FormBuilderState> formKey,
       required String url,
+      required T provider,
       bool? edit,
       Map<String, dynamic>? parameters}) async {
     if (formKey.currentState?.saveAndValidate() ?? false) {
@@ -23,6 +25,7 @@ class FormProvider extends ChangeNotifier {
         response = await AppService.instance.putData(url, formData);
       }
       if (response?.data['statusCode'] == 200) {
+        refreshList(provider);
         successSnackbar(context: context, message: "Success");
       } else {
         errorSnackbar(context: context, message: "Error");
@@ -32,7 +35,9 @@ class FormProvider extends ChangeNotifier {
     }
   }
 
-  void refreshProductList() {
-    notifyListeners();
+  refreshList(provider) {
+    if (provider is StockProvider) {
+      return provider.getProduct();
+    }
   }
 }

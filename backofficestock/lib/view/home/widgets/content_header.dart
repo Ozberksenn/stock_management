@@ -38,17 +38,19 @@ class ContentHeader extends StatelessWidget {
                           apiUrl: "/postMenu",
                           edit: false,
                           title: "Add Menu",
+                          provider: stockProvider,
                           route: "menu")),
                 ),
                 popupItem(
                   name: "Product",
                   onTap: () => customDialog(context,
-                      widget: FormView(
+                      widget: FormView<StockProvider>(
                         dialogContext: context,
                         apiUrl: "/createProducts",
                         edit: false,
                         title: "Add Product",
                         route: "product",
+                        provider: stockProvider,
                         parameters: {
                           "MENUID": stockProvider.selectedTab?.menuId
                         },

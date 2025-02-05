@@ -1,11 +1,11 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/widgets/custom_dialog.dart';
+import 'package:backofficestock/product/widgets/custom_elevated_button.dart';
 import 'package:backofficestock/view/form/form_view.dart';
 import 'package:backofficestock/view/stock/stock_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../product/widgets/custom_icon_button.dart';
 import '../../../product/widgets/popup_menu.dart';
 import '../../../product/widgets/search_field.dart';
 
@@ -25,9 +25,10 @@ class ContentHeader extends StatelessWidget {
         ),
         Row(children: [
           popupMenu(
-              widget: const CustomIconButton(
-                icon: CupertinoIcons.add,
-                text: 'Add',
+              widget: CustomElevatedButton(
+                text: "+ Add",
+                color: AppColors.dark,
+                style: AppFonts.whiteBodyMedium,
               ),
               items: [
                 popupItem(

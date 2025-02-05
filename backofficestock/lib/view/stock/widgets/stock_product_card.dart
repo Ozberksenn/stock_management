@@ -1,8 +1,10 @@
 import 'package:backofficestock/product/model/product_model.dart';
+import 'package:backofficestock/product/widgets/custom_alert_dialog.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/form/form_view.dart';
 import 'package:backofficestock/view/stock/stock_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../../core/widget/padding.dart';
@@ -84,7 +86,14 @@ class StockProductCard extends StatelessWidget {
                     icon: Iconsax.trash,
                     color: AppColors.red,
                     onTap: () {
-                      stockProvider.deleteProduct(product.id, context);
+                      customAlertDialog(
+                          context: context,
+                          onPressed: () {
+                            stockProvider.deleteProduct(product.id, context);
+                            context.pop();
+                          },
+                          title: "Product Delet",
+                          text: "Delete The Product ?");
                     },
                   ))
             ],

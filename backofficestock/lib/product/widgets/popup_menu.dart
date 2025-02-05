@@ -19,19 +19,10 @@ PopupMenuButton<dynamic> popupMenu(
 PopupMenuItem<dynamic> popupItem(
     {String? name, IconData? icon, dynamic onTap}) {
   return PopupMenuItem(
-      value: name,
-      child: ListTile(
-        contentPadding:
-            const EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 0),
-        onTap: onTap,
-        leading: icon != null
-            ? Icon(
-                icon,
-                size: 20,
-              )
-            : null,
-        title: Text(
-          name ?? '',
-        ),
-      ));
+    value: name,
+    onTap: onTap,
+    child: Text(
+      name ?? '',
+    ),
+  );
 }

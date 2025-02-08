@@ -15,7 +15,7 @@ class FormView<T extends ChangeNotifier> extends StatelessWidget {
   final String? apiUrl;
   final T provider;
   final bool? edit;
-  Map<String, dynamic>? initialValue;
+  final Map<String, dynamic>? initialValue;
   final Map<String, dynamic>? parameters;
   FormView(
       {super.key,

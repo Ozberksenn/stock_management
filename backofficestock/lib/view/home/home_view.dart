@@ -4,6 +4,7 @@ import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:backofficestock/view/home/widgets/navigation_bar.dart';
+import 'package:backofficestock/view/qr/qr_view.dart';
 import 'package:backofficestock/view/stock/stock_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,6 +43,8 @@ content(int menuId) {
   switch (menuId) {
     case 1:
       return const StockView();
+    case 2:
+      return const QrView();
     default:
       return Container();
   }

@@ -1,7 +1,6 @@
 import 'package:backofficestock/product/theme/theme.dart';
 import 'package:backofficestock/view/form/form_provider.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
-import 'package:backofficestock/view/stock/stock_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -37,10 +36,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-
-// sorularım : 
-// ngrog adresi ile istek attığmda cors hatası var.
-// swagger da login işlemi kabul etmiyor.

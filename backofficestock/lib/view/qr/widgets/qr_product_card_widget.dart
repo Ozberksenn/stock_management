@@ -4,6 +4,7 @@ import '../../../core/widget/padding.dart';
 import '../../../core/widget/radius.dart';
 import '../../../product/constants/api_constants.dart';
 import '../../../product/model/product_model.dart';
+import 'dialog_qr_product_card_widget.dart';
 
 class QrProductCard extends StatelessWidget {
   final ProductModel? product;
@@ -12,7 +13,9 @@ class QrProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => customDialog(context, widget: DialogProductCard()),
+      onTap: () => product != null
+          ? customDialog(context, widget: DialogProductCard(product: product!))
+          : null,
       child: Container(
         margin: const ConstEdgeInsets.paddingSymetric(verticalPad: 12.0),
         child: Row(
@@ -34,10 +37,13 @@ class QrProductCard extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(product?.productName ?? "",
-                        style: Theme.of(context).textTheme.titleMedium),
-                    Text(product?.price.toString() ?? "0",
-                        style: AppFonts.boldSmall),
+                    Row(children: [
+                      Text(product?.productName ?? "",
+                          style: Theme.of(context).textTheme.titleMedium),
+                      const CustomSizedBox.paddingWidth(widthValue: 12.0),
+                      Text("${product?.price.toString() ?? "0"}TL ",
+                          style: AppFonts.boldSmall),
+                    ]),
                     Text(product?.productDescription ?? "",
                         style: Theme.of(context).textTheme.labelSmall)
                   ]),
@@ -49,16 +55,4 @@ class QrProductCard extends StatelessWidget {
   }
 }
 
-class DialogProductCard extends StatelessWidget {
-  const DialogProductCard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [],
-    );
-  }
-}
 // Transform.scale(scale: 0.6, child: const SwitchWidget())

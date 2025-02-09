@@ -11,6 +11,7 @@ class StockProvider extends ChangeNotifier {
   List<MenuModel> menuTabList = [];
   List<ProductModel> productsList = [];
   // is Ready Variables
+  bool isReady = false;
   bool isMenuReady = false; // tab listesi için tutulan.
   bool isProductReady = false; // ürünlerin listesi için tutulan.
   bool isInitialized = false;

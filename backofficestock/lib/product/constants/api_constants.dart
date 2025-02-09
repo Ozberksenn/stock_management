@@ -40,7 +40,7 @@ final class AppFonts {
       .copyWith(fontSize: 12, color: const Color.fromARGB(255, 160, 157, 157));
   static final TextStyle boldSmall = AppTheme.lightTheme.textTheme.labelSmall!
       .copyWith(
-          fontSize: 12, color: AppColors.black, fontWeight: FontWeight.w700);
+          fontSize: 14, color: AppColors.black, fontWeight: FontWeight.w700);
 }
 
 @immutable

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SwitchWidget extends StatelessWidget {
@@ -5,6 +6,14 @@ class SwitchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Switch(value: false, onChanged: (value) {});
+    return Transform.scale(
+      scale: 0.7,
+      alignment: Alignment.bottomLeft,
+      child: Switch(
+        value: true,
+        onChanged: (value) {},
+        dragStartBehavior: DragStartBehavior.start,
+      ),
+    );
   }
 }

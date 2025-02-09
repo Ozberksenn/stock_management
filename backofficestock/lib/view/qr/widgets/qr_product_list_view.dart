@@ -1,11 +1,11 @@
-import 'package:backofficestock/product/editors/switch.dart';
+import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/widgets/custom_divider.dart';
+import 'package:backofficestock/product/widgets/no_item_widget.dart';
 import 'package:flutter/material.dart';
-
 import '../../../core/widget/padding.dart';
 import '../../../core/widget/radius.dart';
 import '../../../product/constants/api_constants.dart';
-import '../../../product/model/product_model.dart';
+import '../../../product/editors/switch.dart';
 import '../../stock/stock_provider.dart';
 
 class QrProductList extends StatelessWidget {
@@ -18,17 +18,25 @@ class QrProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<ProductModel> filterProducList = stockProvider.productsList
+        .where((element) => element.menuId == stockProvider.selectedTab?.menuId)
+        .toList();
     return Expanded(
-      child: ListView.separated(
-          itemCount: stockProvider.productsList.length,
-          separatorBuilder: (context, index) {
-            return const CustomDivider();
-          },
-          itemBuilder: (context, index) {
-            return QrProductCard(
-              product: stockProvider.productsList[index],
-            );
-          }),
+      child: stockProvider.isProductReady == true
+          ? filterProducList.isNotEmpty
+              ? ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: filterProducList.length,
+                  separatorBuilder: (context, index) {
+                    return const CustomDivider();
+                  },
+                  itemBuilder: (context, index) {
+                    return QrProductCard(
+                      product: filterProducList[index],
+                    );
+                  })
+              : const NoItemWidget()
+          : Container(),
     );
   }
 }

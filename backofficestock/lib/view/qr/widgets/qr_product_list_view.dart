@@ -1,3 +1,4 @@
+import 'package:backofficestock/product/editors/switch.dart';
 import 'package:backofficestock/product/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 
@@ -66,7 +67,7 @@ class QrProductCard extends StatelessWidget {
                       child: Text(product?.productName ?? "",
                           style: Theme.of(context).textTheme.titleMedium),
                     ),
-                    const Text('Switch')
+                    Transform.scale(scale: 0.6, child: const SwitchWidget())
                   ],
                 ),
               ),

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../home/widgets/content_header.dart';
 import 'stock_provider.dart';
 import 'widgets/product_list_widget.dart';
+import 'widgets/stock_add_button.dart';
 import 'widgets/stock_menu_title.dart';
 import 'widgets/tab_bar_widget.dart';
 
@@ -27,8 +28,8 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
         return Column(children: [
           const CustomSizedBox.paddingHeight(heightValue: 10),
           ContentHeader(
-            title: homeProvider.menu.title ?? "",
-          ),
+              title: homeProvider.menu.title ?? "",
+              widget: StockAddButton(stockProvider: stockProvider)),
           const CustomSizedBox.paddingHeight(heightValue: 10),
           StockMenuTitle(provider: stockProvider),
           stockProvider.isMenuReady == true

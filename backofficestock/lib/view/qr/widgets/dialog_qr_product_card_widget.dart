@@ -36,13 +36,16 @@ class DialogProductCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: context.dynamicWidth(0.2),
-                height: context.dynamicHeight(0.3),
+                width: context.dynamicWidth(0.3),
+                height: context.dynamicHeight(0.5),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.0),
-                    image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(AppString.custumProductUrl))),
+                    image: product.image != null && product.image != ""
+                        ? DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                product.image ?? AppString.custumProductUrl))
+                        : null),
               ),
               const CustomSizedBox.paddingWidth(widthValue: 12.0),
               CustomExpanded(
@@ -53,17 +56,17 @@ class DialogProductCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Product Name",
+                            product.productName,
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                           Text("27 TL", style: AppFonts.boldSmall)
                         ]),
                     Text(
-                      "Product Count : 122",
+                      "Count : ${product.count}",
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     Text(
-                      "Product Description",
+                      product.productDescription ?? "",
                       maxLines: 8,
                       style: Theme.of(context).textTheme.labelSmall,
                     ),

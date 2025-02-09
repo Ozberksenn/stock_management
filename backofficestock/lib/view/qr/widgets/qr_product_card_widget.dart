@@ -1,3 +1,4 @@
+import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/product/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import '../../../core/widget/padding.dart';
@@ -14,7 +15,9 @@ class QrProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => product != null
-          ? customDialog(context, widget: DialogProductCard(product: product!))
+          ? customDialog(context,
+              width: context.dynamicWidth(0.7),
+              widget: DialogProductCard(product: product!))
           : null,
       child: Container(
         margin: const ConstEdgeInsets.paddingSymetric(verticalPad: 12.0),

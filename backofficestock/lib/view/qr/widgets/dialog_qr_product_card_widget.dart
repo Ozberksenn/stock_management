@@ -1,6 +1,7 @@
 import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/product/editors/switch.dart';
 import 'package:backofficestock/product/model/product_model.dart';
+import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/widgets/custom_divider.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,7 +45,7 @@ class DialogProductCard extends StatelessWidget {
                         ? DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(
-                                product.image ?? AppString.custumProductUrl))
+                                "${AppService.cdnUrl}/${product.image}"))
                         : null),
               ),
               const CustomSizedBox.paddingWidth(widthValue: 12.0),

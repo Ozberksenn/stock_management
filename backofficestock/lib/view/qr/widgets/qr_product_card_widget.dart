@@ -1,4 +1,5 @@
 import 'package:backofficestock/core/extension/context_extension.dart';
+import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import '../../../core/widget/padding.dart';
@@ -27,11 +28,14 @@ class QrProductCard extends StatelessWidget {
             Container(
               width: 75,
               height: 75,
-              decoration: BoxDecoration(
-                  borderRadius: CustomRadius.radius6,
-                  image: const DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(AppString.customProfileUrl))),
+              decoration: product?.image != null
+                  ? BoxDecoration(
+                      borderRadius: CustomRadius.radius6,
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              "${AppService.cdnUrl}/${product?.image}")))
+                  : null,
             ),
             const CustomSizedBox.paddingWidth(
               widthValue: 8,

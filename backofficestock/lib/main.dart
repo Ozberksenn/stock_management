@@ -1,3 +1,4 @@
+import 'package:backofficestock/product/editors/form_image_picker_field.dart';
 import 'package:backofficestock/product/theme/theme.dart';
 import 'package:backofficestock/view/form/form_provider.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => HomeProivder()),
         ChangeNotifierProvider(create: (context) => FormProvider()),
+        ChangeNotifierProvider(create: (context) => FormImagePickerProvider()),
       ],
       child: MaterialApp.router(
         title: 'Stock Management',

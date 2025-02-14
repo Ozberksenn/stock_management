@@ -11,7 +11,8 @@ import 'widgets/form_title_widget.dart';
 class FormView<T extends ChangeNotifier> extends StatelessWidget {
   final BuildContext dialogContext;
   final String? title;
-  final String? route;
+  final String?
+      route; // menu mu product mı vs ona göre formu basıyor ve image field alanını ayarlıyor.
   final String? apiUrl;
   final T provider;
   final bool? edit;
@@ -50,6 +51,7 @@ class FormView<T extends ChangeNotifier> extends StatelessWidget {
             FormFooter(onTap: () {
               if (edit == true) {
                 formProvider.handleSaveButton<T>(
+                    formName: route,
                     context: context,
                     formKey: _formKey,
                     url: apiUrl!,
@@ -58,6 +60,7 @@ class FormView<T extends ChangeNotifier> extends StatelessWidget {
                     parameters: parameters);
               } else {
                 formProvider.handleSaveButton<T>(
+                    formName: route,
                     context: context,
                     formKey: _formKey,
                     url: apiUrl!,

@@ -13,7 +13,7 @@ class MenuForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FormImagePicker(name: "MENUIMAGE"),
+          FormImagePicker(),
           CustomSizedBox.paddingWidth(widthValue: 16.0),
           FormLabel(text: "Menu Name"),
           FormTextField(name: "MENUNAME"),

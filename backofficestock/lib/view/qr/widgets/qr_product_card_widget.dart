@@ -25,18 +25,17 @@ class QrProductCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: 75,
-              height: 75,
-              decoration: product?.image != null
-                  ? BoxDecoration(
-                      borderRadius: CustomRadius.radius6,
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                              "${AppService.cdnUrl}/${product?.image}")))
-                  : null,
-            ),
+            product?.image != null && product?.image != ""
+                ? Container(
+                    width: 75,
+                    height: 75,
+                    decoration: BoxDecoration(
+                        borderRadius: CustomRadius.radius6,
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                "${AppService.cdnUrl}/${product?.image}"))))
+                : const SizedBox(),
             const CustomSizedBox.paddingWidth(
               widthValue: 8,
             ),

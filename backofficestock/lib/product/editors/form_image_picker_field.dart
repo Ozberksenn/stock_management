@@ -10,9 +10,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 
 class FormImagePicker extends StatelessWidget {
-  final String name;
-  final double? height;
-  const FormImagePicker({super.key, required this.name, this.height});
+  const FormImagePicker({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +56,7 @@ class FormImagePicker extends StatelessWidget {
     return InkWell(
       onTap: () => provider.uploadImage(),
       child: Container(
-          height: height ?? context.dynamicHeight(0.25),
+          height: context.dynamicHeight(0.25),
           width: context.dynamicWidth(1),
           padding: const ConstEdgeInsets.padding20(),
           child: provider.imageFile.isEmpty ? noImage() : selectedImage()),
@@ -70,7 +68,15 @@ class FormImagePickerProvider extends ChangeNotifier {
   List<PlatformFile> imageFile = [];
 
   void uploadImage() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: [
+        'jpg',
+        'png',
+        'jpeg',
+      ],
+      withData: true,
+    );
     if (result == null) return;
     imageFile = result.files;
     notifyListeners();

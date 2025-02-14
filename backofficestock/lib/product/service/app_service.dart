@@ -2,8 +2,8 @@ import 'package:backofficestock/product/storage/app_storage.dart';
 import 'package:dio/dio.dart';
 
 class AppService {
-  static const String serviceUrl = "http://192.168.1.33:8080";
-  static const String cdnUrl = "http://192.168.1.33:8080/uploads";
+  static const String serviceUrl = "http://192.168.1.34:8080";
+  static const String cdnUrl = "http://192.168.1.34:8080/uploads";
 
   late final Dio dio;
   AppService._init() {

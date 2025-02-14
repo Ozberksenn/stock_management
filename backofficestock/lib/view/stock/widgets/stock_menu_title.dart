@@ -1,7 +1,9 @@
 import 'package:backofficestock/product/widgets/custom_alert_dialog.dart';
 import 'package:backofficestock/product/widgets/popup_menu.dart';
+import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/widget/padding.dart';
 import '../../../core/widget/radius.dart';
 import '../../../product/constants/api_constants.dart';
@@ -79,7 +81,17 @@ class ActionIcon extends StatelessWidget {
               onTap: () => customAlertDialog(
                   context: context,
                   title: "Menu Delete",
-                  onPressed: () => provider.deleteMenu(),
+                  onPressed: () async {
+                    final response = await provider.deleteMenu();
+                    if (response == true) {
+                      provider.refreshMenu();
+                      successSnackbar(
+                          context: context, message: "Deleted Menu");
+                      context.pop();
+                    } else {
+                      errorSnackbar(context: context, message: "Error");
+                    }
+                  },
                   text: "Do you want to delete menu"),
             )
           ]),

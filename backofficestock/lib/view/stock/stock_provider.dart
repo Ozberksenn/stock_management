@@ -45,6 +45,19 @@ class StockProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> refreshMenu() async {
+    isMenuReady = false;
+    Response response = await AppService.instance.getData("/getMenu");
+    if (response.data != null) {
+      menuTabList = (response.data['data'] as List)
+          .map((e) => MenuModel.fromMap(e))
+          .toList()
+          .cast<MenuModel>();
+    }
+    isMenuReady = true;
+    notifyListeners();
+  }
+
   Future<void> getProduct() async {
     // productlar burada çekilecek.
     isProductReady = false;
@@ -59,14 +72,13 @@ class StockProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> deleteMenu() async {
-    // menu silme
+  Future deleteMenu() async {
     Response response = await AppService.instance
         .deleteData("/deleteMenu", {"MENUID": selectedTab?.menuId});
     if (response.data['statusCode'] == 200) {
-      print("başarılı");
+      return true;
     } else {
-      print("error");
+      return false;
     }
   }
 

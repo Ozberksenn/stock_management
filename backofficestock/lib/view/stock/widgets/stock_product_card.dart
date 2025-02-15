@@ -1,4 +1,5 @@
 import 'package:backofficestock/product/model/product_model.dart';
+import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/widgets/custom_alert_dialog.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/form/form_view.dart';
@@ -57,15 +58,18 @@ class StockProductCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(AppString.custumProductUrl))),
-                  ),
+                  product.image != null && product.image != ""
+                      ? Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                      "${AppService.cdnUrl}/${product.image}"))),
+                        )
+                      : const SizedBox(),
                   const CustomSizedBox.paddingWidth(widthValue: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

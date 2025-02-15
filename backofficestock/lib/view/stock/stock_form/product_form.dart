@@ -1,3 +1,4 @@
+import 'package:backofficestock/product/editors/form_image_picker_field.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/widget/padding.dart';
@@ -13,26 +14,40 @@ class ProductForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          FormImagePicker(),
+          CustomSizedBox.paddingHeight(heightValue: 8),
           FormLabel(text: "Product Name"),
           FormTextField(name: "PRODUCTNAME"),
           CustomSizedBox.paddingHeight(heightValue: 8),
           FormLabel(text: "Product Description"),
           FormTextField(name: "PRODUCTDESCRIPTION", maxLines: 3),
           CustomSizedBox.paddingHeight(heightValue: 8),
-          FormLabel(text: "Price"),
-          FormTextField(
-            name: "PRICE",
-            postDataType: "int",
-          ),
-          CustomSizedBox.paddingHeight(heightValue: 8),
-          FormLabel(text: "Count"),
-          FormTextField(
-            name: "COUNT",
-            postDataType: "int",
-          ),
-          CustomSizedBox.paddingHeight(heightValue: 8),
-          FormLabel(text: "Image Url"),
-          FormTextField(name: "IMAGE"),
+          Row(children: [
+            CustomExpanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FormLabel(text: "Price"),
+                    FormTextField(
+                      name: "PRICE",
+                      postDataType: "int",
+                    ),
+                  ]),
+            ),
+            CustomSizedBox.paddingWidth(widthValue: 12.0),
+            CustomExpanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FormLabel(text: "Count"),
+                  FormTextField(
+                    name: "COUNT",
+                    postDataType: "int",
+                  ),
+                ],
+              ),
+            )
+          ]),
         ]);
   }
 }

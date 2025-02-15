@@ -24,7 +24,7 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
       builder: (context, child) {
         final stockProvider = context.watch<StockProvider>();
         final homeProvider = context.read<HomeProivder>();
-        stockProvider.init(vsync: this);
+        stockProvider.init(tabVsync: this);
         return Column(children: [
           const CustomSizedBox.paddingHeight(heightValue: 10),
           ContentHeader(

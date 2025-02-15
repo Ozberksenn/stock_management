@@ -30,8 +30,10 @@ class FormProvider extends ChangeNotifier {
         response = await AppService.instance.putData(url, formData);
       }
       if (response?.data['statusCode'] == 200) {
-        refreshList(provider);
         successSnackbar(context: context, message: "Success");
+        refreshProduct(provider);
+        refreshMenu(provider);
+        refreshImageField(context);
         context.pop();
       } else {
         errorSnackbar(context: context, message: "Error");
@@ -41,10 +43,22 @@ class FormProvider extends ChangeNotifier {
     }
   }
 
-  refreshList(provider) {
+  refreshProduct(provider) {
     if (provider is StockProvider) {
       return provider.getProduct();
     }
+  }
+
+  refreshMenu(provider) {
+    if (provider is StockProvider) {
+      return provider.refreshMenu();
+    }
+  }
+
+  refreshImageField(context) {
+    final imageProvider =
+        Provider.of<FormImagePickerProvider>(context, listen: false);
+    imageProvider.imageFile = [];
   }
 
   uploadImageData(
@@ -70,6 +84,8 @@ class FormProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         if (formName == "menu") {
           formData.addAll({"MENUIMAGE": response.data['file']['filename']});
+        } else if (formName == "product") {
+          formData.addAll({"PRODUCTIMAGE": response.data['file']['filename']});
         }
       } else {
         errorSnackbar(context: context, message: response.statusMessage);

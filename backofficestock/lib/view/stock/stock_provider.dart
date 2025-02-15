@@ -17,10 +17,12 @@ class StockProvider extends ChangeNotifier {
   bool isInitialized = false;
   // Selecteds
   MenuModel? selectedTab; // seçili tab bilgisi burada tutuluyor.
+  TickerProvider? vsync;
 
-  void init({TickerProvider? vsync}) {
+  void init({required TickerProvider tabVsync}) {
     if (isInitialized) return;
     isInitialized = true;
+    vsync = tabVsync;
     getMenu(vsync);
     getProduct();
   }
@@ -46,6 +48,7 @@ class StockProvider extends ChangeNotifier {
   }
 
   Future<void> refreshMenu() async {
+    if (vsync == null) return;
     isMenuReady = false;
     Response response = await AppService.instance.getData("/getMenu");
     if (response.data != null) {
@@ -53,6 +56,7 @@ class StockProvider extends ChangeNotifier {
           .map((e) => MenuModel.fromMap(e))
           .toList()
           .cast<MenuModel>();
+      tabController = TabController(length: menuTabList.length, vsync: vsync!);
     }
     isMenuReady = true;
     notifyListeners();

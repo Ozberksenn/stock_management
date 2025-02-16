@@ -2,6 +2,7 @@ import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/core/widget/padding.dart';
 import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
+import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,18 +11,30 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 
 class FormImagePicker extends StatelessWidget {
-  const FormImagePicker({super.key});
+  final String? initialValue;
+  const FormImagePicker({super.key, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
     FormImagePickerProvider provider = context.watch();
 
     Widget noImage() {
-      return const CustomIcon(
-        icon: Iconsax.camera,
-        size: 48,
-        color: AppColors.blue,
-      );
+      return initialValue == null || initialValue == ""
+          ? const CustomIcon(
+              icon: Iconsax.camera,
+              size: 48,
+              color: AppColors.blue,
+            )
+          : Container(
+              width: context.dynamicWidth(0.2),
+              height: context.dynamicHeight(0.3),
+              decoration: BoxDecoration(
+                  borderRadius: CustomRadius.radius6,
+                  image: DecorationImage(
+                      fit: BoxFit.contain,
+                      image:
+                          NetworkImage("${AppService.cdnUrl}/$initialValue"))),
+            );
     }
 
     Widget selectedImage() {
@@ -40,14 +53,13 @@ class FormImagePicker extends StatelessWidget {
           child: Align(
             alignment: Alignment.topRight,
             child: CustomPaddings.customPadding(
-              value: 4.0,
-              child: CustomIcon(
-                icon: CupertinoIcons.xmark,
-                size: 28,
-                color: AppColors.black,
-                onTap: () => provider.deleteSelectedImage(),
-              ),
-            ),
+                value: 4.0,
+                child: CustomIcon(
+                  icon: CupertinoIcons.xmark,
+                  size: 28,
+                  color: AppColors.black,
+                  onTap: () => provider.deleteSelectedImage(),
+                )),
           ),
         ),
       );

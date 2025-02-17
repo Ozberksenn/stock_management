@@ -24,7 +24,9 @@ class DialogProductCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SwitchWidget(),
+              const SwitchWidget(
+                value: true,
+              ),
               CustomIcon(
                   onTap: () => context.pop(), icon: CupertinoIcons.xmark),
             ],

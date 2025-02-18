@@ -10,7 +10,8 @@ class ProductModel {
   final int? count;
   final String? image;
   final int? bandId;
-  bool? showStore;
+  final bool? showStore;
+  final String? barcode;
 
   ProductModel(
       {required this.id,
@@ -22,7 +23,8 @@ class ProductModel {
       this.count,
       this.image,
       this.bandId,
-      this.showStore});
+      this.showStore,
+      this.barcode});
 
   factory ProductModel.fromMap(Map<String, dynamic> json) {
     return ProductModel(
@@ -35,7 +37,8 @@ class ProductModel {
         count: json['COUNT'],
         image: json['IMAGE'],
         bandId: json['BANDID'],
-        showStore: json["SHOWSTORE"] ?? true);
+        showStore: json["SHOWSTORE"] ?? true,
+        barcode: json['BARCODE']);
   }
 
   factory ProductModel.toMap(json) {
@@ -53,7 +56,8 @@ class ProductModel {
       'COUNT': count.toString(),
       'IMAGE': image,
       'BANDID': bandId,
-      'SHOWSTORE': showStore
+      'SHOWSTORE': showStore,
+      'BARCODE': barcode
     };
   }
 }

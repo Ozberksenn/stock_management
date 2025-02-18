@@ -75,7 +75,7 @@ class StockProductCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${product.productName} - ${product.price}TL',
+                        '${product.count} - ${product.productName}',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       Text(product.productDescription ?? '',

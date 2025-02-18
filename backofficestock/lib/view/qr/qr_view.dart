@@ -25,7 +25,6 @@ class _QrViewState extends State<QrView> with TickerProviderStateMixin {
         final homeProvider = context.read<HomeProivder>();
         stockProvider.init(tabVsync: this);
         return Column(children: [
-          const CustomSizedBox.paddingHeight(heightValue: 10),
           ContentHeader(
             title: homeProvider.menu.title ?? "",
           ),

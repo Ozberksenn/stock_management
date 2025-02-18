@@ -5,6 +5,7 @@ import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:backofficestock/view/home/widgets/navigation_bar.dart';
 import 'package:backofficestock/view/qr/qr_view.dart';
+import 'package:backofficestock/view/sale/sale_view.dart';
 import 'package:backofficestock/view/stock/stock_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,6 +46,8 @@ content(int menuId) {
       return const StockView();
     case 2:
       return const QrView();
+    case 3:
+      return const SaleView();
     default:
       return Container();
   }

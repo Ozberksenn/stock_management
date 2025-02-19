@@ -9,4 +9,9 @@ final class CustomDecoration {
           shape: BoxShape.circle,
           image: DecorationImage(
               fit: BoxFit.cover, image: NetworkImage(imageUrl)));
+
+  static BoxDecoration radiusImageDecoration(ImageProvider<Object> image) =>
+      BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          image: DecorationImage(fit: BoxFit.cover, image: image));
 }

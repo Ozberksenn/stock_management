@@ -1,8 +1,7 @@
 import 'package:backofficestock/product/constants/api_constants.dart';
-import 'package:backofficestock/product/editors/form_image_picker_field.dart';
+import 'package:backofficestock/product/widgets/custom_buttons.dart';
 import 'package:backofficestock/product/widgets/custom_divider.dart';
 import 'package:backofficestock/view/sale/sale_provider.dart';
-import 'package:backofficestock/view/sale/widgets/no_product_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,20 +34,45 @@ class BasketWidget extends StatelessWidget {
               color: AppColors.dark,
             ),
             provider.isReady == true
-                ? ListView.builder(
-                    itemCount: provider.productList.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        // leading: Image.asset("name"),
-                        title: Text(provider.productList[index].productName),
-                        subtitle: Text(
-                            provider.productList[index].productDescription ??
+                ? CustomExpanded(
+                    child: ListView.builder(
+                        itemCount: provider.productList.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            // leading: Image.asset("name"),
+                            title:
+                                Text(provider.productList[index].productName),
+                            subtitle: Text(provider
+                                    .productList[index].productDescription ??
                                 ""),
-                      );
-                    })
-                : Text("No Product",
-                    style: Theme.of(context).textTheme.titleMedium)
+                          );
+                        }),
+                  )
+                : CustomExpanded(
+                    child: Text("No Product",
+                        style: Theme.of(context).textTheme.titleMedium),
+                  ),
+            CustomPaddings.customPadding(
+              value: 8.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(children: [
+                    Text(
+                      "\$ : 100",
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    const CustomSizedBox.paddingWidth(widthValue: 12.0),
+                    Text("Count : 5",
+                        style: Theme.of(context).textTheme.titleSmall),
+                  ]),
+                  CustomButton(
+                    text: "Completed",
+                    onTap: () => provider.sendProducts(),
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),

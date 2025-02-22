@@ -60,4 +60,8 @@ class ProductModel {
       'BARCODE': barcode
     };
   }
+
+  Map<String, dynamic> toJsonStock() {
+    return {'ID': id, 'COUNT': count};
+  }
 }

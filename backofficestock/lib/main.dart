@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => HomeProivder()),
         ChangeNotifierProvider(create: (context) => FormProvider()),
         ChangeNotifierProvider(create: (context) => FormImagePickerProvider()),
-        // ChangeNotifierProvider(create: (context) => StockProvider()),
       ],
       child: MaterialApp.router(
         title: 'Stock Management',

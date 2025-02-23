@@ -1,3 +1,4 @@
+import 'package:backofficestock/core/widget/padding.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class CompanyView extends StatelessWidget {
             ContentHeader(
               title: homeProvider.menu.title ?? "",
             ),
-            const CompanyForm()
+            CustomExpanded(child: SingleChildScrollView(child: CompanyForm()))
           ],
         );
       },

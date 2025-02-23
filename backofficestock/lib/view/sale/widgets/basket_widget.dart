@@ -85,7 +85,7 @@ class BasketCard extends StatelessWidget {
             onTap: () => provider.handleDelete(product),
             icon: CupertinoIcons.delete),
         title: Text(product.productName),
-        subtitle: Text(product.price.toString()),
+        subtitle: Text("Stock : ${product.price.toString()}"),
         trailing: Container(
           color: AppColors.white,
           width: 90,
@@ -93,8 +93,8 @@ class BasketCard extends StatelessWidget {
           child: Row(
             children: [
               CustomIcon(
-                onTap: () => provider.handlePlus(product),
-                icon: CupertinoIcons.plus,
+                onTap: () => provider.handleMinus(product),
+                icon: CupertinoIcons.minus,
                 size: 16,
               ),
               const CustomSizedBox.paddingWidth(widthValue: 20.0),
@@ -102,10 +102,10 @@ class BasketCard extends StatelessWidget {
                   style: AppFonts.greenTitleMedium),
               const CustomSizedBox.paddingWidth(widthValue: 20.0),
               CustomIcon(
-                onTap: () => provider.handleMinus(product),
-                icon: CupertinoIcons.minus,
+                onTap: () => provider.handlePlus(product),
+                icon: CupertinoIcons.plus,
                 size: 16,
-              )
+              ),
             ],
           ),
         ));

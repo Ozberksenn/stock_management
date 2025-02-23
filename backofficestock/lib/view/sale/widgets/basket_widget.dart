@@ -26,7 +26,7 @@ class BasketWidget extends StatelessWidget {
             ListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(
-                "Sepet",
+                "Basket",
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               trailing: const CustomIcon(icon: CupertinoIcons.xmark),
@@ -56,7 +56,7 @@ class BasketWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Total Price :  \$ : ${provider.totalPrice}",
+                    "Total Price: ${provider.totalPrice}TL",
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   CustomButton(

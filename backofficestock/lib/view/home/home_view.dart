@@ -2,6 +2,7 @@ import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/core/widget/padding.dart';
 import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
+import 'package:backofficestock/view/company/company_view.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:backofficestock/view/home/widgets/navigation_bar.dart';
 import 'package:backofficestock/view/qr/qr_view.dart';
@@ -48,6 +49,8 @@ content(int menuId) {
       return const QrView();
     case 3:
       return const SaleView();
+    case 6:
+      return const CompanyView();
     default:
       return Container();
   }

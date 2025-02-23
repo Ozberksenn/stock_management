@@ -14,6 +14,7 @@ final class AppColors {
   static const Color blue = Color.fromRGBO(32, 80, 153, 1);
   static const Color error = Colors.red;
   static const Color red = Color.fromARGB(255, 195, 62, 53);
+  static const Color green = Colors.green;
 }
 
 @immutable
@@ -41,6 +42,9 @@ final class AppFonts {
   static final TextStyle boldSmall = AppTheme.lightTheme.textTheme.labelSmall!
       .copyWith(
           fontSize: 14, color: AppColors.black, fontWeight: FontWeight.w700);
+  static final TextStyle greenTitleMedium = AppTheme
+      .lightTheme.textTheme.titleMedium!
+      .copyWith(fontSize: 18, color: AppColors.green);
 }
 
 @immutable

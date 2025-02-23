@@ -9,8 +9,8 @@ class SaleProvider extends ChangeNotifier {
   bool isReady = false;
   ProductModel? productFounded;
   List<ProductModel> productList = [];
-  // List<dynamic> products = [];
   TextEditingController barcodeTextController = TextEditingController();
+  int totalPrice = 0;
 
   Future<void> searchBarcode() async {
     isReady = false;
@@ -19,8 +19,7 @@ class SaleProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       if ((response.data['data'] as List).isNotEmpty) {
         productFounded = ProductModel.fromMap(response.data['data'][0]);
-        productList.add(productFounded!);
-        // products.add(response.data['data']);
+        sameProductIdControll(); // aynı üründen varsa listey eklemiyor.
         isReady = true;
         notifyListeners();
       } else {
@@ -40,13 +39,61 @@ class SaleProvider extends ChangeNotifier {
           "/updateProductQuantity", {"PRODUCTJSONDATA": jsonProductList});
       if (response.statusCode == 200) {
         if (response.data['statusCode'] == 200) {
+          // todo : success bas
           print('success');
         } else {
+          // todo : error bas
           print('error');
         }
       } else {
+        // todo : error bas
         print('error');
       }
+    }
+  }
+
+  void handlePlus(ProductModel product) {
+    if (product.basketQuantity < product.count!) {
+      product.basketQuantity += 1;
+      getTotalPrice();
+      notifyListeners();
+    } else {
+      // todo : error bas
+    }
+  }
+
+  void handleMinus(ProductModel product) {
+    if (product.basketQuantity > 1) {
+      product.basketQuantity -= 1;
+      getTotalPrice();
+      notifyListeners();
+    } else {
+      // todo : error bas
+    }
+  }
+
+  handleDelete(ProductModel product) {
+    productList.remove(product);
+    isReady = false;
+    notifyListeners();
+  }
+
+  getTotalPrice() {
+    totalPrice = 0;
+    for (var i in productList) {
+      totalPrice += (i.basketQuantity * i.price!);
+    }
+    notifyListeners();
+  }
+
+  sameProductIdControll() {
+    bool exists = productList.any((item) => item.id == productFounded!.id);
+    if (exists) {
+      // todo uyarıyı  bas.
+      print("Bu üründen mevcut, lütfen adedini arttırınız");
+    } else {
+      productList.add(productFounded!);
+      getTotalPrice();
     }
   }
 }

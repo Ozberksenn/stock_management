@@ -12,6 +12,7 @@ class ProductModel {
   final int? bandId;
   final bool? showStore;
   final String? barcode;
+  int basketQuantity;
 
   ProductModel(
       {required this.id,
@@ -24,7 +25,8 @@ class ProductModel {
       this.image,
       this.bandId,
       this.showStore,
-      this.barcode});
+      this.barcode,
+      this.basketQuantity = 1});
 
   factory ProductModel.fromMap(Map<String, dynamic> json) {
     return ProductModel(
@@ -38,7 +40,8 @@ class ProductModel {
         image: json['IMAGE'],
         bandId: json['BANDID'],
         showStore: json["SHOWSTORE"] ?? true,
-        barcode: json['BARCODE']);
+        barcode: json['BARCODE'],
+        basketQuantity: 1);
   }
 
   factory ProductModel.toMap(json) {
@@ -62,6 +65,9 @@ class ProductModel {
   }
 
   Map<String, dynamic> toJsonStock() {
-    return {'ID': id, 'COUNT': count};
+    return {
+      'ID': id,
+      'COUNT': count! - basketQuantity,
+    };
   }
 }

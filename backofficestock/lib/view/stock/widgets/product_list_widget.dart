@@ -1,5 +1,5 @@
 import 'package:backofficestock/product/model/product_model.dart';
-import 'package:backofficestock/product/widgets/no_item_widget.dart';
+import 'package:backofficestock/product/utils/undefined/no_item_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/widget/padding.dart';

@@ -14,6 +14,7 @@ final class AppColors {
   static const Color blue = Color.fromRGBO(32, 80, 153, 1);
   static const Color error = Colors.red;
   static const Color red = Color.fromARGB(255, 195, 62, 53);
+  static const Color yellow = Color.fromARGB(255, 239, 235, 7);
   static const Color green = Colors.green;
 }
 

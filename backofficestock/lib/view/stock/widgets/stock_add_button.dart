@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../product/constants/api_constants.dart';
-import '../../../product/widgets/custom_dialog.dart';
+import '../../../product/utils/modal/custom_dialog.dart';
 import '../../../product/widgets/custom_elevated_button.dart';
 import '../../../product/widgets/popup_menu.dart';
 import '../../form/form_view.dart';

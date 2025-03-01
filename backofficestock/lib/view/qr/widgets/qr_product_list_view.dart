@@ -1,6 +1,6 @@
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/widgets/custom_divider.dart';
-import 'package:backofficestock/product/widgets/no_item_widget.dart';
+import 'package:backofficestock/product/utils/undefined/no_item_widget.dart';
 import 'package:flutter/material.dart';
 import '../../stock/stock_provider.dart';
 import 'qr_product_card_widget.dart';

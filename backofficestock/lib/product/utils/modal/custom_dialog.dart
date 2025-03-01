@@ -1,6 +1,6 @@
 import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:flutter/material.dart';
-import '../constants/api_constants.dart';
+import '../../constants/api_constants.dart';
 
 Future<dynamic> customDialog(BuildContext context,
     {double? width, double? height, Widget? widget}) {

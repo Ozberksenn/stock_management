@@ -1,6 +1,6 @@
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
-import 'package:backofficestock/product/widgets/custom_alert_dialog.dart';
+import 'package:backofficestock/product/utils/modal/custom_alert_dialog.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/form/form_view.dart';
 import 'package:backofficestock/view/stock/stock_provider.dart';
@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 import '../../../core/widget/padding.dart';
 import '../../../core/widget/radius.dart';
 import '../../../product/constants/api_constants.dart';
-import '../../../product/widgets/custom_dialog.dart';
+import '../../../product/utils/modal/custom_dialog.dart';
 
 class StockProductCard extends StatelessWidget {
   final ProductModel product;

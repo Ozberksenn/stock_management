@@ -1,4 +1,4 @@
-import 'package:backofficestock/product/widgets/custom_alert_dialog.dart';
+import 'package:backofficestock/product/utils/modal/custom_alert_dialog.dart';
 import 'package:backofficestock/product/widgets/popup_menu.dart';
 import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/widget/padding.dart';
 import '../../../core/widget/radius.dart';
 import '../../../product/constants/api_constants.dart';
-import '../../../product/widgets/custom_dialog.dart';
+import '../../../product/utils/modal/custom_dialog.dart';
 import '../../../product/widgets/custom_icon.dart';
 import '../../form/form_view.dart';
 import '../stock_provider.dart';

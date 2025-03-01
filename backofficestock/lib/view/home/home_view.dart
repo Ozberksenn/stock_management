@@ -10,6 +10,8 @@ import 'package:backofficestock/view/sale/sale_view.dart';
 import 'package:backofficestock/view/stock/stock_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../notification/notification_view.dart';
+import '../web_site/web_site_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -49,6 +51,10 @@ content(int menuId) {
       return const QrView();
     case 3:
       return const SaleView();
+    case 4:
+      return const WebSiteView();
+    case 5:
+      return const NotificationView();
     case 6:
       return const CompanyView();
     default:

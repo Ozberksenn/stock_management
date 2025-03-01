@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import '../../../core/widget/padding.dart';
-import '../../../product/editors/form_mulit_text_field.dart';
 import '../../../product/editors/form_text_field.dart';
 import '../../form/widgets/form_card.dart';
 import '../../form/widgets/form_label.dart';
@@ -69,26 +68,8 @@ class CompanyForm extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FormLabel(text: "Monday"),
-              FormMultiText(),
-              CustomSizedBox.paddingHeight(heightValue: 12.0),
-              FormLabel(text: "Tuesday"),
-              FormMultiText(),
-              CustomSizedBox.paddingHeight(heightValue: 12.0),
-              FormLabel(text: "Wednesday"),
-              FormMultiText(),
-              CustomSizedBox.paddingHeight(heightValue: 12.0),
-              FormLabel(text: "Thursday"),
-              FormMultiText(),
-              CustomSizedBox.paddingHeight(heightValue: 12.0),
-              FormLabel(text: "Friday"),
-              FormMultiText(),
-              CustomSizedBox.paddingHeight(heightValue: 12.0),
-              FormLabel(text: "Saturday"),
-              FormMultiText(),
-              CustomSizedBox.paddingHeight(heightValue: 12.0),
-              FormLabel(text: "Sunday"),
-              FormMultiText()
+              FormLabel(text: "Working Days"),
+              FormTextField(name: "WORKINGDAYS", maxLines: 4),
             ],
           )
         ],

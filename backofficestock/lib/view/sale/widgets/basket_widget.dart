@@ -35,7 +35,7 @@ class BasketWidget extends StatelessWidget {
               trailing: const CustomIcon(icon: CupertinoIcons.xmark),
             ),
             const CustomDivider(
-              color: AppColors.dark,
+              color: AppColors.lightGrey,
             ),
             provider.isReady == true
                 ? CustomExpanded(
@@ -67,9 +67,9 @@ class BasketFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const ConstEdgeInsets.padding8(),
-      padding: const ConstEdgeInsets.padding8(),
+      padding: const ConstEdgeInsets.padding12(),
       decoration: BoxDecoration(
-          color: AppColors.white, borderRadius: CustomRadius.radius12),
+          color: AppColors.softGrey, borderRadius: CustomRadius.radius12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

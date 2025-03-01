@@ -42,6 +42,7 @@ Future<dynamic> errorPopup(BuildContext context, {String? message}) {
                   CustomElevatedButton(
                     text: "Done",
                     color: AppColors.black,
+                    onPressed: () => context.pop(),
                     style: AppFonts.greylabelSmall,
                   )
                 ],

@@ -23,6 +23,7 @@ class SaleContent extends StatelessWidget {
           padding: const ConstEdgeInsets.padding8(),
           child: Column(
             children: [
+              const CustomSizedBox.paddingHeight(heightValue: 8.0),
               FormTextField(
                 name: "",
                 hintText: "Barcode No",

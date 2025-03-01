@@ -1,6 +1,8 @@
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/service/app_service.dart';
-import 'package:backofficestock/product/widgets/custom_buttons.dart';
+import 'package:backofficestock/product/utils/modal/error_popup.dart';
+import 'package:backofficestock/product/widgets/custom_elevated_button.dart';
+import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
 import 'package:backofficestock/view/login/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -45,23 +47,24 @@ class LoginForm extends StatelessWidget {
                         textEditingController: provider.passwordController),
                     const CustomSizedBox.paddingHeight(heightValue: 20),
                     Align(
-                        alignment: Alignment.centerRight,
-                        child: provider.isActiveLoginButton == true
-                            ? CustomButton(
-                                text: "Login",
-                                onTap: () async {
-                                  ServiceResponse result =
-                                      await provider.handleSave(_formKey);
-                                  if (result.isSuccess == true) {
-                                    context.go("/home");
-                                  } else {
-                                    // todo : show error message
-                                  }
-                                })
-                            : const CustomButton(
-                                text: "Login",
-                                color: AppColors.lightGrey,
-                              ))
+                      alignment: Alignment.centerRight,
+                      child: CustomElevatedButton(
+                        text: "Login",
+                        color: AppColors.primaryColor,
+                        style: AppFonts.whiteBodyMedium,
+                        onPressed: () async {
+                          ServiceResponse result =
+                              await provider.handleSave(_formKey);
+                          if (result.isSuccess == true) {
+                            successSnackbar(
+                                context: context, message: result.message);
+                            context.go("/home");
+                          } else {
+                            errorPopup(context, message: result.message);
+                          }
+                        },
+                      ),
+                    )
                   ])),
         ]),
         Text(

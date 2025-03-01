@@ -2,6 +2,7 @@ import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/product/editors/switch.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/utils/modal/custom_dialog.dart';
+import 'package:backofficestock/product/utils/undefined/no_image_widget.dart';
 import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
 import 'package:backofficestock/view/stock/stock_provider.dart';
 import 'package:dio/dio.dart';
@@ -56,7 +57,7 @@ class QrProductCard extends StatelessWidget {
                             fit: BoxFit.cover,
                             image: NetworkImage(
                                 "${AppService.cdnUrl}/${product?.image}"))))
-                : const SizedBox(),
+                : const NoImage(width: 100, size: 40),
             const CustomSizedBox.paddingWidth(
               widthValue: 8,
             ),

@@ -1,6 +1,7 @@
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/utils/modal/custom_alert_dialog.dart';
+import 'package:backofficestock/product/utils/undefined/no_image_widget.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/form/form_view.dart';
 import 'package:backofficestock/view/stock/stock_provider.dart';
@@ -69,7 +70,10 @@ class StockProductCard extends StatelessWidget {
                                   image: NetworkImage(
                                       "${AppService.cdnUrl}/${product.image}"))),
                         )
-                      : const SizedBox(),
+                      : const NoImage(
+                          width: 60,
+                          size: 36,
+                        ),
                   const CustomSizedBox.paddingWidth(widthValue: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -30,7 +30,7 @@ class SaleProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> sendProducts() async {
+  Future sendProducts() async {
     if (productList.isNotEmpty) {
       List<dynamic> newList =
           productList.map((product) => product.toJsonStock()).toList();
@@ -39,15 +39,20 @@ class SaleProvider extends ChangeNotifier {
           "/updateProductQuantity", {"PRODUCTJSONDATA": jsonProductList});
       if (response.statusCode == 200) {
         if (response.data['statusCode'] == 200) {
-          // todo : success bas
-          print('success');
+          productList.clear();
+          isReady = false;
+          barcodeTextController.text = "";
+          notifyListeners();
+          return ServiceResponse(
+              isSuccess: true, message: "The sale was succesfully");
         } else {
-          // todo : error bas
-          print('error');
+          return ServiceResponse(
+              isSuccess: false,
+              message: "Error : ${response.data['statusCode']}");
         }
       } else {
-        // todo : error bas
-        print('error');
+        return ServiceResponse(
+            isSuccess: false, message: "${response.statusMessage}");
       }
     }
   }

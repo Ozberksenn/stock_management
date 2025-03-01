@@ -1,6 +1,9 @@
 import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/model/product_model.dart';
+import 'package:backofficestock/product/service/app_service.dart';
+import 'package:backofficestock/product/utils/modal/error_popup.dart';
+import 'package:backofficestock/product/utils/modal/success_popup.dart';
 import 'package:backofficestock/product/widgets/custom_buttons.dart';
 import 'package:backofficestock/product/widgets/custom_divider.dart';
 import 'package:backofficestock/view/sale/sale_provider.dart';
@@ -43,31 +46,48 @@ class BasketWidget extends StatelessWidget {
                               product: provider.productList[index]);
                         }),
                   )
-                : CustomExpanded(
-                    child: Text("No Product",
-                        style: Theme.of(context).textTheme.titleMedium),
-                  ),
-            Container(
-              margin: const ConstEdgeInsets.padding8(),
-              padding: const ConstEdgeInsets.padding8(),
-              decoration: BoxDecoration(
-                  color: AppColors.white, borderRadius: CustomRadius.radius12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Total Price: ${provider.totalPrice}TL",
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  CustomButton(
-                    text: "Completed",
-                    onTap: () => provider.sendProducts(),
-                  )
-                ],
-              ),
-            ),
+                : const CustomExpanded(),
+            BasketFooter(provider: provider),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class BasketFooter extends StatelessWidget {
+  const BasketFooter({
+    super.key,
+    required this.provider,
+  });
+
+  final SaleProvider provider;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const ConstEdgeInsets.padding8(),
+      padding: const ConstEdgeInsets.padding8(),
+      decoration: BoxDecoration(
+          color: AppColors.white, borderRadius: CustomRadius.radius12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            "Total Price: ${provider.totalPrice}TL",
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          CustomButton(
+              text: "Completed",
+              onTap: () async {
+                ServiceResponse response = await provider.sendProducts();
+                if (response.isSuccess == true) {
+                  successPopup(context, message: response.message);
+                } else {
+                  errorPopup(context, message: response.message);
+                }
+              })
+        ],
       ),
     );
   }
@@ -85,11 +105,12 @@ class BasketCard extends StatelessWidget {
             onTap: () => provider.handleDelete(product),
             icon: CupertinoIcons.delete),
         title: Text(product.productName),
-        subtitle: Text("Stock : ${product.price.toString()}"),
+        subtitle: Text("Stock : ${product.count.toString()}"),
         trailing: Container(
-          color: AppColors.white,
-          width: 90,
-          padding: const ConstEdgeInsets.padding2(),
+          width: 100,
+          decoration: BoxDecoration(
+              color: AppColors.white, borderRadius: CustomRadius.radius12),
+          padding: const ConstEdgeInsets.padding4(),
           child: Row(
             children: [
               CustomIcon(

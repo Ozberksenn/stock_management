@@ -14,8 +14,9 @@ class MenuTab extends StatelessWidget {
       padding: const ConstEdgeInsets.paddingSymetric(
           verticalPad: 6.0, horizontalPad: 12.0),
       decoration: BoxDecoration(
-          borderRadius: CustomRadius.radius6, color: AppColors.lightGrey),
-      child: Text(text ?? '', style: Theme.of(context).textTheme.bodyMedium),
+          borderRadius: CustomRadius.radius6, color: AppColors.white),
+      child: Text(text?.toUpperCase() ?? '',
+          style: Theme.of(context).textTheme.bodyMedium),
     ));
   }
 }

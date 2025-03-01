@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 
 ThemeData lightThemeData = ThemeData(
     useMaterial3: true,
+    colorSchemeSeed: AppColors.blue,
     popupMenuTheme:
         const PopupMenuThemeData(color: AppColors.white, elevation: 2),
+    switchTheme: const SwitchThemeData(
+        trackColor: WidgetStatePropertyAll(AppColors.blue)),
     inputDecorationTheme: InputDecorationTheme(
       isDense: true,
       hintStyle: const TextStyle(fontSize: 12, color: AppColors.dark),

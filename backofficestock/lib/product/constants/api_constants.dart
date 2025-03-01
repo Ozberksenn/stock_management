@@ -10,6 +10,7 @@ final class AppColors {
   static const Color white = Colors.white;
   static const Color grey = Color.fromARGB(255, 203, 196, 196);
   static const Color lightGrey = Color.fromARGB(255, 243, 240, 240);
+  static const Color softGrey = Color.fromARGB(255, 248, 246, 246);
   static const Color primaryColor = Color.fromRGBO(32, 80, 153, 1);
   static const Color blue = Color.fromRGBO(32, 80, 153, 1);
   static const Color error = Colors.red;

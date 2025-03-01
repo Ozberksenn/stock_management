@@ -25,15 +25,17 @@ class SaleView extends StatelessWidget {
             ),
             const CustomSizedBox.paddingHeight(heightValue: 8.0),
             CustomExpanded(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: AppColors.lightGrey,
-                    borderRadius: CustomRadius.radius12),
+              child: Card(
+                elevation: 5,
+                color: AppColors.white,
+                // decoration: BoxDecoration(
+                //     color: AppColors.white,
+                //     borderRadius: CustomRadius.radius12),
                 child: Row(children: [
                   const SaleContent(),
                   Container(
-                    width: 2,
-                    color: AppColors.white,
+                    width: 0.5,
+                    color: AppColors.lightGrey,
                   ),
                   const BasketWidget()
                 ]),

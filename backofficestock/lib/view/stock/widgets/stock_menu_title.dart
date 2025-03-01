@@ -22,8 +22,7 @@ class StockMenuTitle extends StatelessWidget {
         ? Container(
             padding: const ConstEdgeInsets.padding8(),
             decoration: BoxDecoration(
-                color: AppColors.lightGrey.withOpacity(0.6),
-                borderRadius: CustomRadius.radius6),
+                color: AppColors.softGrey, borderRadius: CustomRadius.radius6),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

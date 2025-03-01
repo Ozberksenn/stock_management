@@ -15,12 +15,16 @@ class CompanyView extends StatelessWidget {
       create: (_) => CompanyProvider(),
       builder: (context, child) {
         HomeProivder homeProvider = context.read<HomeProivder>();
+        CompanyProvider companyProvider = context.watch<CompanyProvider>();
         return Column(
           children: [
             ContentHeader(
               title: homeProvider.menu.title ?? "",
             ),
-            CustomExpanded(child: SingleChildScrollView(child: CompanyForm()))
+            CustomExpanded(
+                child: CompanyForm(
+              provider: companyProvider,
+            ))
           ],
         );
       },

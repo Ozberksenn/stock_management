@@ -206,6 +206,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -253,6 +258,14 @@ packages:
     description:
       name: form_builder_extra_fields
       sha256: "34fae81ce02c315460285064166d48240160f2951ebcb007d2906bbdfa5ea297"
+      url: "https://pub.dev"
+    source: hosted
+    version: "11.0.0"
+  form_builder_validators:
+    dependency: "direct main"
+    description:
+      name: form_builder_validators
+      sha256: c61ed7b1deecf0e1ebe49e2fa79e3283937c5a21c7e48e3ed9856a4a14e1191a
       url: "https://pub.dev"
     source: hosted
     version: "11.0.0"

@@ -1,5 +1,6 @@
 import 'package:backofficestock/product/editors/form_image_picker_field.dart';
 import 'package:flutter/material.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 import '../../../core/widget/padding.dart';
 import '../../../product/editors/form_text_field.dart';
@@ -10,39 +11,50 @@ class ProductForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FormImagePicker(),
-          CustomSizedBox.paddingHeight(heightValue: 8),
-          FormLabel(text: "Product Name"),
-          FormTextField(name: "PRODUCTNAME"),
-          CustomSizedBox.paddingHeight(heightValue: 8),
-          FormLabel(text: "Product Description"),
-          FormTextField(name: "PRODUCTDESCRIPTION", maxLines: 3),
-          CustomSizedBox.paddingHeight(heightValue: 8),
+          const FormImagePicker(),
+          const CustomSizedBox.paddingHeight(heightValue: 8),
+          const FormLabel(text: "Product Name"),
+          FormTextField(
+            name: "PRODUCTNAME",
+            validator: FormBuilderValidators.required(),
+          ),
+          const CustomSizedBox.paddingHeight(heightValue: 8),
+          const FormLabel(text: "Product Description"),
+          const FormTextField(name: "PRODUCTDESCRIPTION", maxLines: 3),
+          const CustomSizedBox.paddingHeight(heightValue: 8),
+          const FormLabel(text: "Barcode"),
+          FormTextField(
+              name: "BARCODE",
+              maxLines: 1,
+              validator: FormBuilderValidators.required()),
+          const CustomSizedBox.paddingHeight(heightValue: 8),
           Row(children: [
             CustomExpanded(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FormLabel(text: "Price"),
+                    const FormLabel(text: "Price"),
                     FormTextField(
                       name: "PRICE",
                       postDataType: "int",
+                      validator: FormBuilderValidators.numeric(),
                     ),
                   ]),
             ),
-            CustomSizedBox.paddingWidth(widthValue: 12.0),
+            const CustomSizedBox.paddingWidth(widthValue: 12.0),
             CustomExpanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  FormLabel(text: "Count"),
+                  const FormLabel(text: "Count"),
                   FormTextField(
                     name: "COUNT",
                     postDataType: "int",
+                    validator: FormBuilderValidators.numeric(),
                   ),
                 ],
               ),

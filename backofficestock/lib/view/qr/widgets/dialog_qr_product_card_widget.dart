@@ -1,5 +1,4 @@
 import 'package:backofficestock/core/extension/context_extension.dart';
-import 'package:backofficestock/product/editors/switch.dart';
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/utils/undefined/no_image_widget.dart';

@@ -30,7 +30,7 @@ class CompanyForm extends StatelessWidget {
               FormTextField(name: "COMPANYNAME"),
               CustomSizedBox.paddingHeight(heightValue: 8.0),
               FormLabel(text: "Logo Url"),
-              FormTextField(name: "LOGOURL"),
+              FormTextField(name: "LOGO"),
               CustomSizedBox.paddingHeight(heightValue: 8.0),
               FormLabel(text: "QR Url"),
               FormTextField(name: "QRURL"),

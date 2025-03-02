@@ -5,8 +5,10 @@ import 'package:backofficestock/data/navigation_data.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/model/navigation_model.dart';
 import 'package:backofficestock/product/storage/app_storage.dart';
+import 'package:backofficestock/product/utils/undefined/no_image_widget.dart';
 import 'package:backofficestock/product/widgets/custom_elevated_button.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
+import 'package:backofficestock/view/company/company_provider.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -56,6 +58,7 @@ class NavigationProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CompanyProvider provider = context.watch<CompanyProvider>();
     return Container(
       width: double.infinity,
       padding: const ConstEdgeInsets.paddingSymetric(verticalPad: 12),
@@ -63,12 +66,19 @@ class NavigationProfileCard extends StatelessWidget {
           color: AppColors.dark, borderRadius: CustomRadius.radius16),
       child: Column(
         children: [
-          Container(
-            width: 80,
-            height: 80,
-            decoration: CustomDecoration.circularImageDecoration(
-                imageUrl: AppString.customProfileUrl),
-          ),
+          provider.companyInfo['LOGO'] != null &&
+                  provider.companyInfo['LOGO'] != ""
+              ? Container(
+                  width: 80,
+                  height: 80,
+                  decoration: CustomDecoration.circularImageDecoration(
+                      imageUrl: provider.companyInfo['LOGO']),
+                )
+              : const NoImage(
+                  width: 80,
+                  height: 80,
+                  size: 40,
+                ),
           const CustomSizedBox.paddingHeight(heightValue: 2),
           Text(StorageService().companyName, style: AppFonts.whiteBodyMedium),
           Text('Company: ${StorageService().companyId}',

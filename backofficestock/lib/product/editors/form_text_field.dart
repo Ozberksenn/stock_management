@@ -13,6 +13,7 @@ class FormTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? postDataType; // dataya gönderileek veri
   final String? initialValue;
+  final String? Function(String?)? validator;
   const FormTextField(
       {super.key,
       required this.name,
@@ -24,13 +25,13 @@ class FormTextField extends StatelessWidget {
       this.obscureText,
       this.textEditingController,
       this.suffixIcon,
-      this.hintText});
+      this.hintText,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
       controller: textEditingController,
-      autovalidateMode: AutovalidateMode.always,
       name: name,
       valueTransformer: (value) {
         if (postDataType == "int") {
@@ -45,6 +46,7 @@ class FormTextField extends StatelessWidget {
       onChanged: onChanged,
       keyboardType: keyboardType,
       textInputAction: TextInputAction.next,
+      validator: validator,
     );
   }
 }

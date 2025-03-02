@@ -45,6 +45,7 @@ dependencies:
   hive: ^2.2.3
   lottie: ^3.2.0
   file_picker: ^8.3.1
+  form_builder_validators: ^11.0.0
 
 dev_dependencies:
   flutter_test:

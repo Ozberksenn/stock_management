@@ -14,14 +14,18 @@ class LoginProvider extends ChangeNotifier {
       GlobalKey<FormBuilderState> formKey) async {
     if (formKey.currentState?.saveAndValidate() ?? false) {
       isActiveLoginButton = false;
-      Response response = await AppService.instance.postData("/login",
-          {"MAIL": mailController.text, "PASSWORD": passwordController.text});
-      if (response.data['statusCode'] == 200) {
-        await loginWriteStorage(response.data);
+      try {
+        Response response = await AppService.instance.postData("/login",
+            {"MAIL": mailController.text, "PASSWORD": passwordController.text});
+        if (response.data['statusCode'] == 200) {
+          await loginWriteStorage(response.data);
+          return ServiceResponse(isSuccess: true, message: "Login Success");
+        } else {
+          return ServiceResponse(isSuccess: false, message: "Login Failed");
+        }
+      } finally {
         isActiveLoginButton = true;
-        return ServiceResponse(isSuccess: true, message: "Login Success");
-      } else {
-        return ServiceResponse(isSuccess: false, message: "Login Failed");
+        notifyListeners();
       }
     } else {
       return ServiceResponse(isSuccess: false, message: "Validation Error");
@@ -31,8 +35,11 @@ class LoginProvider extends ChangeNotifier {
   loginWriteStorage(data) async {
     Map<String, dynamic> decodedToken = JwtDecoder.decode(data['token']);
     debugPrint(decodedToken.toString());
-    StorageService().companyId = await decodedToken['companyId'];
-    StorageService().token = await data['token'];
-    StorageService().companyName = await decodedToken['companyName'];
+    // StorageService().companyId = await decodedToken['companyId'];
+    await StorageService()
+        .writeStorage(StorageKeys.companyId, decodedToken['companyId']);
+    await StorageService().writeStorage(StorageKeys.token, data['token']);
+    await StorageService()
+        .writeStorage(StorageKeys.companyName, decodedToken['companyName']);
   }
 }

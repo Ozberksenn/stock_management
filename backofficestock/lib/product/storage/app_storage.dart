@@ -11,7 +11,7 @@ class StorageService {
   StorageService._internal();
 
   Future<void> init() async {
-    _box = Hive.box('box');
+    _box = await Hive.openBox('box'); // Box'ın doğru açıldığından emin ol
   }
 
   Future<void> writeStorage(String key, dynamic value) async {
@@ -31,13 +31,15 @@ class StorageService {
   }
 
   String get token => _box.get(StorageKeys.token, defaultValue: "");
-  set token(String value) => writeStorage(StorageKeys.token, value);
-
   String get companyName => _box.get(StorageKeys.companyName, defaultValue: "");
-  set companyName(String value) => writeStorage(StorageKeys.companyName, value);
+  int get companyId => _box.get(StorageKeys.companyId, defaultValue: 0);
 
-  int get companyId => _box.get(StorageKeys.companyId, defaultValue: "");
-  set companyId(int value) => writeStorage(StorageKeys.companyId, value);
+  Future<void> setToken(String value) async =>
+      await writeStorage(StorageKeys.token, value);
+  Future<void> setCompanyName(String value) async =>
+      await writeStorage(StorageKeys.companyName, value);
+  Future<void> setCompanyId(int value) async =>
+      await writeStorage(StorageKeys.companyId, value);
 }
 
 abstract class StorageKeys {
@@ -45,16 +47,3 @@ abstract class StorageKeys {
   static const String companyName = "companyName";
   static const String token = "token";
 }
-
-
-
-  // StorageService storageService = StorageService();
-  // await storageService.init();
-
-  // Veri yazma
-  // storageService.userId = 123;
-  // storageService.token = "abcdef123456";
-  
-  // Veri okuma
-  // print("User ID: ${storageService.userId}");
-  // print("Token: ${storageService.token}");

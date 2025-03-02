@@ -10,9 +10,11 @@ import 'product/storage/app_storage.dart';
 
 void main() async {
   await Hive.initFlutter();
-  await Hive.openBox('box');
-  StorageService storageService = StorageService();
-  await storageService.init();
+  try {
+    await StorageService().init(); // Singleton üzerinden çağır
+  } catch (e) {
+    debugPrint("Hive Box Açılırken Hata: $e");
+  }
   runApp(const MyApp());
 }
 

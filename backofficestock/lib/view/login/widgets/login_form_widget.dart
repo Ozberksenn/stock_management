@@ -46,25 +46,35 @@ class LoginForm extends StatelessWidget {
                         maxLines: 1,
                         textEditingController: provider.passwordController),
                     const CustomSizedBox.paddingHeight(heightValue: 20),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: CustomElevatedButton(
-                        text: "Login",
-                        color: AppColors.primaryColor,
-                        style: AppFonts.whiteBodyMedium,
-                        onPressed: () async {
-                          ServiceResponse result =
-                              await provider.handleSave(_formKey);
-                          if (result.isSuccess == true) {
-                            successSnackbar(
-                                context: context, message: result.message);
-                            context.go("/home");
-                          } else {
-                            errorPopup(context, message: result.message);
-                          }
-                        },
-                      ),
-                    )
+                    provider.isActiveLoginButton == true
+                        ? Align(
+                            alignment: Alignment.centerRight,
+                            child: CustomElevatedButton(
+                              text: "Login",
+                              color: AppColors.primaryColor,
+                              style: AppFonts.whiteBodyMedium,
+                              onPressed: () async {
+                                ServiceResponse result =
+                                    await provider.handleSave(_formKey);
+                                if (result.isSuccess == true) {
+                                  successSnackbar(
+                                      context: context,
+                                      message: result.message);
+                                  context.go("/home");
+                                } else {
+                                  errorPopup(context, message: result.message);
+                                }
+                              },
+                            ),
+                          )
+                        : Align(
+                            alignment: Alignment.centerRight,
+                            child: CustomElevatedButton(
+                              text: "Login",
+                              color: AppColors.primaryColor.withOpacity(0.4),
+                              style: AppFonts.whiteBodyMedium,
+                            ),
+                          )
                   ])),
         ]),
         Text(

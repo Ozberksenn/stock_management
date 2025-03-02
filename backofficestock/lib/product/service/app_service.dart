@@ -12,12 +12,20 @@ class AppService {
     dio = Dio(BaseOptions(
       baseUrl: serviceUrl,
       // baseUrl: "https://helped-pig-glad.ngrok-free.app", // URL
-      followRedirects: false, // Yönlendirmeyi izlemeyin
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
         "ngrok-skip-browser-warning": "true", // Bu başlık önemli!
-        "Authorization": "Bearer ${StorageService().token}"
+      },
+    ));
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // **Burada her istekte güncel token çekiliyor**
+        final token = StorageService().token;
+        if (token != "" && token.isNotEmpty) {
+          options.headers["Authorization"] = "Bearer $token";
+        }
+        return handler.next(options);
       },
     ));
   }

@@ -24,8 +24,9 @@ class StockProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     StockProvider stockProvider = context.read<StockProvider>();
-    return GestureDetector(
-      onTap: () => customDialog(context,
+
+    void handleCard() {
+      customDialog(context,
           widget: FormView(
             dialogContext: context,
             edit: true,
@@ -38,7 +39,22 @@ class StockProductCard extends StatelessWidget {
               "MENUID": stockProvider.selectedTab?.menuId
             },
             initialValue: product.toJson(),
-          )),
+          ));
+    }
+
+    void handleDelete() {
+      customAlertDialog(
+          context: context,
+          onPressed: () {
+            stockProvider.deleteProduct(product.id, context);
+            context.pop();
+          },
+          title: "Product Delet",
+          text: "Delete The Product ?");
+    }
+
+    return GestureDetector(
+      onTap: () => handleCard(),
       child: Container(
           decoration: BoxDecoration(
               borderRadius: CustomRadius.radius8,
@@ -91,19 +107,9 @@ class StockProductCard extends StatelessWidget {
               CustomPaddings.customPadding(
                   value: 6,
                   child: CustomIcon(
-                    icon: Iconsax.trash,
-                    color: AppColors.red,
-                    onTap: () {
-                      customAlertDialog(
-                          context: context,
-                          onPressed: () {
-                            stockProvider.deleteProduct(product.id, context);
-                            context.pop();
-                          },
-                          title: "Product Delet",
-                          text: "Delete The Product ?");
-                    },
-                  ))
+                      icon: Iconsax.trash,
+                      color: AppColors.red,
+                      onTap: () => handleDelete()))
             ],
           )),
     );

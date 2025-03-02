@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 ThemeData lightThemeData = ThemeData(
     useMaterial3: true,
     colorSchemeSeed: AppColors.blue,
+    fontFamily: 'Montserrat',
     popupMenuTheme:
         const PopupMenuThemeData(color: AppColors.white, elevation: 2),
     switchTheme: const SwitchThemeData(

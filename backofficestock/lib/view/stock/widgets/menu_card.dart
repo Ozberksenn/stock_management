@@ -16,7 +16,10 @@ class MenuTab extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: CustomRadius.radius6, color: AppColors.white),
       child: Text(text?.toUpperCase() ?? '',
-          style: Theme.of(context).textTheme.bodyMedium),
+          style: Theme.of(context)
+              .textTheme
+              .titleSmall!
+              .copyWith(fontWeight: FontWeight.bold)),
     ));
   }
 }

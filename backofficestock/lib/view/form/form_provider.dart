@@ -31,15 +31,22 @@ class FormProvider extends ChangeNotifier {
       }
       if (response?.data['statusCode'] == 200) {
         successSnackbar(context: context, message: "Success");
-        refreshProduct(provider);
-        refreshMenu(provider);
         refreshImageField(context);
+        formNameCondition(provider, formName);
         context.pop();
       } else {
         errorSnackbar(context: context, message: "Error");
       }
     } else {
       errorSnackbar(context: context, message: "Validate Error");
+    }
+  }
+
+  formNameCondition(provider, formName) {
+    if (formName == "product") {
+      refreshProduct(provider);
+    } else if (formName == "menu") {
+      refreshMenu(provider);
     }
   }
 

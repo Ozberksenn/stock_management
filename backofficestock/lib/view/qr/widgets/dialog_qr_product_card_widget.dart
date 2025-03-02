@@ -2,6 +2,7 @@ import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/product/editors/switch.dart';
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
+import 'package:backofficestock/product/utils/undefined/no_image_widget.dart';
 import 'package:backofficestock/product/widgets/custom_divider.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,12 +21,13 @@ class DialogProductCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Padding(
-          padding: const ConstEdgeInsets.paddingHorizontal12(),
+          padding: const ConstEdgeInsets.padding12(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SwitchWidget(
-                value: true,
+              Text(
+                "Product Preview",
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               CustomIcon(
                   onTap: () => context.pop(), icon: CupertinoIcons.xmark),
@@ -38,18 +40,22 @@ class DialogProductCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: context.dynamicWidth(0.3),
-                height: context.dynamicHeight(0.5),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
-                    image: product.image != null && product.image != ""
-                        ? DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                "${AppService.cdnUrl}/${product.image}"))
-                        : null),
-              ),
+              product.image != null && product.image != ""
+                  ? Container(
+                      width: context.dynamicWidth(0.3),
+                      height: context.dynamicHeight(0.3),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  "${AppService.cdnUrl}/${product.image}"))),
+                    )
+                  : NoImage(
+                      width: context.dynamicWidth(0.3),
+                      height: context.dynamicHeight(0.3),
+                      size: 100,
+                    ),
               const CustomSizedBox.paddingWidth(widthValue: 12.0),
               CustomExpanded(
                 child: Column(

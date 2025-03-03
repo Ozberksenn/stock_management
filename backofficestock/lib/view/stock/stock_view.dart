@@ -29,6 +29,23 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
         final stockProvider = context.watch<StockProvider>();
         final homeProvider = context.watch<HomeProivder>();
         stockProvider.init(tabVsync: this);
+
+        Widget stockContent(StockProvider stockProvider) {
+          return CustomExpanded(
+            child: Column(
+              children: [
+                const CustomSizedBox.paddingHeight(heightValue: 10),
+                StockMenuTitle(provider: stockProvider),
+                stockProvider.isMenuReady == true
+                    ? TabBarWidget(stockProvider: stockProvider)
+                    : const SizedBox(),
+                const CustomSizedBox.paddingHeight(heightValue: 10),
+                ProductsList(stockProvider: stockProvider),
+              ],
+            ),
+          );
+        }
+
         return Column(children: [
           ContentHeader(
               title: homeProvider.menu.title ?? "",
@@ -49,22 +66,6 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
               : stockContent(stockProvider)
         ]);
       },
-    );
-  }
-
-  Widget stockContent(StockProvider stockProvider) {
-    return CustomExpanded(
-      child: Column(
-        children: [
-          const CustomSizedBox.paddingHeight(heightValue: 10),
-          StockMenuTitle(provider: stockProvider),
-          stockProvider.isMenuReady == true
-              ? TabBarWidget(stockProvider: stockProvider)
-              : const SizedBox(),
-          const CustomSizedBox.paddingHeight(heightValue: 10),
-          ProductsList(stockProvider: stockProvider),
-        ],
-      ),
     );
   }
 }

@@ -15,17 +15,16 @@ class LoginView extends StatelessWidget {
           return Scaffold(
             body: Row(children: [
               const CustomSizedBox.paddingWidth(widthValue: 40),
-              CustomExpanded(flex: 1, child: LoginForm()),
+              CustomExpanded(flex: 2, child: LoginForm()),
               const CustomSizedBox.paddingWidth(widthValue: 40),
               CustomExpanded(
-                  flex: 2,
+                  flex: 5,
                   child: Container(
-                    width: 200,
                     padding: const ConstEdgeInsets.padding20(),
                     decoration: const BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage("assets/images/login.jpg"))),
+                            image: AssetImage("assets/images/login.jpeg"))),
                   ))
             ]),
           );

@@ -59,8 +59,12 @@ class StockProductCard extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: CustomRadius.radius8,
               color: AppColors.white,
-              border: const Border(
-                  left: BorderSide(width: 3, color: AppColors.primaryColor)),
+              border: Border(
+                  left: BorderSide(
+                      width: 3,
+                      color: product.count! < 3
+                          ? AppColors.red
+                          : AppColors.primaryColor)),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.2),

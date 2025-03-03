@@ -24,7 +24,7 @@ class CompanyProvider extends ChangeNotifier {
       companyInfo = response.data['data'];
       isReady = true;
     } else {
-      print("Error");
+      isReady = false;
     }
     notifyListeners();
   }
@@ -40,10 +40,9 @@ class CompanyProvider extends ChangeNotifier {
         fetchCompanyInfo();
       } else {
         errorPopup(context);
-        print("Error");
       }
     } else {
-      debugPrint('validation failed');
+      errorPopup(context);
     }
   }
 }

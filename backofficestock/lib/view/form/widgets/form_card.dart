@@ -1,4 +1,5 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:flutter/material.dart';
 
 class FormCard extends StatelessWidget {
@@ -10,6 +11,7 @@ class FormCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionTile(
       childrenPadding: const ConstEdgeInsets.padding0(),
+      collapsedBackgroundColor: AppColors.softGrey,
       dense: true,
       tilePadding: const ConstEdgeInsets.padding0(),
       title: Text(

@@ -1,6 +1,10 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/product/utils/modal/warning_popup.dart';
+import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
+import 'package:backofficestock/view/search/search_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../home/widgets/content_header.dart';
 import 'stock_provider.dart';
@@ -23,12 +27,35 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
       create: (_) => StockProvider(),
       builder: (context, child) {
         final stockProvider = context.watch<StockProvider>();
-        final homeProvider = context.read<HomeProivder>();
+        final homeProvider = context.watch<HomeProivder>();
         stockProvider.init(tabVsync: this);
         return Column(children: [
           ContentHeader(
               title: homeProvider.menu.title ?? "",
-              widget: StockAddButton(stockProvider: stockProvider)),
+              widget: Row(
+                children: [
+                  CustomIcon(
+                    icon: Iconsax.import,
+                    size: 20,
+                    onTap: () => warningPopup(context,
+                        message: "This service is currently unavailable"),
+                  ),
+                  const CustomSizedBox.paddingWidth(widthValue: 12.0),
+                  StockAddButton(stockProvider: stockProvider)
+                ],
+              )),
+          homeProvider.searchList.isNotEmpty
+              ? const SearchListView()
+              : stockContent(stockProvider)
+        ]);
+      },
+    );
+  }
+
+  Widget stockContent(StockProvider stockProvider) {
+    return CustomExpanded(
+      child: Column(
+        children: [
           const CustomSizedBox.paddingHeight(heightValue: 10),
           StockMenuTitle(provider: stockProvider),
           stockProvider.isMenuReady == true
@@ -36,8 +63,8 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
               : const SizedBox(),
           const CustomSizedBox.paddingHeight(heightValue: 10),
           ProductsList(stockProvider: stockProvider),
-        ]);
-      },
+        ],
+      ),
     );
   }
 }

@@ -5,7 +5,9 @@ import '../../../product/widgets/search_field.dart';
 class ContentHeader extends StatelessWidget {
   final String title;
   final Widget? widget;
-  const ContentHeader({super.key, required this.title, this.widget});
+  final bool? searchBar;
+  const ContentHeader(
+      {super.key, required this.title, this.widget, this.searchBar});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class ContentHeader extends StatelessWidget {
         Row(children: [
           widget ?? const SizedBox(),
           const CustomSizedBox.paddingWidth(widthValue: 8.0),
-          const SearchField()
+          searchBar != false ? const SearchField() : const SizedBox()
         ])
       ],
     );

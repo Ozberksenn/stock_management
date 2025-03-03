@@ -20,6 +20,7 @@ class SaleView extends StatelessWidget {
           return Column(children: [
             ContentHeader(
               title: homeProvider.menu.title ?? "",
+              searchBar: false,
             ),
             const CustomSizedBox.paddingHeight(heightValue: 8.0),
             CustomExpanded(

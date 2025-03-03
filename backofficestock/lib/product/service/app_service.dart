@@ -44,7 +44,7 @@ class AppService {
   }
 
   Future deleteData(String path, Map<String, dynamic> parameters) async {
-    final defaultParams = {"COMPANYID": 1};
+    final defaultParams = {"COMPANYID": StorageService().companyId};
     final mergedData = {
       ...defaultParams,
       ...parameters, // Gelen data sonradan yazılarak varsayılanları ezebilir
@@ -62,7 +62,7 @@ class AppService {
   }
 
   Future postData(String path, Map<String, dynamic> parameters) async {
-    final defaultParams = {"COMPANYID": 1};
+    final defaultParams = {"COMPANYID": StorageService().companyId};
     final mergedData = {
       ...defaultParams,
       ...parameters, // Gelen data sonradan yazılarak varsayılanları ezebilir
@@ -80,7 +80,7 @@ class AppService {
   }
 
   Future putData(String path, Map<String, dynamic> parameters) async {
-    final defaultParams = {"COMPANYID": 1};
+    final defaultParams = {"COMPANYID": StorageService().companyId};
     final mergedData = {
       ...defaultParams,
       ...parameters, // Gelen data sonradan yazılarak varsayılanları ezebilir

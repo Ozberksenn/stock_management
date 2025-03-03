@@ -1,4 +1,5 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/product/utils/undefined/no_item_widget.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +23,11 @@ class CompanyView extends StatelessWidget {
               title: homeProvider.menu.title ?? "",
             ),
             CustomExpanded(
-                child: CompanyForm(
-              provider: companyProvider,
-            ))
+                child: companyProvider.isReady == true
+                    ? CompanyForm(
+                        provider: companyProvider,
+                      )
+                    : const NoItemWidget())
           ],
         );
       },

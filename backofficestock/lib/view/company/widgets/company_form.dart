@@ -115,7 +115,7 @@ class CompanyForm extends StatelessWidget {
           right: 0,
           bottom: 0,
           child: CircleButton(
-            onTap: () => provider.handleSendButton(formKey),
+            onTap: () => provider.handleSendButton(formKey, context),
           ),
         )
       ]),

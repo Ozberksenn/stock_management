@@ -8,7 +8,7 @@ class WebSiteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const UndefinedModule(
-      message: "Please, Contact Us for Notification Module",
+      message: "Please, Contact Us for Web Site Module",
     );
   }
 }

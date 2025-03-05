@@ -6,11 +6,11 @@ import 'package:backofficestock/view/company/company_view.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:backofficestock/view/home/widgets/navigation_bar.dart';
 import 'package:backofficestock/view/qr/qr_view.dart';
+import 'package:backofficestock/view/reports/reports_view.dart';
 import 'package:backofficestock/view/sale/sale_view.dart';
 import 'package:backofficestock/view/stock/stock_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../notification/notification_view.dart';
 import '../web_site/web_site_view.dart';
 
 class HomeView extends StatelessWidget {
@@ -54,7 +54,7 @@ content(int menuId) {
     case 4:
       return const WebSiteView();
     case 5:
-      return const NotificationView();
+      return const ReportsView();
     case 6:
       return const CompanyView();
     default:

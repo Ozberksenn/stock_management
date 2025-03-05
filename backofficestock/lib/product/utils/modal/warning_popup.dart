@@ -44,6 +44,7 @@ Future<dynamic> warningPopup(BuildContext context, {String? message}) {
                     text: "Done",
                     color: AppColors.black,
                     style: AppFonts.greylabelSmall,
+                    onPressed: () => context.pop(),
                   )
                 ],
               ),

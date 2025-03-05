@@ -80,6 +80,8 @@ class StockProvider extends ChangeNotifier {
     Response response = await AppService.instance
         .deleteData("/deleteMenu", {"MENUID": selectedTab?.menuId});
     if (response.data['statusCode'] == 200) {
+      refreshMenu();
+      selectedTab = menuTabList[0];
       return true;
     } else {
       return false;

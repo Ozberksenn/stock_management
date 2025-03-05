@@ -13,6 +13,7 @@ ThemeData lightThemeData = ThemeData(
         trackColor: WidgetStatePropertyAll(AppColors.blue)),
     inputDecorationTheme: InputDecorationTheme(
       isDense: true,
+      labelStyle: const TextStyle(fontSize: 12, color: AppColors.dark),
       hintStyle: const TextStyle(fontSize: 12, color: AppColors.dark),
       contentPadding: const ConstEdgeInsets.padding8(),
       enabledBorder: OutlineInputBorder(

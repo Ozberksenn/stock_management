@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
+import 'package:backofficestock/product/utils/modal/error_popup.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -57,29 +57,29 @@ class SaleProvider extends ChangeNotifier {
     }
   }
 
-  void handlePlus(ProductModel product) {
+  void handlePlus(ProductModel product, context) {
     if (product.basketQuantity < product.count!) {
       product.basketQuantity += 1;
       getTotalPrice();
       notifyListeners();
     } else {
-      // todo : error bas
+      errorPopup(context, message: "Insufficient Stock");
     }
   }
 
-  void handleMinus(ProductModel product) {
+  void handleMinus(ProductModel product, context) {
     if (product.basketQuantity > 1) {
       product.basketQuantity -= 1;
       getTotalPrice();
       notifyListeners();
     } else {
-      // todo : error bas
+      errorPopup(context, message: "cannot be less than 1");
     }
   }
 
   handleDelete(ProductModel product) {
-    productList.remove(product);
-    isReady = false;
+    productList.removeWhere((item) => item.id == product.id);
+    getTotalPrice();
     notifyListeners();
   }
 
@@ -94,7 +94,6 @@ class SaleProvider extends ChangeNotifier {
   sameProductIdControll() {
     bool exists = productList.any((item) => item.id == productFounded!.id);
     if (exists) {
-      // todo uyarıyı  bas.
       print("Bu üründen mevcut, lütfen adedini arttırınız");
     } else {
       productList.add(productFounded!);

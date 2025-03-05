@@ -24,7 +24,7 @@ class LoginForm extends StatelessWidget {
         const SizedBox(),
         Column(children: [
           Image.asset(
-            "assets/logo/stock-dark.png",
+            "assets/logo/logo.png",
             width: 160,
             height: 160,
           ),

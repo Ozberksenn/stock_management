@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/utils/modal/error_popup.dart';
-import 'package:backofficestock/product/utils/modal/success_popup.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+
+import '../../product/utils/modal/success_popup.dart';
 
 class CompanyProvider extends ChangeNotifier {
   bool isReady = false;
@@ -32,9 +35,14 @@ class CompanyProvider extends ChangeNotifier {
   Future<void> handleSendButton(
       GlobalKey<FormBuilderState> formKey, context) async {
     if (formKey.currentState?.saveAndValidate() ?? false) {
-      debugPrint(formKey.currentState?.value.toString());
-      Response response = await AppService.instance
-          .postData("/updateCompanyInfo", formKey.currentState?.value ?? {});
+      final Map<String, dynamic> originalData =
+          formKey.currentState?.value ?? {};
+      final Map<String, dynamic> data = Map<String, dynamic>.from(originalData);
+      if (data.containsKey("WORKINGHOURS")) {
+        data["WORKINGHOURS"] = jsonEncode(data["WORKINGHOURS"]);
+      }
+      Response response =
+          await AppService.instance.postData("/updateCompanyInfo", data);
       if (response.statusCode == 200) {
         successPopup(context);
         fetchCompanyInfo();

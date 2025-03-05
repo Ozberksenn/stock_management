@@ -27,9 +27,6 @@ class SaleView extends StatelessWidget {
               child: Card(
                 elevation: 5,
                 color: AppColors.white,
-                // decoration: BoxDecoration(
-                //     color: AppColors.white,
-                //     borderRadius: CustomRadius.radius12),
                 child: Row(children: [
                   const SaleContent(),
                   Container(

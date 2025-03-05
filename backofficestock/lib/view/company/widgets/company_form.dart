@@ -1,6 +1,7 @@
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
+import 'package:backofficestock/view/company/widgets/working_days_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -67,10 +68,7 @@ class CompanyForm extends StatelessWidget {
         widget: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              FormLabel(text: "Working Days"),
-              FormTextField(name: "WORKINGDAYS", maxLines: 4),
-            ],
+            children: [WorkingDaysField()],
           )
         ],
       );

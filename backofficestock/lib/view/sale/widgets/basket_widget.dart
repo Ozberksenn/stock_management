@@ -78,7 +78,7 @@ class BasketFooter extends StatelessWidget {
             style: Theme.of(context).textTheme.titleSmall,
           ),
           CustomButton(
-              text: "Completed",
+              text: "Complete",
               onTap: () async {
                 ServiceResponse response = await provider.sendProducts();
                 if (response.isSuccess == true) {
@@ -114,18 +114,18 @@ class BasketCard extends StatelessWidget {
           child: Row(
             children: [
               CustomIcon(
-                onTap: () => provider.handleMinus(product),
+                onTap: () => provider.handleMinus(product, context),
                 icon: CupertinoIcons.minus,
-                size: 16,
+                size: 18,
               ),
               const CustomSizedBox.paddingWidth(widthValue: 20.0),
               Text(product.basketQuantity.toString(),
                   style: AppFonts.greenTitleMedium),
               const CustomSizedBox.paddingWidth(widthValue: 20.0),
               CustomIcon(
-                onTap: () => provider.handlePlus(product),
+                onTap: () => provider.handlePlus(product, context),
                 icon: CupertinoIcons.plus,
-                size: 16,
+                size: 18,
               ),
             ],
           ),

@@ -94,10 +94,15 @@ class SaleProvider extends ChangeNotifier {
   sameProductIdControll() {
     bool exists = productList.any((item) => item.id == productFounded!.id);
     if (exists) {
-      print("Bu üründen mevcut, lütfen adedini arttırınız");
     } else {
       productList.add(productFounded!);
       getTotalPrice();
     }
+  }
+
+  clearBasketList() {
+    productList = [];
+    getTotalPrice();
+    notifyListeners();
   }
 }

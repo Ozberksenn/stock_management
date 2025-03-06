@@ -32,7 +32,10 @@ class BasketWidget extends StatelessWidget {
                 "Basket",
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
-              trailing: const CustomIcon(icon: CupertinoIcons.xmark),
+              trailing: CustomIcon(
+                icon: CupertinoIcons.cart_fill_badge_minus,
+                onTap: () => provider.clearBasketList(),
+              ),
             ),
             const CustomDivider(
               color: AppColors.lightGrey,

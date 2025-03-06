@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -9,6 +8,7 @@ class FormTextField extends StatelessWidget {
   final bool? obscureText;
   final TextEditingController? textEditingController;
   final Function(String?)? onChanged;
+  final void Function(String?)? onSubmitted;
   final TextInputType? keyboardType;
   final Widget? suffixIcon;
   final String? postDataType; // dataya gönderileek veri
@@ -18,6 +18,7 @@ class FormTextField extends StatelessWidget {
       {super.key,
       required this.name,
       this.onChanged,
+      this.onSubmitted,
       this.keyboardType,
       this.maxLines,
       this.postDataType,
@@ -44,6 +45,7 @@ class FormTextField extends StatelessWidget {
       decoration: InputDecoration(hintText: hintText, suffixIcon: suffixIcon),
       obscureText: obscureText ?? false,
       onChanged: onChanged,
+      onSubmitted: onSubmitted,
       keyboardType: keyboardType,
       textInputAction: TextInputAction.next,
       validator: validator,

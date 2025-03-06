@@ -24,6 +24,7 @@ class SaleContent extends StatelessWidget {
               const CustomSizedBox.paddingHeight(heightValue: 8.0),
               FormTextField(
                 name: "",
+                onSubmitted: (v) => provider.searchBarcode(),
                 hintText: "Barcode No",
                 suffixIcon: IconButton(
                     onPressed: () => provider.searchBarcode(),

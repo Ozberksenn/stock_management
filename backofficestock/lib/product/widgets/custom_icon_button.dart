@@ -7,11 +7,14 @@ import 'custom_icon.dart';
 class CustomIconButton extends StatelessWidget {
   final IconData icon;
   final String? text;
-  const CustomIconButton({super.key, required this.icon, this.text});
+  final void Function()? onTap;
+  const CustomIconButton(
+      {super.key, required this.icon, this.text, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: onTap,
       child: Container(
           decoration: BoxDecoration(
               color: AppColors.grey, borderRadius: CustomRadius.radius8),

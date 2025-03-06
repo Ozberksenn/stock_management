@@ -60,7 +60,7 @@ class LoginForm extends StatelessWidget {
                                   successSnackbar(
                                       context: context,
                                       message: result.message);
-                                  context.go("/home");
+                                  context.go("/");
                                 } else {
                                   errorPopup(context, message: result.message);
                                 }

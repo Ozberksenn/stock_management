@@ -1,0 +1,18 @@
+{
+  "" : {
+    "diagnostics" : "/Users/ozberksen/Desktop/developer/stock_management/backofficestock/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_picker.build/Objects-normal/arm64/file_picker-master.dia",
+    "emit-module-dependencies" : "/Users/ozberksen/Desktop/developer/stock_management/backofficestock/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_picker.build/Objects-normal/arm64/file_picker-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/ozberksen/Desktop/developer/stock_management/backofficestock/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_picker.build/Objects-normal/arm64/file_picker-master-emit-module.dia",
+    "swift-dependencies" : "/Users/ozberksen/Desktop/developer/stock_management/backofficestock/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_picker.build/Objects-normal/arm64/file_picker-master.swiftdeps"
+  },
+  "/Users/ozberksen/.pub-cache/hosted/pub.dev/file_picker-8.3.1/macos/file_picker/Sources/file_picker/FilePickerPlugin.swift" : {
+    "const-values" : "/Users/ozberksen/Desktop/developer/stock_management/backofficestock/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_picker.build/Objects-normal/arm64/FilePickerPlugin.swiftconstvalues",
+    "dependencies" : "/Users/ozberksen/Desktop/developer/stock_management/backofficestock/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_picker.build/Objects-normal/arm64/FilePickerPlugin.d",
+    "diagnostics" : "/Users/ozberksen/Desktop/developer/stock_management/backofficestock/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_picker.build/Objects-normal/arm64/FilePickerPlugin.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/file_picker.build/Objects-normal/arm64/FilePickerPlugin.o",
+    "llvm-bc" : "/Users/ozberksen/Desktop/developer/stock_management/backofficestock/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_picker.build/Objects-normal/arm64/FilePickerPlugin.bc",
+    "object" : "/Users/ozberksen/Desktop/developer/stock_management/backofficestock/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_picker.build/Objects-normal/arm64/FilePickerPlugin.o",
+    "swift-dependencies" : "/Users/ozberksen/Desktop/developer/stock_management/backofficestock/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_picker.build/Objects-normal/arm64/FilePickerPlugin.swiftdeps",
+    "swiftmodule" : "/Users/ozberksen/Desktop/developer/stock_management/backofficestock/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_picker.build/Objects-normal/arm64/FilePickerPlugin~partial.swiftmodule"
+  }
+}

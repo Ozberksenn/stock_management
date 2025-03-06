@@ -89,7 +89,7 @@ class NavigationProfileCard extends StatelessWidget {
               onPressed: () async {
                 await StorageService().clearStorage();
                 if (StorageService().token == "") {
-                  context.go("/");
+                  context.go("/login");
                 }
               })
         ],

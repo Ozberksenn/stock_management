@@ -14,7 +14,7 @@ class StockAddButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return popupMenu(
         widget: CustomElevatedButton(
-          text: "+ Add",
+          text: "+ New",
           color: AppColors.dark,
           style: AppFonts.whiteBodyMedium,
         ),

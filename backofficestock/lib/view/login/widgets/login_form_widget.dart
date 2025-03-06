@@ -17,7 +17,7 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoginProvider provider = context.read<LoginProvider>();
+    LoginProvider provider = context.watch<LoginProvider>();
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -74,7 +74,20 @@ class LoginForm extends StatelessWidget {
                               color: AppColors.primaryColor.withOpacity(0.4),
                               style: AppFonts.whiteBodyMedium,
                             ),
-                          )
+                          ),
+                    Row(
+                      children: [
+                        const Text("Don't have an account?"),
+                        const CustomSizedBox.paddingWidth(widthValue: 4),
+                        InkWell(
+                          onTap: () => provider.changeStep(1),
+                          child: Text(
+                            " Sign up",
+                            style: AppFonts.boldSmall,
+                          ),
+                        ),
+                      ],
+                    )
                   ])),
         ]),
         Text(

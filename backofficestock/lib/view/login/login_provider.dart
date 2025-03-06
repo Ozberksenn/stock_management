@@ -9,6 +9,12 @@ class LoginProvider extends ChangeNotifier {
   bool isActiveLoginButton = true;
   TextEditingController mailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  int step = 0;
+
+  changeStep(int value) {
+    step = value;
+    notifyListeners();
+  }
 
   Future<ServiceResponse> handleSave(
       GlobalKey<FormBuilderState> formKey) async {
@@ -42,4 +48,6 @@ class LoginProvider extends ChangeNotifier {
     await StorageService()
         .writeStorage(StorageKeys.companyName, decodedToken['companyName']);
   }
+
+  Future<void> signUpForm() async {}
 }

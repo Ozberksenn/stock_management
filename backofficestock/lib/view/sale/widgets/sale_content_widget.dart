@@ -1,8 +1,10 @@
 import 'package:backofficestock/product/editors/form_text_field.dart';
+import 'package:backofficestock/product/widgets/custom_icon.dart';
+import 'package:backofficestock/product/widgets/custom_icon_button.dart';
 import 'package:backofficestock/view/sale/sale_provider.dart';
 import 'package:backofficestock/view/sale/widgets/no_product_widget.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../../core/widget/padding.dart';
 import 'sale_product_card_widget.dart';
@@ -22,15 +24,23 @@ class SaleContent extends StatelessWidget {
           child: Column(
             children: [
               const CustomSizedBox.paddingHeight(heightValue: 8.0),
-              FormTextField(
-                name: "",
-                onSubmitted: (v) => provider.searchBarcode(),
-                hintText: "Barcode No",
-                suffixIcon: IconButton(
-                    onPressed: () => provider.searchBarcode(),
-                    icon: const Icon(CupertinoIcons.search)),
-                textEditingController: provider.barcodeTextController,
-              ),
+              Row(children: [
+                const CustomIconButton(icon: Iconsax.filter),
+                const CustomSizedBox.paddingWidth(widthValue: 12.0),
+                Expanded(
+                  child: FormTextField(
+                    name: "",
+                    onSubmitted: (v) => provider.searchBarcode(),
+                    hintText: "Barcode No",
+                    textEditingController: provider.barcodeTextController,
+                  ),
+                ),
+                const CustomSizedBox.paddingWidth(widthValue: 12.0),
+                CustomIcon(
+                  icon: CupertinoIcons.search,
+                  onTap: () => provider.searchBarcode(),
+                )
+              ]),
               const CustomSizedBox.paddingHeight(heightValue: 30.0),
               provider.isReady == true
                   ? CustomExpanded(child: SaleProductCard(provider: provider))

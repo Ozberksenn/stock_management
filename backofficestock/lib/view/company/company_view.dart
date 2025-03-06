@@ -12,25 +12,20 @@ class CompanyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => CompanyProvider(),
-      builder: (context, child) {
-        HomeProivder homeProvider = context.read<HomeProivder>();
-        CompanyProvider companyProvider = context.watch<CompanyProvider>();
-        return Column(
-          children: [
-            ContentHeader(
-              title: homeProvider.menu.title ?? "",
-            ),
-            CustomExpanded(
-                child: companyProvider.isReady == true
-                    ? CompanyForm(
-                        provider: companyProvider,
-                      )
-                    : const NoItemWidget())
-          ],
-        );
-      },
+    HomeProivder homeProvider = context.read<HomeProivder>();
+    CompanyProvider companyProvider = context.watch<CompanyProvider>();
+    return Column(
+      children: [
+        ContentHeader(
+          title: homeProvider.menu.title ?? "",
+        ),
+        CustomExpanded(
+            child: companyProvider.isReady == true
+                ? CompanyForm(
+                    provider: companyProvider,
+                  )
+                : const NoItemWidget())
+      ],
     );
   }
 }

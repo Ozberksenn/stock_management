@@ -1,4 +1,5 @@
 import 'package:backofficestock/product/constants/api_constants.dart';
+import 'package:backofficestock/product/constants/masks.dart';
 import 'package:backofficestock/product/widgets/custom_elevated_button.dart';
 import 'package:backofficestock/view/login/login_provider.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,7 @@ class SignupForm extends StatelessWidget {
                     FormTextField(
                       name: "PHONE",
                       hintText: "Phone",
+                      inputFormatters: [phoneFormatter],
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
                         FormBuilderValidators.phoneNumber()

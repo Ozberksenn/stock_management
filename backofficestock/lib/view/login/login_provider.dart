@@ -1,5 +1,7 @@
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/storage/app_storage.dart';
+import 'package:backofficestock/product/utils/modal/success_popup.dart';
+import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -49,5 +51,20 @@ class LoginProvider extends ChangeNotifier {
         .writeStorage(StorageKeys.companyName, decodedToken['companyName']);
   }
 
-  Future<void> signUpForm() async {}
+  Future<void> signUpForm(GlobalKey<FormBuilderState> formKey, context) async {
+    if (formKey.currentState?.saveAndValidate() ?? false) {
+      Map<String, dynamic> formData = {};
+      formData.addAll(formKey.currentState?.value ?? {});
+      Response response =
+          await AppService.instance.postData("/postCustomerContact", formData);
+      if (response.statusCode == 200) {
+        if (response.data['success'] == true) {
+          successSnackbar(context: context, message: response.data['message']);
+          changeStep(0);
+        }
+      } else {
+        successPopup(context, message: response.data['message']);
+      }
+    }
+  }
 }

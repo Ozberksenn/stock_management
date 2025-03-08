@@ -1,3 +1,4 @@
+import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -19,10 +20,7 @@ class FormCheckboxField extends StatelessWidget {
         contentPadding: EdgeInsets.zero,
         name: name,
         initialValue: initialValue,
-        title: Text(
-          text ?? "",
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
+        title: Text(text ?? "", style: AppFonts.inputStyle),
         validator: validator);
   }
 }

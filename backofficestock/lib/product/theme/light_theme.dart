@@ -15,7 +15,8 @@ ThemeData lightThemeData = ThemeData(
       isDense: true,
       labelStyle: const TextStyle(fontSize: 12, color: AppColors.dark),
       hintStyle: const TextStyle(fontSize: 12, color: AppColors.dark),
-      contentPadding: const ConstEdgeInsets.padding8(),
+      contentPadding: const ConstEdgeInsets.paddingSymetric(
+          verticalPad: 12, horizontalPad: 8.0),
       enabledBorder: OutlineInputBorder(
           borderRadius: CustomRadius.radius12,
           borderSide: const BorderSide(width: 0.5, color: AppColors.grey)),

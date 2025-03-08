@@ -1,3 +1,4 @@
+import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -14,6 +15,7 @@ class FormDateTime extends StatelessWidget {
       name: name,
       initialEntryMode: initialEntryMode ?? DatePickerEntryMode.calendar,
       initialValue: DateTime.now(),
+      style: AppFonts.inputStyle,
       inputType: inputType ?? InputType.date,
       initialTime: const TimeOfDay(hour: 8, minute: 0),
       // locale: const Locale.fromSubtags(languageCode: 'fr'),

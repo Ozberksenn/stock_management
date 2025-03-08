@@ -1,3 +1,4 @@
+import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -21,7 +22,10 @@ class FormRadioGroup extends StatelessWidget {
           ? options!
               .map((value) => FormBuilderFieldOption(
                     value: value,
-                    child: Text(value),
+                    child: Text(
+                      value,
+                      style: AppFonts.inputStyle,
+                    ),
                   ))
               .toList(growable: false)
           : [],

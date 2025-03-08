@@ -47,6 +47,8 @@ final class AppFonts {
   static final TextStyle greenTitleMedium = AppTheme
       .lightTheme.textTheme.titleMedium!
       .copyWith(fontSize: 18, color: AppColors.green);
+  static const TextStyle inputStyle =
+      TextStyle(fontSize: 14, color: AppColors.dark);
 }
 
 @immutable

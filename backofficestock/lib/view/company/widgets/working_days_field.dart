@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
 import 'package:backofficestock/view/form/widgets/form_label.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,7 @@ class TextFormForWorkingDays extends StatelessWidget {
         TextFormField(
           decoration: InputDecoration(hintText: fieldName),
           initialValue: field.value?[fieldName],
+          style: AppFonts.inputStyle,
           onChanged: (val) {
             field.didChange({...field.value ?? {}, fieldName: val});
           },

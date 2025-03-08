@@ -1,3 +1,4 @@
+import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -52,6 +53,7 @@ class FormTextField extends StatelessWidget {
       onSubmitted: onSubmitted,
       keyboardType: keyboardType,
       textInputAction: TextInputAction.next,
+      style: AppFonts.inputStyle,
       validator: validator,
     );
   }

@@ -80,7 +80,11 @@ class NavigationProfileCard extends StatelessWidget {
                   size: 40,
                 ),
           const CustomSizedBox.paddingHeight(heightValue: 2),
-          Text(StorageService().companyName, style: AppFonts.whiteBodyMedium),
+          provider.companyInfo['COMANYNAME'] != null &&
+                  provider.companyInfo['COMANYNAME'] != ""
+              ? Text(provider.companyInfo['COMANYNAME'],
+                  style: AppFonts.whiteBodyMedium)
+              : const SizedBox(),
           Text('Company: ${StorageService().companyId}',
               style: AppFonts.formLabelStyle),
           const CustomSizedBox.paddingHeight(heightValue: 8),

@@ -35,7 +35,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         title: 'Stock Management',
         theme: AppTheme.lightTheme,
-        // darkTheme: AppTheme.darkTheme,
         debugShowCheckedModeBanner: false,
         routerConfig: router,
       ),

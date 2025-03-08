@@ -31,7 +31,7 @@ class NavigationBarWidget extends StatelessWidget {
         children: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Image.asset(
-              "logo/logo_lighht.png",
+              "assets/logo/logo_lighht.png",
               width: context.dynamicWidth(0.075),
             ),
             const CustomSizedBox.paddingHeight(heightValue: 40),

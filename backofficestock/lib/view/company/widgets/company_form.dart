@@ -81,21 +81,7 @@ class CompanyForm extends StatelessWidget {
         widget: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SocialMediaField()
-              // CustomSizedBox.paddingHeight(heightValue: 8.0),
-              // FormLabel(text: "Instagram"),
-              // FormTextField(name: "INSTAGRAM"),
-              // CustomSizedBox.paddingHeight(heightValue: 8.0),
-              // FormLabel(text: "X"),
-              // FormTextField(name: "X"),
-              // CustomSizedBox.paddingHeight(heightValue: 8.0),
-              // FormLabel(text: "Youtube"),
-              // FormTextField(name: "YOUTUBE"),
-              // CustomSizedBox.paddingHeight(heightValue: 8.0),
-              // FormLabel(text: "Facebook"),
-              // FormTextField(name: "FACEBOOK"),
-            ],
+            children: [SocialMediaField()],
           )
         ],
       );

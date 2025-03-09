@@ -10,6 +10,7 @@ class CompanyModel {
   final String? x;
   final String? youtube;
   final String? workingHours;
+  final String? socialMedia;
 
   CompanyModel(
       {required this.companyName,
@@ -22,7 +23,8 @@ class CompanyModel {
       this.facebook,
       this.x,
       this.youtube,
-      this.workingHours});
+      this.workingHours,
+      this.socialMedia});
 
   factory CompanyModel.fromMap(Map<String, dynamic> json) {
     return CompanyModel(
@@ -36,6 +38,7 @@ class CompanyModel {
         facebook: json['FACEBOOK'],
         x: json['X'],
         youtube: json['YOUTUBE'],
-        workingHours: json['WORKINGHOURS']);
+        workingHours: json['WORKINGHOURS'],
+        socialMedia: json['SOCIALMEDIA']);
   }
 }

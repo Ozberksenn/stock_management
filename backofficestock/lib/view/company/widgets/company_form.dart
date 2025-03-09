@@ -1,6 +1,7 @@
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
+import 'package:backofficestock/view/company/widgets/social_media_field.dart';
 import 'package:backofficestock/view/company/widgets/working_days_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -81,18 +82,19 @@ class CompanyForm extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomSizedBox.paddingHeight(heightValue: 8.0),
-              FormLabel(text: "Instagram"),
-              FormTextField(name: "INSTAGRAM"),
-              CustomSizedBox.paddingHeight(heightValue: 8.0),
-              FormLabel(text: "X"),
-              FormTextField(name: "X"),
-              CustomSizedBox.paddingHeight(heightValue: 8.0),
-              FormLabel(text: "Youtube"),
-              FormTextField(name: "YOUTUBE"),
-              CustomSizedBox.paddingHeight(heightValue: 8.0),
-              FormLabel(text: "Facebook"),
-              FormTextField(name: "FACEBOOK"),
+              SocialMediaField()
+              // CustomSizedBox.paddingHeight(heightValue: 8.0),
+              // FormLabel(text: "Instagram"),
+              // FormTextField(name: "INSTAGRAM"),
+              // CustomSizedBox.paddingHeight(heightValue: 8.0),
+              // FormLabel(text: "X"),
+              // FormTextField(name: "X"),
+              // CustomSizedBox.paddingHeight(heightValue: 8.0),
+              // FormLabel(text: "Youtube"),
+              // FormTextField(name: "YOUTUBE"),
+              // CustomSizedBox.paddingHeight(heightValue: 8.0),
+              // FormLabel(text: "Facebook"),
+              // FormTextField(name: "FACEBOOK"),
             ],
           )
         ],

@@ -41,13 +41,16 @@ class CompanyProvider extends ChangeNotifier {
       if (data.containsKey("WORKINGHOURS")) {
         data["WORKINGHOURS"] = jsonEncode(data["WORKINGHOURS"]);
       }
+      if (data.containsKey("SOCIALMEDIA")) {
+        data["SOCIALMEDIA"] = jsonEncode(data["SOCIALMEDIA"]);
+      }
       Response response =
           await AppService.instance.postData("/updateCompanyInfo", data);
       if (response.statusCode == 200) {
         successPopup(context);
         fetchCompanyInfo();
       } else {
-        errorPopup(context);
+        errorPopup(context, message: response.data['error']);
       }
     } else {
       errorPopup(context);

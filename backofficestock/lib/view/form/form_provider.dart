@@ -52,13 +52,13 @@ class FormProvider extends ChangeNotifier {
 
   refreshProduct(provider) {
     if (provider is StockProvider) {
-      return provider.getProduct();
+      provider.getProduct();
     }
   }
 
   refreshMenu(provider) {
     if (provider is StockProvider) {
-      return provider.refreshMenu();
+      provider.refreshMenu();
     }
   }
 

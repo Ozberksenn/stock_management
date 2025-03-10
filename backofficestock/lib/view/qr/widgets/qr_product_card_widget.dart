@@ -27,6 +27,7 @@ class QrProductCard extends StatelessWidget {
         "PRODUCTNAME": product?.productName,
         "ID": product?.id,
         "MENUID": product?.menuId,
+        "BARCODE": product?.barcode,
         "SHOWSTORE": value,
       });
       if (response.statusCode == 200) {

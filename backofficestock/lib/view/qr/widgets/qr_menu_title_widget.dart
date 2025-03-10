@@ -11,37 +11,39 @@ class QrMenuTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          selectedTab?.menuImage != null && selectedTab?.menuImage != ""
-              ? Container(
-                  decoration: BoxDecoration(
-                      borderRadius: CustomRadius.radius12,
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                              "${AppService.cdnUrl}/${selectedTab?.menuImage}"))),
-                  width: 100,
-                  height: 100)
-              : const NoImage(
-                  width: 100,
-                  height: 100,
-                  size: 60,
+    return selectedTab != null
+        ? SizedBox(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                selectedTab?.menuImage != null && selectedTab?.menuImage != ""
+                    ? Container(
+                        decoration: BoxDecoration(
+                            borderRadius: CustomRadius.radius12,
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                    "${AppService.cdnUrl}/${selectedTab?.menuImage}"))),
+                        width: 100,
+                        height: 100)
+                    : const NoImage(
+                        width: 100,
+                        height: 100,
+                        size: 60,
+                      ),
+                const CustomSizedBox.paddingWidth(widthValue: 12.0),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(selectedTab?.menuName ?? "",
+                        style: Theme.of(context).textTheme.titleMedium),
+                    Text(selectedTab?.menuDescription ?? "",
+                        style: Theme.of(context).textTheme.bodySmall)
+                  ],
                 ),
-          const CustomSizedBox.paddingWidth(widthValue: 12.0),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(selectedTab?.menuName ?? "",
-                  style: Theme.of(context).textTheme.titleMedium),
-              Text(selectedTab?.menuDescription ?? "",
-                  style: Theme.of(context).textTheme.bodySmall)
-            ],
-          ),
-        ],
-      ),
-    );
+              ],
+            ),
+          )
+        : const SizedBox();
   }
 }

@@ -23,24 +23,26 @@ class StockMenuTitle extends StatelessWidget {
             padding: const ConstEdgeInsets.padding8(),
             decoration: BoxDecoration(
                 color: AppColors.softGrey, borderRadius: CustomRadius.radius6),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          provider.selectedTab?.menuName ?? "",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        Text(
-                          provider.selectedTab?.menuDescription ?? "",
-                          style: AppFonts.greylabelSmall,
-                        )
-                      ]),
-                  ActionIcon(provider: provider)
-                ]),
+            child: provider.isMenuReady == true
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                provider.selectedTab?.menuName ?? "",
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              Text(
+                                provider.selectedTab?.menuDescription ?? "",
+                                style: AppFonts.greylabelSmall,
+                              )
+                            ]),
+                        ActionIcon(provider: provider)
+                      ])
+                : const SizedBox(),
           )
         : const SizedBox();
   }

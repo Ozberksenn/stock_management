@@ -56,7 +56,18 @@ class StockProvider extends ChangeNotifier {
           .map((e) => MenuModel.fromMap(e))
           .toList()
           .cast<MenuModel>();
-      tabController = TabController(length: menuTabList.length, vsync: vsync!);
+      selectedTab = menuTabList.firstWhere((e) =>
+          e.menuId ==
+          selectedTab
+              ?.menuId); // sayfa güncellendikten sonra aynı tabde kalabilmesi için yaptım.
+      var initialTabIndex = menuTabList.indexWhere((e) =>
+          e.menuId ==
+          selectedTab
+              ?.menuId); // tabin index değerini buldum ve alt satırda ki kodda verebilmek için.
+      tabController = TabController(
+          length: menuTabList.length,
+          vsync: vsync!,
+          initialIndex: initialTabIndex);
     }
     isMenuReady = true;
     notifyListeners();

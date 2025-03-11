@@ -56,7 +56,7 @@ class SearchContainer extends StatelessWidget {
       CustomExpanded(
         child: FormTextField(
           name: "",
-          onSubmitted: (v) => provider.searchBarcode(),
+          onSubmitted: (v) => provider.searchBarcode(context),
           hintText: "Barcode No",
           textEditingController: provider.barcodeTextController,
         ),
@@ -64,7 +64,7 @@ class SearchContainer extends StatelessWidget {
       const CustomSizedBox.paddingWidth(widthValue: 12.0),
       CustomIcon(
         icon: CupertinoIcons.search,
-        onTap: () => provider.searchBarcode(),
+        onTap: () => provider.searchBarcode(context),
       )
     ]);
   }

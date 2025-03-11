@@ -7,7 +7,7 @@ class ProductModel {
   final String productName;
   final String? productDescription;
   final int? price;
-  final int? count;
+  final int count;
   final String? image;
   final int? bandId;
   final bool? showStore;
@@ -21,7 +21,7 @@ class ProductModel {
       required this.productName,
       this.productDescription,
       this.price,
-      this.count,
+      required this.count,
       this.image,
       this.bandId,
       this.showStore,
@@ -67,7 +67,7 @@ class ProductModel {
   Map<String, dynamic> toJsonStock() {
     return {
       'ID': id,
-      'COUNT': count! - basketQuantity,
+      'COUNT': count - basketQuantity,
     };
   }
 }

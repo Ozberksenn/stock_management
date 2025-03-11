@@ -5,6 +5,8 @@ import 'package:backofficestock/product/utils/modal/error_popup.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+import '../../product/utils/modal/warning_popup.dart';
+
 class SaleProvider extends ChangeNotifier {
   bool isReady = false;
   ProductModel? productFounded;
@@ -12,14 +14,14 @@ class SaleProvider extends ChangeNotifier {
   TextEditingController barcodeTextController = TextEditingController();
   int totalPrice = 0;
 
-  Future<void> searchBarcode() async {
+  Future<void> searchBarcode(BuildContext context) async {
     isReady = false;
     Response response = await AppService.instance.postData(
         "/findProductWithBarcode", {"BARCODE": barcodeTextController.text});
     if (response.statusCode == 200) {
       if ((response.data['data'] as List).isNotEmpty) {
         productFounded = ProductModel.fromMap(response.data['data'][0]);
-        sameProductIdControll(); // aynı üründen varsa listey eklemiyor.
+        sameProductIdControll(context); // aynı üründen varsa listeye eklemiyor.
         isReady = true;
         notifyListeners();
       } else {
@@ -58,7 +60,7 @@ class SaleProvider extends ChangeNotifier {
   }
 
   void handlePlus(ProductModel product, context) {
-    if (product.basketQuantity < product.count!) {
+    if (product.basketQuantity < product.count) {
       product.basketQuantity += 1;
       getTotalPrice();
       notifyListeners();
@@ -91,12 +93,16 @@ class SaleProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  sameProductIdControll() {
+  sameProductIdControll(context) {
     bool exists = productList.any((item) => item.id == productFounded!.id);
     if (exists) {
     } else {
-      productList.add(productFounded!);
-      getTotalPrice();
+      if (productFounded?.count != 0) {
+        productList.add(productFounded!);
+        getTotalPrice();
+      } else {
+        warningPopup(context, message: "insufficient stock");
+      }
     }
   }
 

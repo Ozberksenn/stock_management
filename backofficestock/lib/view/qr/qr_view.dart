@@ -1,5 +1,6 @@
 import 'package:backofficestock/core/widget/padding.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
+import 'package:backofficestock/view/search/search_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../home/widgets/content_header.dart';
@@ -22,20 +23,27 @@ class _QrViewState extends State<QrView> with TickerProviderStateMixin {
       create: (_) => StockProvider(),
       builder: (context, child) {
         final stockProvider = context.watch<StockProvider>();
-        final homeProvider = context.read<HomeProivder>();
+        final homeProvider = context.watch<HomeProivder>();
         stockProvider.init(tabVsync: this);
         return Column(children: [
           ContentHeader(
             title: homeProvider.menu.title ?? "",
           ),
-          const CustomSizedBox.paddingHeight(heightValue: 10),
-          QrMenuTitle(selectedTab: stockProvider.selectedTab),
-          const CustomSizedBox.paddingHeight(heightValue: 10),
-          stockProvider.isMenuReady == true
-              ? TabBarWidget(stockProvider: stockProvider)
-              : const SizedBox(),
-          const CustomSizedBox.paddingHeight(heightValue: 10),
-          QrProductList(stockProvider: stockProvider)
+          Expanded(
+              child: homeProvider.searchText.length > 1
+                  ? const SearchListView()
+                  : Column(
+                      children: [
+                        const CustomSizedBox.paddingHeight(heightValue: 10),
+                        QrMenuTitle(selectedTab: stockProvider.selectedTab),
+                        const CustomSizedBox.paddingHeight(heightValue: 10),
+                        stockProvider.isMenuReady == true
+                            ? TabBarWidget(stockProvider: stockProvider)
+                            : const SizedBox(),
+                        const CustomSizedBox.paddingHeight(heightValue: 10),
+                        QrProductList(stockProvider: stockProvider)
+                      ],
+                    ))
         ]);
       },
     );

@@ -29,7 +29,6 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
         final stockProvider = context.watch<StockProvider>();
         final homeProvider = context.watch<HomeProivder>();
         stockProvider.init(tabVsync: this);
-
         Widget stockContent(StockProvider stockProvider) {
           return CustomExpanded(
             child: Column(
@@ -61,7 +60,7 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
                   StockAddButton(stockProvider: stockProvider)
                 ],
               )),
-          homeProvider.searchList.isNotEmpty
+          homeProvider.searchText.length > 1
               ? const SearchListView()
               : stockContent(stockProvider)
         ]);

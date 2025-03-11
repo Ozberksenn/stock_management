@@ -12,6 +12,8 @@ class LoginProvider extends ChangeNotifier {
   TextEditingController mailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   int step = 0;
+  // isVisibLogin
+  bool isVisibleLoginPassword = true;
 
   changeStep(int value) {
     step = value;
@@ -66,5 +68,10 @@ class LoginProvider extends ChangeNotifier {
         successPopup(context, message: response.data['message']);
       }
     }
+  }
+
+  visiblePassword() {
+    isVisibleLoginPassword = !isVisibleLoginPassword;
+    notifyListeners();
   }
 }

@@ -62,7 +62,7 @@ class StockProductCard extends StatelessWidget {
               border: Border(
                   left: BorderSide(
                       width: 3,
-                      color: product.count! < 3
+                      color: product.count < 3
                           ? AppColors.red
                           : AppColors.primaryColor)),
               boxShadow: [

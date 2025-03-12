@@ -1,8 +1,8 @@
+import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/storage/app_storage.dart';
 import 'package:backofficestock/product/utils/modal/success_popup.dart';
 import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -25,9 +25,9 @@ class LoginProvider extends ChangeNotifier {
     if (formKey.currentState?.saveAndValidate() ?? false) {
       isActiveLoginButton = false;
       try {
-        Response response = await AppService.instance.postData("/login",
+        ApiResponse response = await AppService.instance.postData("/login",
             {"MAIL": mailController.text, "PASSWORD": passwordController.text});
-        if (response.data['statusCode'] == 200) {
+        if (response.success) {
           await loginWriteStorage(response.data);
           return ServiceResponse(isSuccess: true, message: "Login Success");
         } else {
@@ -57,13 +57,11 @@ class LoginProvider extends ChangeNotifier {
     if (formKey.currentState?.saveAndValidate() ?? false) {
       Map<String, dynamic> formData = {};
       formData.addAll(formKey.currentState?.value ?? {});
-      Response response =
+      ApiResponse response =
           await AppService.instance.postData("/postCustomerContact", formData);
-      if (response.statusCode == 200) {
-        if (response.data['success'] == true) {
-          successSnackbar(context: context, message: response.data['message']);
-          changeStep(0);
-        }
+      if (response.success) {
+        successSnackbar(context: context, message: response.message);
+        changeStep(0);
       } else {
         successPopup(context, message: response.data['message']);
       }

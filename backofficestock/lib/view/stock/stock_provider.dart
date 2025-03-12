@@ -1,9 +1,10 @@
+import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/product/model/menu_model.dart';
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class StockProvider extends ChangeNotifier {
   late TabController tabController;
@@ -34,15 +35,16 @@ class StockProvider extends ChangeNotifier {
 
   Future<void> getMenu(vsync) async {
     isMenuReady = false;
-    Response response = await AppService.instance.getData("/getMenu");
-    if (response.data != null) {
-      menuTabList = (response.data['data'] as List)
+    ApiResponse response = await AppService.instance.getData("/getMenu");
+    if (response.success) {
+      menuTabList = (response.data as List)
           .map((e) => MenuModel.fromMap(e))
           .toList()
           .cast<MenuModel>();
       tabController = TabController(length: menuTabList.length, vsync: vsync!);
+      selectedTab =
+          menuTabList[0]; // seçili olan ilk menüyü burada belirliyoruz.
     }
-    selectedTab = menuTabList[0]; // seçili olan ilk menüyü burada belirliyoruz.
     isMenuReady = true;
     notifyListeners();
   }
@@ -50,9 +52,9 @@ class StockProvider extends ChangeNotifier {
   Future<void> refreshMenu() async {
     if (vsync == null) return;
     isMenuReady = false;
-    Response response = await AppService.instance.getData("/getMenu");
+    ApiResponse response = await AppService.instance.getData("/getMenu");
     if (response.data != null) {
-      menuTabList = (response.data['data'] as List)
+      menuTabList = (response.data as List)
           .map((e) => MenuModel.fromMap(e))
           .toList()
           .cast<MenuModel>();
@@ -76,9 +78,9 @@ class StockProvider extends ChangeNotifier {
   Future<void> getProduct() async {
     // productlar burada çekilecek.
     isProductReady = false;
-    Response response = await AppService.instance.getData("/getProducts");
-    if (response.data != null) {
-      productsList = (response.data['data'] as List)
+    ApiResponse response = await AppService.instance.getData("/getProducts");
+    if (response.success) {
+      productsList = (response.data as List)
           .map((e) => ProductModel.fromMap(e))
           .toList()
           .cast<ProductModel>();
@@ -87,22 +89,24 @@ class StockProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future deleteMenu() async {
-    Response response = await AppService.instance
+  Future deleteMenu(BuildContext context) async {
+    ApiResponse response = await AppService.instance
         .deleteData("/deleteMenu", {"MENUID": selectedTab?.menuId});
-    if (response.data['statusCode'] == 200) {
-      refreshMenu();
-      selectedTab = menuTabList[0];
-      return true;
+    if (!context.mounted) return;
+    if (response.success) {
+      context.pop();
+      successSnackbar(context: context, message: "success");
+      getMenu(vsync);
     } else {
-      return false;
+      context.pop();
+      errorSnackbar(context: context, message: response.message);
     }
   }
 
   Future<void> deleteProduct(int id, context) async {
-    Response response =
+    ApiResponse response =
         await AppService.instance.deleteData("/deleteProduct", {"ID": id});
-    if (response.data['statusCode'] == 200) {
+    if (response.success) {
       getProduct();
       successSnackbar(
           context: context, message: "Success product ID :$id deleted");

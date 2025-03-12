@@ -1,11 +1,9 @@
 import 'dart:convert';
-
+import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/utils/modal/error_popup.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-
 import '../../product/utils/modal/success_popup.dart';
 
 class CompanyProvider extends ChangeNotifier {
@@ -22,9 +20,9 @@ class CompanyProvider extends ChangeNotifier {
 
   Future<void> fetchCompanyInfo() async {
     isReady = false;
-    Response response = await AppService.instance.getData("/getCompanyInfo");
-    if (response.data['statusCode'] == 200) {
-      companyInfo = response.data['data'];
+    ApiResponse response = await AppService.instance.getData("/getCompanyInfo");
+    if (response.success) {
+      companyInfo = response.data[0];
       isReady = true;
     } else {
       isReady = false;
@@ -44,9 +42,9 @@ class CompanyProvider extends ChangeNotifier {
       if (data.containsKey("SOCIALMEDIA")) {
         data["SOCIALMEDIA"] = jsonEncode(data["SOCIALMEDIA"]);
       }
-      Response response =
+      ApiResponse response =
           await AppService.instance.postData("/updateCompanyInfo", data);
-      if (response.statusCode == 200) {
+      if (response.success == true) {
         successPopup(context);
         fetchCompanyInfo();
       } else {

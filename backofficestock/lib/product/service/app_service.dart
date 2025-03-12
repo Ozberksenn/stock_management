@@ -1,3 +1,4 @@
+import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/product/storage/app_storage.dart';
 import 'package:dio/dio.dart';
 
@@ -35,12 +36,18 @@ class AppService {
   static AppService get instance => _instance;
 
   Future getData(String path) async {
-    final response = await dio.get(path);
-    if (response.statusCode == 200) {
-      return response;
-    } else {
-      return null;
+    try {
+      Response response = await dio.get(path);
+      return parseSuccessResponse(response);
+    } on DioException catch (e) {
+      return ApiResponse(
+          success: false, data: {}, message: e.response?.data['message']);
     }
+    // if (response.statusCode == 200) {
+    //   return response;
+    // } else {
+    //   return null;
+    // }
   }
 
   Future deleteData(String path, Map<String, dynamic> parameters) async {
@@ -49,15 +56,14 @@ class AppService {
       ...defaultParams,
       ...parameters, // Gelen data sonradan yazılarak varsayılanları ezebilir
     };
-    final response = await dio.delete(path, data: mergedData);
     try {
-      if (response.statusCode == 200) {
-        return response;
-      } else {
-        return null;
-      }
+      Response response = await dio.delete(path, data: mergedData);
+      return parseSuccessResponse(response);
+    } on DioException catch (e) {
+      return ApiResponse(
+          success: false, data: {}, message: e.response?.data['message']);
     } catch (e) {
-      print(e);
+      return ApiResponse(success: false, data: {}, message: e.toString());
     }
   }
 
@@ -67,16 +73,25 @@ class AppService {
       ...defaultParams,
       ...parameters, // Gelen data sonradan yazılarak varsayılanları ezebilir
     };
-    final response = await dio.post(path, data: mergedData);
     try {
-      if (response.statusCode == 200) {
-        return response;
-      } else {
-        return null;
-      }
+      Response response = await dio.post(path, data: mergedData);
+      return parseSuccessResponse(response);
+    } on DioException catch (e) {
+      return ApiResponse(
+          success: false, data: {}, message: e.response?.data['message']);
     } catch (e) {
-      print(e);
+      return ApiResponse(success: false, data: {}, message: e.toString());
     }
+
+    // try {
+    //   if (response.statusCode == 200) {
+    //     return response;
+    //   } else {
+    //     return null;
+    //   }
+    // } catch (e) {
+    //   print(e);
+    // }
   }
 
   Future putData(String path, Map<String, dynamic> parameters) async {
@@ -85,15 +100,31 @@ class AppService {
       ...defaultParams,
       ...parameters, // Gelen data sonradan yazılarak varsayılanları ezebilir
     };
-    final response = await dio.put(path, data: mergedData);
     try {
-      if (response.statusCode == 200) {
-        return response;
-      } else {
-        return null;
-      }
+      Response response = await dio.put(path, data: mergedData);
+      return parseSuccessResponse(response);
+    } on DioException catch (e) {
+      return ApiResponse(
+          success: false, data: {}, message: e.response?.data['message']);
     } catch (e) {
-      print(e);
+      return ApiResponse(success: false, data: {}, message: e.toString());
+    }
+  }
+
+  ApiResponse parseSuccessResponse(Response response) {
+    if (response.statusCode == 200) {
+      if (response.data != null) {
+        ApiResponse data = ApiResponse.fromMap(response.data);
+        return data;
+      } else {
+        return ApiResponse(
+            success: false,
+            data: {},
+            message: response.statusMessage.toString());
+      }
+    } else {
+      return ApiResponse(
+          success: false, data: {}, message: response.statusMessage.toString());
     }
   }
 }

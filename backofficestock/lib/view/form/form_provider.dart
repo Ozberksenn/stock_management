@@ -1,4 +1,5 @@
 import 'package:backofficestock/product/editors/form_image_picker_field.dart';
+import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/view/stock/stock_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -23,19 +24,19 @@ class FormProvider extends ChangeNotifier {
       await uploadImageData(context, formData, formName ?? "");
       formData.addAll(parameters ?? {});
       formData.addAll(formKey.currentState?.value ?? {});
-      Response? response;
+      ApiResponse response;
       if (edit == false) {
         response = await AppService.instance.postData(url, formData);
       } else {
         response = await AppService.instance.putData(url, formData);
       }
-      if (response?.data['statusCode'] == 200) {
-        successSnackbar(context: context, message: "Success");
+      if (response.success) {
+        successSnackbar(context: context, message: response.message);
         refreshImageField(context);
         formNameCondition(provider, formName);
         context.pop();
       } else {
-        errorSnackbar(context: context, message: "Error");
+        errorSnackbar(context: context, message: response.message);
       }
     } else {
       errorSnackbar(context: context, message: "Validate Error");

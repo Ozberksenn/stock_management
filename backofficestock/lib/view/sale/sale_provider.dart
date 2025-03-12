@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/utils/modal/error_popup.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
+import '../../product/utils/modal/success_popup.dart';
 import '../../product/utils/modal/warning_popup.dart';
 
 class SaleProvider extends ChangeNotifier {
@@ -16,11 +16,11 @@ class SaleProvider extends ChangeNotifier {
 
   Future<void> searchBarcode(BuildContext context) async {
     isReady = false;
-    Response response = await AppService.instance.postData(
+    ApiResponse response = await AppService.instance.postData(
         "/findProductWithBarcode", {"BARCODE": barcodeTextController.text});
-    if (response.statusCode == 200) {
-      if ((response.data['data'] as List).isNotEmpty) {
-        productFounded = ProductModel.fromMap(response.data['data'][0]);
+    if (response.success) {
+      if ((response.data as List).isNotEmpty) {
+        productFounded = ProductModel.fromMap(response.data[0]);
         sameProductIdControll(context); // aynı üründen varsa listeye eklemiyor.
         isReady = true;
         notifyListeners();
@@ -32,29 +32,22 @@ class SaleProvider extends ChangeNotifier {
     }
   }
 
-  Future sendProducts() async {
+  Future sendProducts(BuildContext context) async {
     if (productList.isNotEmpty) {
       List<dynamic> newList =
           productList.map((product) => product.toJsonStock()).toList();
       var jsonProductList = jsonEncode(newList);
-      Response response = await AppService.instance.postData(
+      ApiResponse response = await AppService.instance.postData(
           "/updateProductQuantity", {"PRODUCTJSONDATA": jsonProductList});
-      if (response.statusCode == 200) {
-        if (response.data['statusCode'] == 200) {
-          productList.clear();
-          isReady = false;
-          barcodeTextController.text = "";
-          notifyListeners();
-          return ServiceResponse(
-              isSuccess: true, message: "The sale was succesfully");
-        } else {
-          return ServiceResponse(
-              isSuccess: false,
-              message: "Error : ${response.data['statusCode']}");
-        }
+      if (!context.mounted) return;
+      if (response.success) {
+        productList.clear();
+        isReady = false;
+        barcodeTextController.text = "";
+        successPopup(context, message: response.message);
+        notifyListeners();
       } else {
-        return ServiceResponse(
-            isSuccess: false, message: "${response.statusMessage}");
+        errorPopup(context, message: response.message);
       }
     }
   }

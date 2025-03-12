@@ -1,9 +1,6 @@
 import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/model/product_model.dart';
-import 'package:backofficestock/product/service/app_service.dart';
-import 'package:backofficestock/product/utils/modal/error_popup.dart';
-import 'package:backofficestock/product/utils/modal/success_popup.dart';
 import 'package:backofficestock/product/widgets/custom_buttons.dart';
 import 'package:backofficestock/product/widgets/custom_divider.dart';
 import 'package:backofficestock/view/sale/sale_provider.dart';
@@ -81,15 +78,7 @@ class BasketFooter extends StatelessWidget {
             style: Theme.of(context).textTheme.titleSmall,
           ),
           CustomButton(
-              text: "Complete",
-              onTap: () async {
-                ServiceResponse response = await provider.sendProducts();
-                if (response.isSuccess == true) {
-                  successPopup(context, message: response.message);
-                } else {
-                  errorPopup(context, message: response.message);
-                }
-              })
+              text: "Complete", onTap: () => provider.sendProducts(context))
         ],
       ),
     );

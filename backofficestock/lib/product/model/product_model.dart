@@ -6,7 +6,7 @@ class ProductModel {
   final int menuId;
   final String productName;
   final String? productDescription;
-  final int? price;
+  final double? price;
   final int count;
   final String? image;
   final int? bandId;

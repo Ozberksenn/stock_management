@@ -40,7 +40,7 @@ class ProductForm extends StatelessWidget {
                     const FormLabel(text: "Price"),
                     FormTextField(
                       name: "PRICE",
-                      postDataType: "int",
+                      postDataType: "double",
                       validator: FormBuilderValidators.numeric(),
                     ),
                   ]),

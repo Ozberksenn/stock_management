@@ -41,6 +41,9 @@ class FormTextField extends StatelessWidget {
       valueTransformer: (value) {
         if (postDataType == "int") {
           return int.tryParse(value ?? '') ?? 0; // Sayı ise int olarak gönder
+        } else if (postDataType == "double") {
+          return double.tryParse(value ?? '') ??
+              0.0; // Sayı ise int olarak gönder
         }
         return value; // Diğer alanları string olarak bırak
       },

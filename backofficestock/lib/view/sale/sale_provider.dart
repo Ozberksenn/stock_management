@@ -12,7 +12,7 @@ class SaleProvider extends ChangeNotifier {
   ProductModel? productFounded;
   List<ProductModel> productList = [];
   TextEditingController barcodeTextController = TextEditingController();
-  int totalPrice = 0;
+  double totalPrice = 0.0;
 
   Future<void> searchBarcode(BuildContext context) async {
     isReady = false;
@@ -79,7 +79,7 @@ class SaleProvider extends ChangeNotifier {
   }
 
   getTotalPrice() {
-    totalPrice = 0;
+    totalPrice = 0.0;
     for (var i in productList) {
       totalPrice += (i.basketQuantity * i.price!);
     }

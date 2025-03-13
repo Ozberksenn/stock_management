@@ -1,16 +1,18 @@
 import 'package:backofficestock/data/navigation_data.dart';
 import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/product/model/navigation_model.dart';
+import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:flutter/material.dart';
 
 class HomeProivder extends ChangeNotifier {
   NavigationModel menu = navigationData[0]; // first menu
-  List<dynamic> searchList = [];
+  List<ProductModel> searchList = [];
   String searchText = "";
 
   void changeMenu(NavigationModel item) {
     menu = item;
+    clearSearch();
     notifyListeners();
   }
 
@@ -19,10 +21,10 @@ class HomeProivder extends ChangeNotifier {
       ApiResponse response = await AppService.instance
           .postData("/searchProduct", {"PRODUCTNAME": searchText});
       if (response.success) {
-        for (var e in (response.data as List)) {
+        for (var e in response.data) {
           if (!searchList
-              .any((element) => element["PRODUCTNAME"] == e["PRODUCTNAME"])) {
-            searchList.add(e);
+              .any((element) => element.productName == e['PRODUCTNAME'])) {
+            searchList.add(ProductModel.fromMap(e));
           }
         }
       }
@@ -30,5 +32,10 @@ class HomeProivder extends ChangeNotifier {
       searchList.clear();
     }
     notifyListeners();
+  }
+
+  void clearSearch() {
+    searchText = "";
+    searchList.clear();
   }
 }

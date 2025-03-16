@@ -34,6 +34,7 @@ class StorageService {
   String? get companyName =>
       _box.get(StorageKeys.companyName, defaultValue: "");
   int get companyId => _box.get(StorageKeys.companyId, defaultValue: 0);
+  int get role => _box.get(StorageKeys.companyId, defaultValue: 0);
 
   Future<void> setToken(String value) async =>
       await writeStorage(StorageKeys.token, value);

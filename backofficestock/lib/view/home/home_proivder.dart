@@ -3,6 +3,7 @@ import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/product/model/navigation_model.dart';
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
+import 'package:backofficestock/product/storage/app_storage.dart';
 import 'package:flutter/material.dart';
 
 class HomeProivder extends ChangeNotifier {
@@ -37,5 +38,14 @@ class HomeProivder extends ChangeNotifier {
   void clearSearch() {
     searchText = "";
     searchList.clear();
+  }
+
+  isAdmin() {
+    int role = StorageService().role;
+    if (role == 1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

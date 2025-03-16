@@ -1,4 +1,5 @@
 import 'package:backofficestock/view/company/company_provider.dart';
+import 'package:backofficestock/view/company/components/company.dart';
 import 'package:backofficestock/view/company/widgets/content_widgets.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,9 @@ class CompanyView extends StatelessWidget {
         ContentHeader(
           title: homeProvider.menu.title ?? "",
         ),
-        content(context, companyProvider)
+        homeProvider.isAdmin()
+            ? content(context, companyProvider)
+            : Company(provider: companyProvider)
       ],
     );
   }

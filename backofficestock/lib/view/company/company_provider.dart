@@ -9,6 +9,7 @@ import '../../product/utils/modal/success_popup.dart';
 class CompanyProvider extends ChangeNotifier {
   bool isReady = false;
   Map<String, dynamic> companyInfo = {};
+  int selectedMenu = 0;
 
   CompanyProvider() {
     onInit();
@@ -16,6 +17,11 @@ class CompanyProvider extends ChangeNotifier {
 
   void onInit() {
     fetchCompanyInfo();
+  }
+
+  changeMenu(int value) {
+    selectedMenu = value;
+    notifyListeners();
   }
 
   Future<void> fetchCompanyInfo() async {

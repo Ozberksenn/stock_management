@@ -47,4 +47,5 @@ abstract class StorageKeys {
   static const String companyId = "companyId";
   static const String companyName = "companyName";
   static const String token = "token";
+  static const String role = "role";
 }

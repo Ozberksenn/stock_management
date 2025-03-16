@@ -1,11 +1,11 @@
 import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/product/editors/switch.dart';
+import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/utils/modal/custom_dialog.dart';
 import 'package:backofficestock/product/utils/undefined/no_image_widget.dart';
 import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
 import 'package:backofficestock/view/stock/stock_provider.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/widget/padding.dart';
@@ -23,17 +23,18 @@ class QrProductCard extends StatelessWidget {
     StockProvider provider = context.read<StockProvider>();
 
     void visibleProduct(value) async {
-      Response response = await AppService.instance.putData("/updateProduct", {
+      ApiResponse response =
+          await AppService.instance.putData("/updateProduct", {
         "PRODUCTNAME": product?.productName,
         "ID": product?.id,
         "MENUID": product?.menuId,
         "BARCODE": product?.barcode,
         "SHOWSTORE": value,
       });
-      if (response.statusCode == 200) {
+      if (response.success == true) {
         provider.getProduct();
       } else {
-        errorSnackbar(context: context, message: response.statusMessage);
+        errorSnackbar(context: context, message: response.message);
       }
     }
 

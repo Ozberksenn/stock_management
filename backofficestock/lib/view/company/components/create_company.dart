@@ -21,7 +21,7 @@ class CreateCompany extends StatelessWidget {
           child: Stack(children: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text("Create Company",
-              style: Theme.of(context).textTheme.displaySmall),
+              style: Theme.of(context).textTheme.headlineMedium),
           const CustomSizedBox.paddingHeight(heightValue: 12.0),
           const FormLabel(text: "Mail"),
           FormTextField(

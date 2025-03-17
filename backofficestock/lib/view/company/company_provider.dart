@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:backofficestock/product/model/custom_response.dart';
+import 'package:backofficestock/product/model/customer_contact_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
+import 'package:backofficestock/product/storage/app_storage.dart';
 import 'package:backofficestock/product/utils/modal/error_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -12,12 +14,22 @@ class CompanyProvider extends ChangeNotifier {
   Map<String, dynamic> companyInfo = {};
   int selectedMenu = 0;
 
+  // customer contact
+  List<String> customerContactKeys = [];
+  List<CustomerContactModel> customerContacts = [];
+
+  // logs
+
   CompanyProvider() {
     onInit();
   }
 
   void onInit() {
     fetchCompanyInfo();
+    if (StorageService().role == 1) {
+      fetchCustomerContact();
+    }
+    notifyListeners();
   }
 
   changeMenu(int value) {
@@ -34,7 +46,28 @@ class CompanyProvider extends ChangeNotifier {
     } else {
       isReady = false;
     }
-    notifyListeners();
+  }
+
+  Future<void> fetchCustomerContact() async {
+    ApiResponse response =
+        await AppService.instance.getData("/getCustomerContact");
+    if (response.success) {
+      List<Map<String, dynamic>> dataList =
+          List<Map<String, dynamic>>.from(response.data);
+      customerContactKeys = dataList.first.keys.toList();
+      // Çıktı: [ID, PHONE, CONTACTMAIL, COMPANYNAME, DES]
+      customerContacts = (response.data as List)
+          .map((item) => CustomerContactModel.fromMap(item))
+          .toList()
+          .cast<CustomerContactModel>();
+    } else {}
+  }
+
+  Future<void> fetchLogs() async {
+    ApiResponse response =
+        await AppService.instance.getData("/getCustomerContact");
+    if (response.success) {
+    } else {}
   }
 
   Future<void> handleSendButton(

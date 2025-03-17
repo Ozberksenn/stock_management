@@ -2,6 +2,8 @@ import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
 import 'package:backofficestock/view/company/components/create_company.dart';
+import 'package:backofficestock/view/company/components/customer_contact.dart';
+import 'package:backofficestock/view/company/components/logs.dart';
 import 'package:backofficestock/view/company/data/company_menu_data.dart';
 import 'package:flutter/material.dart';
 import '../../../core/widget/padding.dart';
@@ -12,6 +14,10 @@ content(BuildContext context, CompanyProvider provider) {
     switch (provider.selectedMenu) {
       case 0:
         return Company(provider: provider);
+      case 1:
+        return const CustomerContact();
+      case 2:
+        return const Logs();
       case 3:
         return CreateCompany(provider: provider);
       default:

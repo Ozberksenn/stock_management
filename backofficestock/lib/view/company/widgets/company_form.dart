@@ -111,14 +111,15 @@ class CompanyForm extends StatelessWidget {
 
 class CircleButton extends StatelessWidget {
   final void Function()? onTap;
-  const CircleButton({super.key, this.onTap});
+  final Color? color;
+  const CircleButton({super.key, this.onTap, this.color});
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
         onPressed: onTap,
         shape: const CircleBorder(),
-        backgroundColor: AppColors.blue,
+        backgroundColor: color ?? AppColors.blue,
         child: const CustomIcon(
           icon: CupertinoIcons.check_mark,
           color: AppColors.white,

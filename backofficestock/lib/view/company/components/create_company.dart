@@ -1,4 +1,5 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/editors/form_text_field.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
 import 'package:backofficestock/view/form/widgets/form_label.dart';
@@ -14,10 +15,10 @@ class CreateCompany extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
-    return CustomExpanded(
-        child: FormBuilder(
+    return FormBuilder(
       key: _formKey,
-      child: Stack(children: [
+      child: CustomExpanded(
+          child: Stack(children: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text("Create Company",
               style: Theme.of(context).textTheme.displaySmall),
@@ -47,6 +48,7 @@ class CreateCompany extends StatelessWidget {
           const FormLabel(text: "Role"),
           FormTextField(
             name: "ROLE",
+            postDataType: "int",
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
               FormBuilderValidators.numeric(),
@@ -56,11 +58,15 @@ class CreateCompany extends StatelessWidget {
         Positioned(
           right: 0,
           bottom: 0,
-          child: CircleButton(
-            onTap: () => provider.handleSendButton(_formKey, context),
-          ),
+          child: provider.isCreateCompanyButton == true
+              ? CircleButton(
+                  onTap: () => provider.handleCreateCompany(_formKey, context),
+                )
+              : CircleButton(
+                  color: AppColors.blue.withValues(alpha: 0.2),
+                ),
         )
-      ]),
-    ));
+      ])),
+    );
   }
 }

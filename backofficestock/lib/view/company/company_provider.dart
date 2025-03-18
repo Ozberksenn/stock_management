@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/product/model/customer_contact_model.dart';
+import 'package:backofficestock/product/model/log_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/storage/app_storage.dart';
 import 'package:backofficestock/product/utils/modal/error_popup.dart';
@@ -17,8 +18,11 @@ class CompanyProvider extends ChangeNotifier {
   // customer contact
   List<String> customerContactKeys = [];
   List<CustomerContactModel> customerContacts = [];
+  List<int> deletedCustomerContactList = [];
 
   // logs
+  List<String> logKeys = [];
+  List<LogModel> logs = [];
 
   CompanyProvider() {
     onInit();
@@ -28,6 +32,7 @@ class CompanyProvider extends ChangeNotifier {
     fetchCompanyInfo();
     if (StorageService().role == 1) {
       fetchCustomerContact();
+      fetchLogs();
     }
     notifyListeners();
   }
@@ -63,10 +68,44 @@ class CompanyProvider extends ChangeNotifier {
     } else {}
   }
 
-  Future<void> fetchLogs() async {
-    ApiResponse response =
-        await AppService.instance.getData("/getCustomerContact");
+  void selectedCustomer(int id) {
+    if (deletedCustomerContactList.contains(id)) {
+      deletedCustomerContactList.remove(id);
+    } else {
+      deletedCustomerContactList.add(id);
+    }
+    notifyListeners();
+  }
+
+  Future<void> deletedCustomers() async {
+    List<Map<String, dynamic>> data = [];
+    for (var i in deletedCustomerContactList) {
+      data.add({"id": i});
+    }
+    ApiResponse response = await AppService.instance
+        .deleteData("/deleteCustomerContact", {"CUSTOMERS": jsonEncode(data)});
     if (response.success) {
+      print("başarılı");
+      // todo : success popupu bas.
+      // successPopup(context)
+    }
+  }
+
+  // Future<void> deletedCustomersContact() async {
+  //   print(deletedCustomerContactList);
+  //   notifyListeners();
+  // }
+
+  Future<void> fetchLogs() async {
+    ApiResponse response = await AppService.instance.getData("/getLogs");
+    if (response.success) {
+      List<Map<String, dynamic>> dataList =
+          List<Map<String, dynamic>>.from(response.data);
+      logKeys = dataList.first.keys.toList();
+      logs = (response.data as List)
+          .map((item) => LogModel.fromMap(item))
+          .toList()
+          .cast<LogModel>();
     } else {}
   }
 

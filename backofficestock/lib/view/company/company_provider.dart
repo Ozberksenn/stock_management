@@ -5,8 +5,10 @@ import 'package:backofficestock/product/model/log_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/storage/app_storage.dart';
 import 'package:backofficestock/product/utils/modal/error_popup.dart';
+import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:go_router/go_router.dart';
 import '../../product/utils/modal/success_popup.dart';
 
 class CompanyProvider extends ChangeNotifier {
@@ -16,11 +18,13 @@ class CompanyProvider extends ChangeNotifier {
   int selectedMenu = 0;
 
   // customer contact
+  bool isCustomerContact = false;
   List<String> customerContactKeys = [];
   List<CustomerContactModel> customerContacts = [];
   List<int> deletedCustomerContactList = [];
 
   // logs
+  bool isLogs = false;
   List<String> logKeys = [];
   List<LogModel> logs = [];
 
@@ -54,6 +58,7 @@ class CompanyProvider extends ChangeNotifier {
   }
 
   Future<void> fetchCustomerContact() async {
+    isCustomerContact = false;
     ApiResponse response =
         await AppService.instance.getData("/getCustomerContact");
     if (response.success) {
@@ -65,7 +70,9 @@ class CompanyProvider extends ChangeNotifier {
           .map((item) => CustomerContactModel.fromMap(item))
           .toList()
           .cast<CustomerContactModel>();
-    } else {}
+    }
+    notifyListeners();
+    isCustomerContact = true;
   }
 
   void selectedCustomer(int id) {
@@ -77,7 +84,7 @@ class CompanyProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> deletedCustomers() async {
+  Future<void> deletedCustomers(BuildContext context) async {
     List<Map<String, dynamic>> data = [];
     for (var i in deletedCustomerContactList) {
       data.add({"id": i});
@@ -85,18 +92,16 @@ class CompanyProvider extends ChangeNotifier {
     ApiResponse response = await AppService.instance
         .deleteData("/deleteCustomerContact", {"CUSTOMERS": jsonEncode(data)});
     if (response.success) {
-      print("başarılı");
-      // todo : success popupu bas.
-      // successPopup(context)
+      context.pop();
+      successSnackbar(context: context, message: response.message);
+      fetchCustomerContact();
+    } else {
+      errorPopup(context, message: response.message);
     }
   }
 
-  // Future<void> deletedCustomersContact() async {
-  //   print(deletedCustomerContactList);
-  //   notifyListeners();
-  // }
-
   Future<void> fetchLogs() async {
+    isLogs = false;
     ApiResponse response = await AppService.instance.getData("/getLogs");
     if (response.success) {
       List<Map<String, dynamic>> dataList =
@@ -106,7 +111,9 @@ class CompanyProvider extends ChangeNotifier {
           .map((item) => LogModel.fromMap(item))
           .toList()
           .cast<LogModel>();
-    } else {}
+    }
+    notifyListeners();
+    isLogs = true;
   }
 
   Future<void> handleSendButton(

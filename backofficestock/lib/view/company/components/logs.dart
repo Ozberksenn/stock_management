@@ -1,9 +1,13 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/product/utils/undefined/no_item_widget.dart';
+import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../product/constants/api_constants.dart';
+import '../../../product/widgets/custom_divider.dart';
+import '../widgets/company_header.dart';
 
 class Logs extends StatelessWidget {
   const Logs({super.key});
@@ -11,13 +15,9 @@ class Logs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<CompanyProvider>();
-    return CustomExpanded(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        "Logs",
-        style: Theme.of(context).textTheme.headlineMedium,
-      ),
-      CustomExpanded(
+
+    Widget dataTable(CompanyProvider provider) {
+      return CustomExpanded(
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: DataTable(
@@ -42,7 +42,20 @@ class Logs extends StatelessWidget {
                         ]))
               ]),
         ),
-      )
+      );
+    }
+
+    return CustomExpanded(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      CompanyHeader(
+          provider: provider,
+          title: "Logs",
+          child: CustomIcon(
+              icon: CupertinoIcons.refresh, onTap: () => provider.fetchLogs())),
+      const CustomSizedBox.paddingHeight(heightValue: 12.0),
+      const CustomDivider(),
+      const CustomSizedBox.paddingHeight(heightValue: 12.0),
+      provider.isLogs ? dataTable(provider) : const NoItemWidget()
     ]));
   }
 }

@@ -34,7 +34,10 @@ class CreateCompany extends StatelessWidget {
           const CustomSizedBox.paddingHeight(heightValue: 8.0),
           const FormLabel(text: "Password"),
           FormTextField(
-              name: "PASSWORD", validator: FormBuilderValidators.required()),
+              name: "PASSWORD",
+              obscureText: true,
+              maxLines: 1,
+              validator: FormBuilderValidators.required()),
           const CustomSizedBox.paddingHeight(heightValue: 8.0),
           const FormLabel(text: "Company Name"),
           FormTextField(

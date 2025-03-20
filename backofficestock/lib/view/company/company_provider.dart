@@ -13,7 +13,7 @@ import '../../product/utils/modal/success_popup.dart';
 
 class CompanyProvider extends ChangeNotifier {
   bool isReady = false;
-  bool isCreateCompanyButton = true;
+  // bool isCreateCompanyButton = true;
   Map<String, dynamic> companyInfo = {};
   int selectedMenu = 0;
 
@@ -144,7 +144,7 @@ class CompanyProvider extends ChangeNotifier {
   Future<void> handleCreateCompany(
       GlobalKey<FormBuilderState> formKey, BuildContext context) async {
     if (formKey.currentState?.saveAndValidate() ?? false) {
-      isCreateCompanyButton = false;
+      // isCreateCompanyButton = false;
       final Map<String, dynamic> data = formKey.currentState?.value ?? {};
       ApiResponse response =
           await AppService.instance.postData("/createCompany", data);
@@ -157,6 +157,17 @@ class CompanyProvider extends ChangeNotifier {
     } else {
       errorPopup(context, message: "Validation Error");
     }
-    isCreateCompanyButton = true;
+    // isCreateCompanyButton = true;
+  }
+
+  Future<void> updatePassword(
+      GlobalKey<FormBuilderState> formKey, BuildContext context) async {
+    if (formKey.currentState?.saveAndValidate() ?? false) {
+      final Map<String, dynamic> data = formKey.currentState?.value ?? {};
+      ApiResponse response =
+          await AppService.instance.postData("/updatePassword", data);
+      if (response.success) {
+      } else {}
+    }
   }
 }

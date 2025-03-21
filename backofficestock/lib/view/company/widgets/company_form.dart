@@ -1,6 +1,7 @@
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
+import 'package:backofficestock/view/company/widgets/company_header.dart';
 import 'package:backofficestock/view/company/widgets/social_media_field.dart';
 import 'package:backofficestock/view/company/widgets/working_days_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -92,6 +93,8 @@ class CompanyForm extends StatelessWidget {
       initialValue: provider.companyInfo,
       child: Stack(children: [
         ListView(children: [
+          CompanyHeader(provider: provider, title: "Account Info"),
+          const CustomSizedBox.paddingHeight(heightValue: 12.0),
           generalInformation(),
           contactInformation(),
           socialMediaInformation(),

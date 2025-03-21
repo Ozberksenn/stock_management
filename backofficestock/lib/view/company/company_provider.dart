@@ -167,7 +167,10 @@ class CompanyProvider extends ChangeNotifier {
       ApiResponse response =
           await AppService.instance.postData("/updatePassword", data);
       if (response.success) {
-      } else {}
+        successPopup(context, message: response.message);
+      } else {
+        errorPopup(context, message: response.message);
+      }
     }
   }
 }

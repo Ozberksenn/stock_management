@@ -16,8 +16,7 @@ class CreateCompany extends StatelessWidget {
     return FormBuilder(
       key: _formKey,
       child: CustomExpanded(
-          child: Stack(children: [
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text("Create Company",
               style: Theme.of(context).textTheme.headlineMedium),
           const CustomSizedBox.paddingHeight(heightValue: 12.0),
@@ -55,13 +54,14 @@ class CreateCompany extends StatelessWidget {
               FormBuilderValidators.numeric(),
             ]),
           ), // todo :  dropdown olsun.
+          const CustomSizedBox.paddingHeight(heightValue: 16.0),
+          Container(
+              alignment: Alignment.centerRight,
+              child: CustomButton(
+                  text: "Create a Company",
+                  onTap: () => provider.handleCreateCompany(_formKey, context)))
         ]),
-        Container(
-            alignment: Alignment.centerRight,
-            child: CustomButton(
-                text: "Create a Company",
-                onTap: () => provider.handleCreateCompany(_formKey, context)))
-      ])),
+      ),
     );
   }
 }

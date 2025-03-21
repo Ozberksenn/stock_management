@@ -49,7 +49,7 @@ class LoginProvider extends ChangeNotifier {
     await StorageService()
         .writeStorage(StorageKeys.companyId, decodedToken['companyId']);
     await StorageService().writeStorage(StorageKeys.token, data['token']);
-    await StorageService().writeStorage(StorageKeys.role, data['role']);
+    await StorageService().writeStorage(StorageKeys.role, decodedToken['role']);
     await StorageService()
         .writeStorage(StorageKeys.companyName, decodedToken['companyName']);
   }

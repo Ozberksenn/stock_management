@@ -1,5 +1,6 @@
 import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
+import 'package:backofficestock/product/storage/app_storage.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
 import 'package:backofficestock/view/company/components/create_company.dart';
 import 'package:backofficestock/view/company/components/customer_contact.dart';
@@ -54,18 +55,34 @@ class CompanyMenu extends StatelessWidget {
         decoration: BoxDecoration(
             color: AppColors.lightGrey, borderRadius: CustomRadius.radius6),
         padding: const ConstEdgeInsets.padding12(),
-        child: ListView.builder(
-            itemCount: companyMenuData.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                onTap: () => provider.changeMenu(companyMenuData[index].id),
-                title: Text(
-                  companyMenuData[index].title ?? "",
-                  style: companyMenuData[index].id == provider.selectedMenu
-                      ? AppFonts.boldSmall
-                      : Theme.of(context).textTheme.bodyMedium,
-                ),
-              );
-            }));
+        child: StorageService().role == 0
+            ? ListView.builder(
+                itemCount: companyMenuData.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    onTap: () => provider.changeMenu(companyMenuData[index].id),
+                    title: Text(
+                      companyMenuData[index].title ?? "",
+                      style: companyMenuData[index].id == provider.selectedMenu
+                          ? AppFonts.boldSmall
+                          : Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  );
+                })
+            : ListView.builder(
+                itemCount: companyMenuDataAdmin.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    onTap: () =>
+                        provider.changeMenu(companyMenuDataAdmin[index].id),
+                    title: Text(
+                      companyMenuDataAdmin[index].title ?? "",
+                      style: companyMenuDataAdmin[index].id ==
+                              provider.selectedMenu
+                          ? AppFonts.boldSmall
+                          : Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  );
+                }));
   }
 }

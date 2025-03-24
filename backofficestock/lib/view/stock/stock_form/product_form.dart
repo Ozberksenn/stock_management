@@ -1,7 +1,8 @@
 import 'package:backofficestock/product/editors/form_image_picker_field.dart';
+import 'package:backofficestock/view/form/components/product_variation/product_variation_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-
 import '../../../core/widget/padding.dart';
 import '../../../product/editors/form_text_field.dart';
 import '../../form/widgets/form_label.dart';
@@ -60,6 +61,10 @@ class ProductForm extends StatelessWidget {
               ),
             )
           ]),
+          const CustomSizedBox.paddingHeight(heightValue: 16),
+          const ProductVariation(
+            fieldName: "PRODUCTVARIATION",
+          )
         ]);
   }
 }

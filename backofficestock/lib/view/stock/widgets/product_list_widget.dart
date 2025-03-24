@@ -1,7 +1,6 @@
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/utils/undefined/no_item_widget.dart';
 import 'package:flutter/material.dart';
-
 import '../../../core/widget/padding.dart';
 import '../stock_provider.dart';
 import 'stock_product_card.dart';

@@ -21,23 +21,23 @@ class FormProvider extends ChangeNotifier {
     if (formKey.currentState?.saveAndValidate() ?? false) {
       Map<String, dynamic> formData = {};
       debugPrint(formKey.currentState?.value.toString());
-      await uploadImageData(context, formData, formName ?? "");
-      formData.addAll(parameters ?? {});
-      formData.addAll(formKey.currentState?.value ?? {});
-      ApiResponse response;
-      if (edit == false) {
-        response = await AppService.instance.postData(url, formData);
-      } else {
-        response = await AppService.instance.putData(url, formData);
-      }
-      if (response.success) {
-        successSnackbar(context: context, message: response.message);
-        refreshImageField(context);
-        formNameCondition(provider, formName);
-        context.pop();
-      } else {
-        errorSnackbar(context: context, message: response.message);
-      }
+      // await uploadImageData(context, formData, formName ?? "");
+      // formData.addAll(parameters ?? {});
+      // formData.addAll(formKey.currentState?.value ?? {});
+      // ApiResponse response;
+      // if (edit == false) {
+      //   response = await AppService.instance.postData(url, formData);
+      // } else {
+      //   response = await AppService.instance.putData(url, formData);
+      // }
+      // if (response.success) {
+      //   successSnackbar(context: context, message: response.message);
+      //   refreshImageField(context);
+      //   formNameCondition(provider, formName);
+      //   context.pop();
+      // } else {
+      //   errorSnackbar(context: context, message: response.message);
+      // }
     } else {
       errorSnackbar(context: context, message: "Validate Error");
     }

@@ -15,7 +15,6 @@ import 'widgets/tab_bar_widget.dart';
 
 class StockView extends StatefulWidget {
   const StockView({super.key});
-
   @override
   State<StockView> createState() => _StockViewState();
 }

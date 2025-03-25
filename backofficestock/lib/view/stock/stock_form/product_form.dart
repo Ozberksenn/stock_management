@@ -1,17 +1,22 @@
+import 'dart:convert';
+
 import 'package:backofficestock/product/editors/form_image_picker_field.dart';
-import 'package:backofficestock/view/form/components/product_variation/product_variation_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import '../../../core/widget/padding.dart';
 import '../../../product/editors/form_text_field.dart';
+import '../../form/components/product_variation/product_variation_widget.dart';
 import '../../form/widgets/form_label.dart';
 
 class ProductForm extends StatelessWidget {
-  const ProductForm({super.key});
+  final Map<String, dynamic>? initialValue;
+  const ProductForm({super.key, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> dataList = List<Map<String, dynamic>>.from(
+        jsonDecode(initialValue?['PRODUCTVARIATION'] ?? "[]"));
     return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,9 +67,11 @@ class ProductForm extends StatelessWidget {
             )
           ]),
           const CustomSizedBox.paddingHeight(heightValue: 16),
-          const ProductVariation(
-            fieldName: "PRODUCTVARIATION",
-          )
+          ProductVariation(
+              fieldName: "PRODUCTVARIATION",
+              // nameInitialValue: "",
+              // priceInitialValue: "",
+              variationList: dataList)
         ]);
   }
 }

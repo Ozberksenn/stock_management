@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:backofficestock/view/form/components/product_variation/product_variation_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +11,14 @@ import 'name_price_field.dart';
 
 class ProductVariation extends StatelessWidget {
   final String fieldName;
-  const ProductVariation({super.key, required this.fieldName});
+  final List<Map<String, dynamic>>? variationList;
+  const ProductVariation(
+      {super.key, required this.fieldName, this.variationList});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (_) => ProductVariationProvider(),
+        create: (_) => ProductVariationProvider(variationList ?? [{}]),
         builder: (context, child) {
           final provider = Provider.of<ProductVariationProvider>(context);
           return Column(children: [
@@ -44,14 +48,28 @@ class ProductVariation extends StatelessWidget {
                             ['nameTextEditingController'],
                         priceController: provider.variationsList[index]
                             ['priceTextEditingController'],
+                        // nameInitialValue: "",
+                        // nameInitialValue: provider.variationsList[index][0],
+                        // priceInitialValue: "",
+                        // priceInitialValue: provider.variationsList[index][1],
                         onTapOutside: (p0) {
-                          field.didChange({
-                            "${provider.variationsList[index]['nameTextEditingController'].text}":
-                                provider
-                                    .variationsList[index]
-                                        ['priceTextEditingController']
-                                    .text
-                          });
+                          // Map<String, dynamic> variations = {
+                          //   for (var variation in provider.variationsList)
+                          //     jsonEncode(
+                          //         variation['nameTextEditingController']
+                          //             .text): jsonEncode(
+                          //         variation['priceTextEditingController'].text)
+                          // };
+                          List<Map<String, dynamic>> variations =
+                              provider.variationsList.map((e) {
+                            return {
+                              "name": jsonEncode(
+                                  e['nameTextEditingController'].text),
+                              "price": jsonEncode(
+                                  e['priceTextEditingController'].text)
+                            };
+                          }).toList();
+                          field.didChange(variations.toString());
                         },
                       );
                     });

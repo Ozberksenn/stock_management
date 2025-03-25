@@ -45,7 +45,8 @@ class FormView<T extends ChangeNotifier> extends StatelessWidget {
                 FormTitle(title: title),
                 const Divider(),
                 CustomPaddings.customPadding(
-                    value: 12.0, child: body(route ?? '', provider))
+                    value: 12.0,
+                    child: body(route ?? '', provider, initialValue))
               ],
             ),
             FormFooter(onTap: () {
@@ -76,14 +77,16 @@ class FormView<T extends ChangeNotifier> extends StatelessWidget {
   }
 }
 
-body(String formName, provider) {
+body(String formName, provider, initialValue) {
   switch (formName) {
     case 'menu':
       return MenuForm(
         provider: provider,
       );
     case 'product':
-      return const ProductForm();
+      return ProductForm(
+        initialValue: initialValue,
+      );
     default:
       return const SizedBox();
   }

@@ -48,28 +48,15 @@ class ProductVariation extends StatelessWidget {
                             ['nameTextEditingController'],
                         priceController: provider.variationsList[index]
                             ['priceTextEditingController'],
-                        // nameInitialValue: "",
-                        // nameInitialValue: provider.variationsList[index][0],
-                        // priceInitialValue: "",
-                        // priceInitialValue: provider.variationsList[index][1],
                         onTapOutside: (p0) {
-                          // Map<String, dynamic> variations = {
-                          //   for (var variation in provider.variationsList)
-                          //     jsonEncode(
-                          //         variation['nameTextEditingController']
-                          //             .text): jsonEncode(
-                          //         variation['priceTextEditingController'].text)
-                          // };
                           List<Map<String, dynamic>> variations =
                               provider.variationsList.map((e) {
                             return {
-                              "name": jsonEncode(
-                                  e['nameTextEditingController'].text),
-                              "price": jsonEncode(
-                                  e['priceTextEditingController'].text)
+                              "name": e['nameTextEditingController'].text,
+                              "price": e['priceTextEditingController'].text
                             };
                           }).toList();
-                          field.didChange(variations.toString());
+                          field.didChange(jsonEncode(variations).toString());
                         },
                       );
                     });

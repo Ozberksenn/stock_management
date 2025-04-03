@@ -7,7 +7,6 @@ import 'package:backofficestock/product/utils/undefined/no_image_widget.dart';
 import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
 import 'package:backofficestock/view/stock/stock_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../core/widget/padding.dart';
 import '../../../core/widget/radius.dart';
 import '../../../product/constants/api_constants.dart';
@@ -16,12 +15,11 @@ import 'dialog_qr_product_card_widget.dart';
 
 class QrProductCard extends StatelessWidget {
   final ProductModel? product;
-  const QrProductCard({super.key, this.product});
+  final StockProvider provider;
+  const QrProductCard({super.key, this.product, required this.provider});
 
   @override
   Widget build(BuildContext context) {
-    StockProvider provider = context.read<StockProvider>();
-
     void visibleProduct(value) async {
       ApiResponse response =
           await AppService.instance.putData("/updateProduct", {
@@ -80,9 +78,13 @@ class QrProductCard extends StatelessWidget {
                         Text(product?.productDescription ?? "",
                             style: Theme.of(context).textTheme.labelSmall)
                       ]),
-                  SwitchWidget(
-                      value: product?.showStore ?? true,
-                      onChanged: (value) => visibleProduct(value))
+                  Padding(
+                    padding:
+                        const ConstEdgeInsets.paddingOnly(right: 52, bottom: 6),
+                    child: SwitchWidget(
+                        value: product?.showStore ?? true,
+                        onChanged: (value) => visibleProduct(value)),
+                  ),
                 ],
               ),
             )

@@ -1,5 +1,4 @@
 import 'package:backofficestock/product/model/product_model.dart';
-import 'package:backofficestock/product/widgets/custom_divider.dart';
 import 'package:backofficestock/product/utils/undefined/no_item_widget.dart';
 import 'package:flutter/material.dart';
 import '../../stock/stock_provider.dart';
@@ -21,17 +20,28 @@ class QrProductList extends StatelessWidget {
     return Expanded(
       child: stockProvider.isProductReady == true
           ? filterProducList.isNotEmpty
-              ? ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: filterProducList.length,
-                  separatorBuilder: (context, index) {
-                    return const CustomDivider();
-                  },
+              ? ReorderableListView.builder(
+                  cacheExtent: 0.5,
                   itemBuilder: (context, index) {
                     return QrProductCard(
+                      key: ValueKey(filterProducList[index].id),
+                      provider: stockProvider,
                       product: filterProducList[index],
                     );
-                  })
+                  },
+                  itemCount: filterProducList.length,
+                  onReorder: (oldIndex, newIndex) {})
+              // ListView.separated(
+              //     shrinkWrap: true,
+              //     itemCount: filterProducList.length,
+              //     separatorBuilder: (context, index) {
+              //       return const CustomDivider();
+              //     },
+              //     itemBuilder: (context, index) {
+              //       return QrProductCard(
+              //         product: filterProducList[index],
+              //       );
+              //     })
               : const NoItemWidget()
           : Container(),
     );

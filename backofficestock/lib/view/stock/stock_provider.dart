@@ -124,6 +124,7 @@ class StockProvider extends ChangeNotifier {
     });
     if (!context.mounted) return;
     if (response.success) {
+      getProduct();
       successSnackbar(context: context, message: "Success");
     } else {
       errorSnackbar(context: context, message: "Error");

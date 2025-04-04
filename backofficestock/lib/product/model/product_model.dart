@@ -12,6 +12,7 @@ class ProductModel {
   final bool? showStore;
   final String barcode;
   final String? prodcutVariation;
+  final int? sort; // todo required
   int basketQuantity;
 
   ProductModel(
@@ -26,6 +27,7 @@ class ProductModel {
       this.showStore,
       required this.barcode,
       this.prodcutVariation,
+      this.sort,
       this.basketQuantity = 1});
 
   factory ProductModel.fromMap(Map<String, dynamic> json) {
@@ -41,6 +43,7 @@ class ProductModel {
         showStore: json["SHOWSTORE"] ?? true,
         barcode: json['BARCODE'] ?? "",
         prodcutVariation: json['PRODUCTVARIATION'],
+        sort: json['SORT'],
         basketQuantity: 1);
   }
 
@@ -60,6 +63,7 @@ class ProductModel {
       'IMAGE': image,
       'SHOWSTORE': showStore,
       'BARCODE': barcode,
+      'SORT': sort,
       'PRODUCTVARIATION': prodcutVariation,
     };
   }

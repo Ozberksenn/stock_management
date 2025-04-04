@@ -30,18 +30,22 @@ class QrProductList extends StatelessWidget {
                     );
                   },
                   itemCount: filterProducList.length,
-                  onReorder: (oldIndex, newIndex) {})
-              // ListView.separated(
-              //     shrinkWrap: true,
-              //     itemCount: filterProducList.length,
-              //     separatorBuilder: (context, index) {
-              //       return const CustomDivider();
-              //     },
-              //     itemBuilder: (context, index) {
-              //       return QrProductCard(
-              //         product: filterProducList[index],
-              //       );
-              //     })
+                  onReorder: (oldIndex, newIndex) {
+                    // print(
+                    //   filterProducList[oldIndex].productName +
+                    //       "sırası : " +
+                    //       filterProducList[newIndex].sort.toString(),
+                    // );
+                    stockProvider.updateOrder(
+                      context,
+                      productId: filterProducList[oldIndex].id,
+                      newOrder: filterProducList[newIndex].sort!,
+                    );
+                    // print(
+                    //     "${filterProducList[oldIndex].productName} ${filterProducList[oldIndex].sort}");
+                    // print(
+                    //     "${filterProducList[newIndex - 1].productName} ${filterProducList[newIndex - 1].sort}");
+                  })
               : const NoItemWidget()
           : Container(),
     );

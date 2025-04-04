@@ -114,4 +114,19 @@ class StockProvider extends ChangeNotifier {
       errorSnackbar(context: context, message: "Error");
     }
   }
+
+  Future<void> updateOrder(BuildContext context,
+      {required int productId, required int newOrder}) async {
+    ApiResponse response =
+        await AppService.instance.putData("/productOrderUpdate", {
+      "PRODUCTID": productId,
+      "NEWORDER": newOrder,
+    });
+    if (!context.mounted) return;
+    if (response.success) {
+      successSnackbar(context: context, message: "Success");
+    } else {
+      errorSnackbar(context: context, message: "Error");
+    }
+  }
 }

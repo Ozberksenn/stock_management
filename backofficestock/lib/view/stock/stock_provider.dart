@@ -124,10 +124,22 @@ class StockProvider extends ChangeNotifier {
     });
     if (!context.mounted) return;
     if (response.success) {
-      getProduct();
       successSnackbar(context: context, message: "Success");
     } else {
       errorSnackbar(context: context, message: "Error");
     }
+  }
+
+  void uiOrderUpdate(oldIndex, newIndex, List<ProductModel> filterList) {
+    final movedItem = filterList[oldIndex];
+    final actualOldIndex = productsList.indexWhere((e) => e.id == movedItem.id);
+
+    final newItem = filterList[newIndex];
+    final actualNewIndex = productsList.indexWhere((e) => e.id == newItem.id);
+
+    final moved = productsList.removeAt(actualOldIndex);
+    productsList.insert(actualNewIndex, moved);
+
+    notifyListeners();
   }
 }

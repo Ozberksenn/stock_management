@@ -31,11 +31,16 @@ class QrProductList extends StatelessWidget {
                   },
                   itemCount: filterProducList.length,
                   onReorder: (oldIndex, newIndex) {
+                    if (newIndex > oldIndex) {
+                      newIndex -= 1;
+                    }
                     stockProvider.updateOrder(
                       context,
                       productId: filterProducList[oldIndex].id,
                       newOrder: filterProducList[newIndex].sort!,
                     );
+                    stockProvider.uiOrderUpdate(
+                        oldIndex, newIndex, filterProducList);
                   })
               : const NoItemWidget()
           : Container(),

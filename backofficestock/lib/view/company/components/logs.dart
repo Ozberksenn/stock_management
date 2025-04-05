@@ -4,6 +4,7 @@ import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../product/constants/api_constants.dart';
 import '../../../product/widgets/custom_divider.dart';
@@ -19,28 +20,32 @@ class Logs extends StatelessWidget {
     Widget dataTable(CompanyProvider provider) {
       return CustomExpanded(
         child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: DataTable(
-              decoration: const BoxDecoration(color: AppColors.lightGrey),
-              showBottomBorder: true,
-              dividerThickness: 0.3,
-              columns: <DataColumn>[
-                ...provider.logKeys.reversed
-                    .map((e) => DataColumn(label: Text(e.toString())))
-              ],
-              rows: <DataRow>[
-                ...provider.logs.map((e) => DataRow(
-                        color: const WidgetStatePropertyAll(Colors.white),
-                        cells: [
-                          DataCell(Text(e.createdAt)),
-                          DataCell(Text(e.statusMessage ?? "")),
-                          DataCell(Text(e.statusCode)),
-                          DataCell(Text(e.body.toString())),
-                          DataCell(Text(e.originalUrl)),
-                          DataCell(Text(e.company.toString())),
-                          DataCell(Text(e.id.toString())),
-                        ]))
-              ]),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: DataTable(
+                decoration: const BoxDecoration(color: AppColors.lightGrey),
+                showBottomBorder: true,
+                dividerThickness: 0.3,
+                columns: <DataColumn>[
+                  ...provider.logKeys.reversed
+                      .map((e) => DataColumn(label: Text(e.toString())))
+                ],
+                rows: <DataRow>[
+                  ...provider.logs.map((e) => DataRow(
+                          color: const WidgetStatePropertyAll(Colors.white),
+                          cells: [
+                            DataCell(Text(DateFormat('dd/MM/yyyy').format(
+                                DateTime.parse(e
+                                    .createdAt)))), // todo : burada ki  Date Format için genel fonksiyon yaz.
+                            DataCell(Text(e.statusMessage ?? "")),
+                            DataCell(Text(e.statusCode)),
+                            DataCell(Text(e.body.toString())),
+                            DataCell(Text(e.originalUrl)),
+                            DataCell(Text(e.company.toString())),
+                            DataCell(Text(e.id.toString())),
+                          ]))
+                ]),
+          ),
         ),
       );
     }
@@ -55,7 +60,9 @@ class Logs extends StatelessWidget {
       const CustomSizedBox.paddingHeight(heightValue: 12.0),
       const CustomDivider(),
       const CustomSizedBox.paddingHeight(heightValue: 12.0),
-      provider.isLogs ? dataTable(provider) : const NoItemWidget()
+      provider.isLogs && provider.logs.isNotEmpty
+          ? dataTable(provider)
+          : const NoItemWidget()
     ]));
   }
 }

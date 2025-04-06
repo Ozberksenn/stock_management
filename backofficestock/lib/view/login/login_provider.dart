@@ -20,10 +20,15 @@ class LoginProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  setButton(bool value) {
+    isActiveLoginButton = value;
+    notifyListeners();
+  }
+
   Future<ServiceResponse> handleSave(
       GlobalKey<FormBuilderState> formKey) async {
     if (formKey.currentState?.saveAndValidate() ?? false) {
-      isActiveLoginButton = false;
+      setButton(false);
       try {
         ApiResponse response = await AppService.instance.postData("/login",
             {"MAIL": mailController.text, "PASSWORD": passwordController.text});
@@ -34,10 +39,11 @@ class LoginProvider extends ChangeNotifier {
           return ServiceResponse(isSuccess: false, message: "Login Failed");
         }
       } finally {
-        isActiveLoginButton = true;
+        setButton(true);
         notifyListeners();
       }
     } else {
+      setButton(true);
       return ServiceResponse(isSuccess: false, message: "Validation Error");
     }
   }

@@ -31,25 +31,24 @@ class FormView<T extends ChangeNotifier> extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => FormProvider(),
-      builder: (context, child) {
-        FormProvider formProvider = context.read();
-        return FormBuilder(
-          key: _formKey,
-          initialValue: initialValue ?? {},
-          child: Column(children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FormTitle(title: title),
-                const Divider(),
-                CustomPaddings.customPadding(
-                    value: 12.0,
-                    child: body(route ?? '', provider, initialValue))
-              ],
-            ),
-            FormFooter(onTap: () {
+    FormProvider formProvider = context.watch<FormProvider>();
+
+    return FormBuilder(
+      key: _formKey,
+      initialValue: initialValue ?? {},
+      child: Column(children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FormTitle(title: title),
+            const Divider(),
+            CustomPaddings.customPadding(
+                value: 12.0, child: body(route ?? '', provider, initialValue))
+          ],
+        ),
+        FormFooter(
+            formProvider: formProvider,
+            onTap: () {
               if (edit == true) {
                 formProvider.handleSaveButton<T>(
                     formName: route,
@@ -70,9 +69,7 @@ class FormView<T extends ChangeNotifier> extends StatelessWidget {
                     parameters: parameters);
               }
             })
-          ]),
-        );
-      },
+      ]),
     );
   }
 }

@@ -12,7 +12,7 @@ import 'product/storage/app_storage.dart';
 void main() async {
   await Hive.initFlutter();
   try {
-    await StorageService().init(); // Singleton üzerinden çağır
+    await StorageService().init();
   } catch (e) {
     debugPrint("Hive Box Açılırken Hata: $e");
   }
@@ -21,8 +21,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

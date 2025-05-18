@@ -65,48 +65,56 @@ class StockProductCard extends StatelessWidget {
                       color: product.count < 3
                           ? AppColors.red
                           : AppColors.primaryColor)),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
+                  color: AppColors.lightGrey,
                   spreadRadius: 2,
-                  blurRadius: 3,
-                  offset: const Offset(0, 1), // changes position of shadow
+                  blurRadius: 2,
+                  offset: Offset(0, 1),
                 ),
               ]),
-          padding: const ConstEdgeInsets.padding6(),
+          padding: const ConstEdgeInsets.padding12(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  product.image != null && product.image != ""
-                      ? Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      "${AppService.cdnUrl}/${product.image}"))),
-                        )
-                      : const NoImage(
-                          width: 60,
-                          size: 36,
-                        ),
-                  const CustomSizedBox.paddingWidth(widthValue: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${product.count} - ${product.productName}',
-                        style: Theme.of(context).textTheme.titleMedium,
+              Expanded(
+                child: Row(
+                  children: [
+                    product.image != null && product.image != ""
+                        ? Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                        "${AppService.cdnUrl}/${product.image}"))),
+                          )
+                        : const NoImage(
+                            width: 60,
+                            size: 36,
+                          ),
+                    const CustomSizedBox.paddingWidth(widthValue: 8),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${product.count} - ${product.productName}',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          SizedBox(
+                            child: Text(product.productDescription ?? '',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppFonts.greylabelSmall),
+                          )
+                        ],
                       ),
-                      Text(product.productDescription ?? '',
-                          style: AppFonts.greylabelSmall)
-                    ],
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
               CustomPaddings.customPadding(
                   value: 6,

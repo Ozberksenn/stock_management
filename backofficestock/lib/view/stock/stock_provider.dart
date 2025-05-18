@@ -59,10 +59,12 @@ class StockProvider extends ChangeNotifier {
           .map((e) => MenuModel.fromMap(e))
           .toList()
           .cast<MenuModel>();
-      selectedTab = menuTabList.firstWhere((e) =>
-          e.menuId ==
-          selectedTab
-              ?.menuId); // sayfa güncellendikten sonra aynı tabde kalabilmesi için yaptım.
+      selectedTab = menuTabList.length == 1
+          ? menuTabList[0]
+          : menuTabList.firstWhere((e) =>
+              e.menuId ==
+              selectedTab
+                  ?.menuId); // sayfa güncellendikten sonra aynı tabde kalabilmesi için yaptım.
       var initialTabIndex = menuTabList.indexWhere((e) =>
           e.menuId ==
           selectedTab

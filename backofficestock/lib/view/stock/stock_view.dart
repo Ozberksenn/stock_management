@@ -33,7 +33,8 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
             child: Column(
               children: [
                 const CustomSizedBox.paddingHeight(heightValue: 10),
-                stockProvider.isMenuReady == true
+                stockProvider.isMenuReady == true &&
+                        stockProvider.menuTabList.isNotEmpty
                     ? StockMenuTitle(provider: stockProvider)
                     : const SizedBox(),
                 stockProvider.isMenuReady == true

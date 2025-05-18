@@ -1,3 +1,4 @@
+import 'package:backofficestock/product/utils/modal/warning_popup.dart';
 import 'package:flutter/material.dart';
 import '../../../product/constants/api_constants.dart';
 import '../../../product/utils/modal/custom_dialog.dart';
@@ -32,16 +33,19 @@ class StockAddButton extends StatelessWidget {
           ),
           popupItem(
             name: "Product",
-            onTap: () => customDialog(context,
-                widget: FormView<StockProvider>(
-                  dialogContext: context,
-                  apiUrl: "/createProducts",
-                  edit: false,
-                  title: "Add Product",
-                  route: "product",
-                  provider: stockProvider,
-                  parameters: {"MENUID": stockProvider.selectedTab?.menuId},
-                )),
+            onTap: () => stockProvider.menuTabList.isNotEmpty
+                ? customDialog(context,
+                    widget: FormView<StockProvider>(
+                      dialogContext: context,
+                      apiUrl: "/createProducts",
+                      edit: false,
+                      title: "Add Product",
+                      route: "product",
+                      provider: stockProvider,
+                      parameters: {"MENUID": stockProvider.selectedTab?.menuId},
+                    ))
+                : warningPopup(context,
+                    message: "You must add at least one menu"),
           )
         ]);
   }

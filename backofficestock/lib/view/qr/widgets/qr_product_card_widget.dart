@@ -77,6 +77,8 @@ class QrProductCard extends StatelessWidget {
                                 style: AppFonts.boldSmall),
                           ]),
                           Text(product?.productDescription ?? "",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               style: Theme.of(context).textTheme.labelSmall)
                         ]),
                   ),

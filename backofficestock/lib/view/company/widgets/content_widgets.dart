@@ -1,10 +1,11 @@
 import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/storage/app_storage.dart';
+import 'package:backofficestock/product/utils/undefined/undefined_module.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
 import 'package:backofficestock/view/company/components/create_company.dart';
 import 'package:backofficestock/view/company/components/customer_contact.dart';
-import 'package:backofficestock/view/company/components/logs.dart';
+// import 'package:backofficestock/view/company/components/logs.dart';
 import 'package:backofficestock/view/company/components/update_password.dart';
 import 'package:backofficestock/view/company/data/company_menu_data.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,9 @@ content(BuildContext context, CompanyProvider provider) {
       case 1:
         return const CustomerContact();
       case 2:
-        return const Logs();
+        return const UndefinedModule(
+          message: "For The Logs, Please Contact an Authorized Person For Now",
+        );
       case 3:
         return CreateCompany(provider: provider);
       case 4:

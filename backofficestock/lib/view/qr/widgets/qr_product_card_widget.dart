@@ -65,19 +65,21 @@ class QrProductCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(children: [
-                          Text(product?.productName ?? "",
-                              style: Theme.of(context).textTheme.titleMedium),
-                          const CustomSizedBox.paddingWidth(widthValue: 12.0),
-                          Text("${product?.price.toString() ?? "0"}TL ",
-                              style: AppFonts.boldSmall),
+                  Expanded(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(children: [
+                            Text(product?.productName ?? "",
+                                style: Theme.of(context).textTheme.titleMedium),
+                            const CustomSizedBox.paddingWidth(widthValue: 12.0),
+                            Text("${product?.price.toString() ?? "0"}TL ",
+                                style: AppFonts.boldSmall),
+                          ]),
+                          Text(product?.productDescription ?? "",
+                              style: Theme.of(context).textTheme.labelSmall)
                         ]),
-                        Text(product?.productDescription ?? "",
-                            style: Theme.of(context).textTheme.labelSmall)
-                      ]),
+                  ),
                   Padding(
                     padding:
                         const ConstEdgeInsets.paddingOnly(right: 52, bottom: 6),

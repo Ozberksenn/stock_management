@@ -64,40 +64,42 @@ class NavigationProfileCard extends StatelessWidget {
       padding: const ConstEdgeInsets.paddingSymetric(verticalPad: 12),
       decoration: BoxDecoration(
           color: AppColors.dark, borderRadius: CustomRadius.radius16),
-      child: Column(
-        children: [
-          provider.companyInfo['LOGO'] != null &&
-                  provider.companyInfo['LOGO'] != ""
-              ? Container(
-                  width: 80,
-                  height: 80,
-                  decoration: CustomDecoration.circularImageDecoration(
-                      imageUrl: provider.companyInfo['LOGO']),
-                )
-              : const NoImage(
-                  width: 80,
-                  height: 80,
-                  size: 40,
-                ),
-          const CustomSizedBox.paddingHeight(heightValue: 2),
-          provider.companyInfo['COMANYNAME'] != null &&
-                  provider.companyInfo['COMANYNAME'] != ""
-              ? Text(provider.companyInfo['COMANYNAME'],
-                  style: AppFonts.whiteBodyMedium)
-              : const SizedBox(),
-          Text('Company: ${StorageService().companyId}',
-              style: AppFonts.formLabelStyle),
-          const CustomSizedBox.paddingHeight(heightValue: 8),
-          CustomElevatedButton(
-              text: "Log out",
-              onPressed: () async {
-                await StorageService().clearStorage();
-                if (StorageService().token == "") {
-                  context.go("/login");
-                }
-              })
-        ],
-      ),
+      child: provider.isReady == true
+          ? Column(
+              children: [
+                provider.companyInfo['LOGO'] != null &&
+                        provider.companyInfo['LOGO'] != ""
+                    ? Container(
+                        width: 80,
+                        height: 80,
+                        decoration: CustomDecoration.circularImageDecoration(
+                            imageUrl: provider.companyInfo['LOGO']),
+                      )
+                    : const NoImage(
+                        width: 80,
+                        height: 80,
+                        size: 40,
+                      ),
+                const CustomSizedBox.paddingHeight(heightValue: 2),
+                provider.companyInfo['COMANYNAME'] != null &&
+                        provider.companyInfo['COMANYNAME'] != ""
+                    ? Text(provider.companyInfo['COMANYNAME'],
+                        style: AppFonts.whiteBodyMedium)
+                    : const SizedBox(),
+                Text('Company: ${StorageService().companyId}',
+                    style: AppFonts.formLabelStyle),
+                const CustomSizedBox.paddingHeight(heightValue: 8),
+                CustomElevatedButton(
+                    text: "Log out",
+                    onPressed: () async {
+                      await StorageService().clearStorage();
+                      if (StorageService().token == "") {
+                        context.go("/login");
+                      }
+                    })
+              ],
+            )
+          : const SizedBox(),
     );
   }
 }

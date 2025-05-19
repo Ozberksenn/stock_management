@@ -52,8 +52,7 @@ class CompanyProvider extends ChangeNotifier {
     if (response.success) {
       companyInfo = response.data[0];
       isReady = true;
-    } else {
-      isReady = false;
+      notifyListeners();
     }
   }
 

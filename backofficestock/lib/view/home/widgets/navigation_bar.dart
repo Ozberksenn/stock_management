@@ -95,6 +95,7 @@ class NavigationProfileCard extends StatelessWidget {
                       await StorageService().clearStorage();
                       if (StorageService().token == "") {
                         context.go("/login");
+                        provider.companyInfo = {};
                       }
                     })
               ],

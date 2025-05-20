@@ -3,9 +3,13 @@ import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/storage/app_storage.dart';
 import 'package:backofficestock/product/utils/modal/success_popup.dart';
 import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
+import 'package:backofficestock/view/company/company_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:provider/provider.dart';
+import '../../product/utils/modal/error_popup.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginProvider extends ChangeNotifier {
   bool isActiveLoginButton = true;
@@ -25,8 +29,8 @@ class LoginProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<ServiceResponse> handleSave(
-      GlobalKey<FormBuilderState> formKey) async {
+  Future<void> handleSave(
+      GlobalKey<FormBuilderState> formKey, BuildContext context) async {
     if (formKey.currentState?.saveAndValidate() ?? false) {
       setButton(false);
       try {
@@ -34,9 +38,12 @@ class LoginProvider extends ChangeNotifier {
             {"MAIL": mailController.text, "PASSWORD": passwordController.text});
         if (response.success) {
           await loginWriteStorage(response.data);
-          return ServiceResponse(isSuccess: true, message: "Login Success");
+          await Provider.of<CompanyProvider>(context, listen: false)
+              .fetchCompanyInfo();
+          await successSnackbar(context: context, message: "Login Success");
+          context.go("/home");
         } else {
-          return ServiceResponse(isSuccess: false, message: "Login Failed");
+          errorPopup(context, message: "Error Message");
         }
       } finally {
         setButton(true);
@@ -44,7 +51,7 @@ class LoginProvider extends ChangeNotifier {
       }
     } else {
       setButton(true);
-      return ServiceResponse(isSuccess: false, message: "Validation Error");
+      errorPopup(context, message: "Validation Error");
     }
   }
 

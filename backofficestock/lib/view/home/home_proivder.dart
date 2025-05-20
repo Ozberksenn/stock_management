@@ -48,4 +48,6 @@ class HomeProivder extends ChangeNotifier {
       return false;
     }
   }
+
+  void logOut() {}
 }

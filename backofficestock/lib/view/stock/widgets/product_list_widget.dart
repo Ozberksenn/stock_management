@@ -33,7 +33,8 @@ class ProductsList extends StatelessWidget {
                       product: filterProducList[index],
                     );
                   })
-              : const NoItemWidget()
+              : const NoItemWidget(
+                  message: "There are no products in this menu")
           : Container(),
     );
   }

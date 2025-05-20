@@ -32,4 +32,9 @@ class ProductVariationProvider extends ChangeNotifier {
     });
     notifyListeners();
   }
+
+  void removeVaration(int index) {
+    variationsList.removeAt(index);
+    notifyListeners();
+  }
 }

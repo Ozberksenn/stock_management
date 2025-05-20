@@ -68,10 +68,7 @@ class ProductForm extends StatelessWidget {
           ]),
           const CustomSizedBox.paddingHeight(heightValue: 16),
           ProductVariation(
-              fieldName: "PRODUCTVARIATION",
-              // nameInitialValue: "",
-              // priceInitialValue: "",
-              variationList: dataList)
+              fieldName: "PRODUCTVARIATION", variationList: dataList)
         ]);
   }
 }

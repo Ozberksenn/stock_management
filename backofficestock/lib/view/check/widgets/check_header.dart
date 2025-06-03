@@ -13,17 +13,20 @@ class CheckHeader extends StatelessWidget {
       width: context.dynamicWidth(1),
       padding: const ConstEdgeInsets.padding8(),
       color: AppColors.softGrey,
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(children: [
-            Text("Active 4"),
-            Text(" | "),
-            Text("All 15"),
-            Text(" | "),
-            Text("Reserved 2")
+            const Text("Active 4"),
+            Text(
+              " | ",
+              style: AppFonts.boldSmall,
+            ),
+            const Text("All 15"),
+            Text(" | ", style: AppFonts.boldSmall),
+            const Text("Reserved 2")
           ]),
-          CustomButton(text: "Edit Tables")
+          const CustomButton(text: "Add Table")
         ],
       ),
     );

@@ -13,16 +13,14 @@ class CheckView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeProivder homeProvider = context.read<HomeProivder>();
-    return CustomExpanded(
-      child: Column(children: [
-        ContentHeader(
-          title: homeProvider.menu.title ?? "",
-        ),
-        const CustomSizedBox.paddingHeight(heightValue: 18.0),
-        const CheckHeader(),
-        const CustomSizedBox.paddingHeight(heightValue: 18.0),
-        const Content()
-      ]),
-    );
+    return Column(children: [
+      ContentHeader(
+        title: homeProvider.menu.title ?? "",
+      ),
+      const CustomSizedBox.paddingHeight(heightValue: 18.0),
+      const CheckHeader(),
+      const CustomSizedBox.paddingHeight(heightValue: 18.0),
+      const Content()
+    ]);
   }
 }

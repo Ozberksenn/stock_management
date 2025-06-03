@@ -1,5 +1,5 @@
 import 'package:backofficestock/core/widget/padding.dart';
-import 'package:backofficestock/product/constants/api_constants.dart';
+import 'package:backofficestock/view/check/widgets/check_card.dart';
 import 'package:flutter/material.dart';
 
 class Content extends StatelessWidget {
@@ -12,24 +12,11 @@ class Content extends StatelessWidget {
             itemCount: 10,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 5,
-                childAspectRatio: 1.5,
+                childAspectRatio: 1.2,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10),
             itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: AppColors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 7,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ]),
-              );
+              return const CheckCard();
             }));
   }
 }

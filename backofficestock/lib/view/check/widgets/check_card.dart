@@ -16,7 +16,7 @@ class CheckCard extends StatelessWidget {
           color: AppColors.white,
           boxShadow: [
             BoxShadow(
-              color: AppColors.grey.withOpacity(0.5),
+              color: AppColors.grey.withValues(alpha: 0.3),
               spreadRadius: 2,
               blurRadius: 7,
               offset: const Offset(0, 3),

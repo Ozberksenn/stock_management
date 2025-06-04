@@ -1,4 +1,5 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/view/check/table_form.dart';
 import 'package:backofficestock/view/form/form_provider.dart';
 import 'package:backofficestock/view/stock/stock_form/menu_form.dart';
 import 'package:backofficestock/view/stock/stock_form/product_form.dart';
@@ -84,6 +85,8 @@ body(String formName, provider, initialValue) {
       return ProductForm(
         initialValue: initialValue,
       );
+    case 'table':
+      return const TableForm();
     default:
       return const SizedBox();
   }

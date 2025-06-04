@@ -16,7 +16,6 @@ class CheckView extends StatelessWidget {
         create: (_) => CheckProvider(),
         builder: (context, child) {
           HomeProivder homeProvider = context.read<HomeProivder>();
-          CheckProvider checkProvider = context.read<CheckProvider>();
           return Column(children: [
             ContentHeader(
               title: homeProvider.menu.title ?? "",

@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 class TableModel {
   final int id;
   final String tableNo;
   final String status;
   final String? customerName;
   final String? specialText;
+  final List<TableProductModel>? products;
 
   TableModel({
     required this.id,
@@ -11,6 +14,7 @@ class TableModel {
     required this.status,
     this.customerName,
     this.specialText,
+    this.products,
   });
 
   factory TableModel.fromMap(Map<String, dynamic> json) {
@@ -20,6 +24,11 @@ class TableModel {
       status: json['STATUS'],
       customerName: json['CUSTOMER_NAME'],
       specialText: json['SPECIAL_TEXT'],
+      products: json['PRODUCTS'] != null
+          ? (jsonDecode(json['PRODUCTS']) as List)
+              .map((e) => TableProductModel.fromMap(e))
+              .toList()
+          : null,
     );
   }
 
@@ -29,4 +38,28 @@ class TableModel {
 
   //   };
   // }
+}
+
+class TableProductModel {
+  final String productName;
+  final double price;
+
+  TableProductModel({
+    required this.productName,
+    required this.price,
+  });
+
+  factory TableProductModel.fromMap(Map<String, dynamic> map) {
+    return TableProductModel(
+      productName: map['PRODUCTNAME'],
+      price: map['PRICE'].toDouble(),
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'PRODUCTNAME': productName,
+      'PRICE': price,
+    };
+  }
 }

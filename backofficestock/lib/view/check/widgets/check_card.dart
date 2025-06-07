@@ -28,7 +28,27 @@ class CheckCard extends StatelessWidget {
           Text("Masa No : ${table?.tableNo}", style: AppFonts.boldSmall),
           Text("Status : ${table?.status}",
               style: Theme.of(context).textTheme.bodySmall),
-          Text("Products :", style: Theme.of(context).textTheme.bodySmall)
+          table?.products != null
+              ? Text("Products", style: Theme.of(context).textTheme.bodySmall)
+              : const SizedBox(),
+          table?.products != null
+              ? CustomExpanded(
+                  child: ListView.builder(
+                      itemCount: table?.products?.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          color: AppColors.lightGrey,
+                          padding: const ConstEdgeInsets.padding2(),
+                          margin: const ConstEdgeInsets.paddingSymetric(
+                              verticalPad: 2.0),
+                          child: Text(
+                              "${table?.products?[index].productName} - "
+                              "${table?.products?[index].price} TL",
+                              style: Theme.of(context).textTheme.bodySmall),
+                        );
+                      }),
+                )
+              : const SizedBox()
         ],
       ),
     );

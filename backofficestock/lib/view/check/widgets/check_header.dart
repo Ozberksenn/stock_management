@@ -35,9 +35,10 @@ class CheckHeader extends StatelessWidget {
               text: "Add Table",
               onTap: () => customDialog(context,
                   widget: FormView(
+                    apiUrl: "/createTable",
                     dialogContext: context,
                     provider: provider,
-                    title: "Add Table",
+                    title: "New Table",
                     route: "table",
                   )))
         ],

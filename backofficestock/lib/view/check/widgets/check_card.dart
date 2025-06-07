@@ -13,7 +13,11 @@ class CheckCard extends StatelessWidget {
       padding: const ConstEdgeInsets.padding4(),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: AppColors.white,
+          color: table?.status == "Active"
+              ? AppColors.activeCardColor
+              : table?.status == "Reserved"
+                  ? AppColors.reservedCardColor
+                  : AppColors.white,
           boxShadow: [
             BoxShadow(
               color: AppColors.grey.withValues(alpha: 0.3),
@@ -25,9 +29,17 @@ class CheckCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Masa No : ${table?.tableNo}", style: AppFonts.boldSmall),
-          Text("Status : ${table?.status}",
-              style: Theme.of(context).textTheme.bodySmall),
+          Row(children: [
+            Text("Table No : ", style: Theme.of(context).textTheme.bodySmall),
+            Text(table?.tableNo ?? "", style: AppFonts.boldSmall),
+          ]),
+          Row(children: [
+            Text("Status : ", style: Theme.of(context).textTheme.bodySmall),
+            Text(
+              table?.status ?? "",
+              style: AppFonts.boldSmall,
+            )
+          ]),
           table?.products != null
               ? Text("Products", style: Theme.of(context).textTheme.bodySmall)
               : const SizedBox(),

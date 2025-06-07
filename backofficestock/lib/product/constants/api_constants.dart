@@ -17,6 +17,8 @@ final class AppColors {
   static const Color red = Color.fromARGB(255, 195, 62, 53);
   static const Color yellow = Color.fromARGB(255, 239, 235, 7);
   static const Color green = Colors.green;
+  static const Color activeCardColor = Color.fromARGB(255, 101, 138, 103);
+  static const Color reservedCardColor = Color.fromARGB(255, 236, 234, 135);
 }
 
 @immutable

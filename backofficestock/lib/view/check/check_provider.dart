@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 
 class CheckProvider extends ChangeNotifier {
   List<TableModel> tables = [];
+  int activeTable = 0;
+  int allTable = 0;
+  int reservedTable = 0;
+
   CheckProvider() {
     onInit();
   }
@@ -19,6 +23,10 @@ class CheckProvider extends ChangeNotifier {
       tables = (response.data as List)
           .map((e) => TableModel.fromMap(e as Map<String, dynamic>))
           .toList();
+      allTable = tables.length;
+      activeTable = tables.where((table) => table.status == "Active").length;
+      reservedTable =
+          tables.where((table) => table.status == "Reserved").length;
       notifyListeners();
     } else {}
   }

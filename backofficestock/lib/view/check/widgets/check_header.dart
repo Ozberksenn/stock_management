@@ -22,14 +22,14 @@ class CheckHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(children: [
-            const Text("Active 4"),
+            Text("All ${provider.allTable}"),
             Text(
               " | ",
               style: AppFonts.boldSmall,
             ),
-            const Text("All 15"),
+            Text("Active ${provider.activeTable}"),
             Text(" | ", style: AppFonts.boldSmall),
-            const Text("Reserved 2")
+            Text("Reserved ${provider.reservedTable}")
           ]),
           CustomButton(
               text: "Add Table",

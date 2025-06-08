@@ -15,14 +15,17 @@ class CheckCard extends StatelessWidget {
   Widget build(BuildContext context) {
     CheckProvider provider = context.read<CheckProvider>();
     return GestureDetector(
-      onTap: () => customDialog(context,
-          widget: FormView(
-            apiUrl: "/createTable",
-            dialogContext: context,
-            provider: provider,
-            title: "Edit Table",
-            route: "table",
-          )),
+      onTap: () {
+        customDialog(context,
+            widget: FormView(
+              apiUrl: "/", // todo put apisi yazılacak.
+              dialogContext: context,
+              provider: provider,
+              title: "Edit Table",
+              route: "table",
+              initialValue: table?.toMap() ?? {},
+            ));
+      },
       child: Container(
         padding: const ConstEdgeInsets.padding4(),
         decoration: BoxDecoration(
@@ -52,8 +55,9 @@ class CheckCard extends StatelessWidget {
               Text(
                 table?.status ?? "",
                 style: AppFonts.boldSmall,
-              )
+              ),
             ]),
+            Text(table?.customerName ?? ""),
             table?.products != null
                 ? Text("Products", style: Theme.of(context).textTheme.bodySmall)
                 : const SizedBox(),

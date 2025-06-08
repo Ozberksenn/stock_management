@@ -32,12 +32,18 @@ class TableModel {
     );
   }
 
-  // Map<String, dynamic> toJson() {
-  //   return {
-  // 'ID': id,
-
-  //   };
-  // }
+  Map<String, dynamic> toMap() {
+    return {
+      'ID': id,
+      'TABLE_NO': tableNo,
+      'STATUS': status,
+      'CUSTOMER_NAME': customerName,
+      'SPECIAL_TEXT': specialText,
+      'PRODUCTS': products != null
+          ? jsonEncode(products!.map((e) => e.toMap()).toList())
+          : null,
+    };
+  }
 }
 
 class TableProductModel {

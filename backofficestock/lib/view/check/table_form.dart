@@ -14,6 +14,7 @@ class TableForm extends StatelessWidget {
         children: [
           FormLabel(text: "Table No"),
           FormTextField(name: "TABLE_NO"),
+          CustomSizedBox.paddingHeight(heightValue: 12.0),
           FormLabel(text: "Status"),
           FormDropdownField(
             fieldName: "STATUS",

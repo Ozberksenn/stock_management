@@ -8,8 +8,13 @@ class FormDropdownField extends StatelessWidget {
   final List<dynamic>? items;
   final String fieldName;
   final bool? showSearchBox;
+  final String? hintText;
   const FormDropdownField(
-      {super.key, this.items, required this.fieldName, this.showSearchBox});
+      {super.key,
+      this.items,
+      required this.fieldName,
+      this.showSearchBox,
+      this.hintText});
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +37,7 @@ class FormDropdownField extends StatelessWidget {
               .arrow_drop_down_rounded), // ← Burayı istediğin ikonla değiştir
           iconSize: 20,
         ),
+        decoration: InputDecoration(hintText: hintText ?? ""),
         // onChanged: _onChanged,
         filterFn: (item, filter) =>
             item.toLowerCase().contains(filter.toLowerCase()),

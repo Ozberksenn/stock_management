@@ -1,17 +1,18 @@
+import 'package:backofficestock/product/editors/form_dropdown_field.dart';
 import 'package:backofficestock/view/check/check_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../product/widgets/custom_icon.dart';
 
 class CheckOrder extends StatelessWidget {
+  final CheckProvider provider;
   const CheckOrder({
     super.key,
+    required this.provider,
   });
 
   @override
   Widget build(BuildContext context) {
-    CheckProvider checkProvider = context.read<CheckProvider>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,10 +22,23 @@ class CheckOrder extends StatelessWidget {
         ]),
         const Divider(),
         ListView.builder(
-            itemCount: checkProvider.selectedTable?.products?.length ?? 0,
+            itemCount: provider.selectedTable?.products?.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              return Text("Product $index");
+              return ListTile(
+                title: FormDropdownField(
+                    hintText:
+                        provider.selectedTable?.products?[index].productName ??
+                            "",
+                    showSearchBox: true,
+                    fieldName: "",
+                    items: []),
+                //     provider.selectedTable?.products?[index].productName ?? ""),
+                trailing: Text(
+                  "${provider.selectedTable?.products?[index].price.toString() ?? ""} TL",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              );
             })
       ],
     );

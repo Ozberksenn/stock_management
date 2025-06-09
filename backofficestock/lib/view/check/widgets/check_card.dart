@@ -25,6 +25,7 @@ class CheckCard extends StatelessWidget {
               title: "Edit Table",
               route: "table",
               initialValue: table?.toMap() ?? {},
+              edit: true,
             ));
       },
       child: Container(

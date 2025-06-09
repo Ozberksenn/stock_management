@@ -1,21 +1,22 @@
 import 'package:backofficestock/core/widget/padding.dart';
 import 'package:backofficestock/product/editors/form_dropdown_field.dart';
 import 'package:backofficestock/product/editors/form_text_field.dart';
+import 'package:backofficestock/view/check/check_provider.dart';
 import 'package:backofficestock/view/form/widgets/form_label.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'widgets/check_order_widget.dart';
 
 class TableForm extends StatelessWidget {
-  const TableForm({super.key});
+  final CheckProvider provider;
+  const TableForm({super.key, required this.provider});
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomExpanded(
+        const CustomExpanded(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             FormLabel(text: "Table No"),
@@ -37,9 +38,9 @@ class TableForm extends StatelessWidget {
             FormTextField(name: "SPECIAL_TEXT"),
           ]),
         ),
-        CustomSizedBox.paddingWidth(widthValue: 12.0),
+        const CustomSizedBox.paddingWidth(widthValue: 12.0),
         CustomExpanded(
-          child: CheckOrder(),
+          child: CheckOrder(provider: provider),
         )
       ],
     );

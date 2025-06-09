@@ -16,6 +16,7 @@ class CheckCard extends StatelessWidget {
     CheckProvider provider = context.read<CheckProvider>();
     return GestureDetector(
       onTap: () {
+        provider.selectedTable = table;
         customDialog(context,
             widget: FormView(
               apiUrl: "/", // todo put apisi yazılacak.

@@ -2,17 +2,20 @@ import 'package:backofficestock/core/widget/padding.dart';
 import 'package:backofficestock/product/editors/form_dropdown_field.dart';
 import 'package:backofficestock/product/editors/form_text_field.dart';
 import 'package:backofficestock/view/form/widgets/form_label.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'widgets/check_order_widget.dart';
 
 class TableForm extends StatelessWidget {
   const TableForm({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CustomExpanded(
+        CustomExpanded(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             FormLabel(text: "Table No"),
@@ -34,20 +37,9 @@ class TableForm extends StatelessWidget {
             FormTextField(name: "SPECIAL_TEXT"),
           ]),
         ),
-        const CustomSizedBox.paddingWidth(widthValue: 12.0),
+        CustomSizedBox.paddingWidth(widthValue: 12.0),
         CustomExpanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const FormLabel(text: "Products"),
-              ListView.builder(
-                  itemCount: 4,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Text("Product $index");
-                  })
-            ],
-          ),
+          child: CheckOrder(),
         )
       ],
     );

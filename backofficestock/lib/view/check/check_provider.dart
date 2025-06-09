@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 class CheckProvider extends ChangeNotifier {
   List<TableModel> tables = [];
+  TableModel? selectedTable;
   int activeTable = 0;
   int allTable = 0;
   int reservedTable = 0;

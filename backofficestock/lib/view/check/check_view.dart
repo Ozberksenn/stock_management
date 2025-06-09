@@ -1,4 +1,5 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/view/check/widgets/check_empty_table_widget.dart';
 import 'package:backofficestock/view/check/widgets/check_header.dart';
 import 'package:backofficestock/view/check/widgets/content_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,11 @@ class CheckView extends StatelessWidget {
         create: (_) => CheckProvider(),
         builder: (context, child) {
           HomeProivder homeProvider = context.read<HomeProivder>();
+          CheckProvider checkProvider = context.watch<CheckProvider>();
+
+          if (checkProvider.tables.isEmpty) {
+            return const CheckEmptyTable();
+          }
           return Column(children: [
             ContentHeader(
               title: homeProvider.menu.title ?? "",

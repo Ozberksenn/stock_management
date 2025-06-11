@@ -9,7 +9,10 @@ import 'widgets/check_order_widget.dart';
 
 class TableForm extends StatelessWidget {
   final CheckProvider provider;
-  const TableForm({super.key, required this.provider});
+  const TableForm({
+    super.key,
+    required this.provider,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +43,7 @@ class TableForm extends StatelessWidget {
         ),
         const CustomSizedBox.paddingWidth(widthValue: 12.0),
         CustomExpanded(
-          child: CheckOrder(provider: provider),
+          child: CheckOrder(provider: provider, productList: []),
         )
       ],
     );

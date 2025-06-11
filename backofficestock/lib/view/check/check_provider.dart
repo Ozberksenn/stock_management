@@ -1,10 +1,12 @@
 import 'package:backofficestock/product/model/custom_response.dart';
+import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/view/check/model/table_model.dart';
 import 'package:flutter/material.dart';
 
 class CheckProvider extends ChangeNotifier {
   List<TableModel> tables = [];
+  List<ProductModel> product = [];
   TableModel? selectedTable;
   int activeTable = 0;
   int allTable = 0;

@@ -86,9 +86,7 @@ body(String formName, provider, initialValue) {
         initialValue: initialValue,
       );
     case 'table':
-      return TableForm(
-        provider: provider,
-      );
+      return TableForm(provider: provider);
     default:
       return const SizedBox();
   }

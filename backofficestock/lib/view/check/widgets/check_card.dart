@@ -13,7 +13,7 @@ class CheckCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CheckProvider provider = context.read<CheckProvider>();
+    CheckProvider provider = context.watch<CheckProvider>();
     return GestureDetector(
       onTap: () {
         provider.selectedTable = table;

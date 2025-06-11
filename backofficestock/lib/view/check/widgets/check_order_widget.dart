@@ -1,4 +1,5 @@
 import 'package:backofficestock/product/editors/form_dropdown_field.dart';
+import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/view/check/check_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +7,11 @@ import '../../../product/widgets/custom_icon.dart';
 
 class CheckOrder extends StatelessWidget {
   final CheckProvider provider;
+  final List<ProductModel> productList;
   const CheckOrder({
     super.key,
     required this.provider,
+    required this.productList,
   });
 
   @override
@@ -32,7 +35,7 @@ class CheckOrder extends StatelessWidget {
                             "",
                     showSearchBox: true,
                     fieldName: "",
-                    items: []),
+                    items: productList),
                 //     provider.selectedTable?.products?[index].productName ?? ""),
                 trailing: Text(
                   "${provider.selectedTable?.products?[index].price.toString() ?? ""} TL",

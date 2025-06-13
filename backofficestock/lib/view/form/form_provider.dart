@@ -43,7 +43,7 @@ class FormProvider extends ChangeNotifier {
       if (response.success) {
         successSnackbar(context: context, message: response.message);
         refreshImageField(context);
-        formNameCondition(provider, formName);
+        formNameCondition(provider, formName, context);
         context.pop();
       } else {
         errorSnackbar(context: context, message: response.message);
@@ -54,7 +54,7 @@ class FormProvider extends ChangeNotifier {
     }
   }
 
-  formNameCondition(provider, formName) {
+  formNameCondition(provider, formName, context) {
     if (formName == "product") {
       refreshProduct(provider);
     } else if (formName == "menu") {

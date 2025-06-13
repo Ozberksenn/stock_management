@@ -1,5 +1,6 @@
 import 'package:backofficestock/product/editors/form_image_picker_field.dart';
 import 'package:backofficestock/product/theme/theme.dart';
+import 'package:backofficestock/view/check/widgets/check_order_provider.dart';
 import 'package:backofficestock/view/company/company_provider.dart';
 import 'package:backofficestock/view/form/form_provider.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => HomeProivder()),
         ChangeNotifierProvider(create: (context) => FormProvider()),
         ChangeNotifierProvider(create: (context) => CompanyProvider()),
+        ChangeNotifierProvider(create: (context) => CheckOrderProvider()),
         ChangeNotifierProvider(create: (context) => FormImagePickerProvider()),
       ],
       child: MaterialApp.router(

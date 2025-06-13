@@ -3,8 +3,10 @@ import 'package:backofficestock/product/model/menu_model.dart';
 import 'package:backofficestock/product/model/product_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/widgets/snackbar_widgets.dart';
+import 'package:backofficestock/view/check/widgets/check_order_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class StockProvider extends ChangeNotifier {
   late TabController tabController;
@@ -18,8 +20,13 @@ class StockProvider extends ChangeNotifier {
   // Selecteds
   MenuModel? selectedTab; // seçili tab bilgisi burada tutuluyor.
   TickerProvider? vsync;
+  BuildContext? context;
 
-  void init({required TickerProvider tabVsync}) {
+  StockProvider(BuildContext buildContext) {
+    context = buildContext;
+  }
+
+  void init({required TickerProvider tabVsync, BuildContext? context}) {
     if (isInitialized) return;
     isInitialized = true;
     vsync = tabVsync;
@@ -87,6 +94,9 @@ class StockProvider extends ChangeNotifier {
           .map((e) => ProductModel.fromMap(e))
           .toList()
           .cast<ProductModel>();
+      final checkProvider = Provider.of<CheckOrderProvider>(context!,
+          listen: false); // CheckOrderProvider'dan erişim sağlıyoruz.
+      checkProvider.products = productsList;
     }
     isProductReady = true;
     notifyListeners();

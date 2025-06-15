@@ -18,7 +18,6 @@ class CheckView extends StatelessWidget {
         builder: (context, child) {
           HomeProivder homeProvider = context.read<HomeProivder>();
           CheckProvider checkProvider = context.watch<CheckProvider>();
-
           if (checkProvider.tables.isEmpty) {
             return const CheckEmptyTable();
           }

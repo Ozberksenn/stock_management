@@ -20,7 +20,7 @@ class _QrViewState extends State<QrView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => StockProvider(context),
+      create: (_) => StockProvider(),
       builder: (context, child) {
         final stockProvider = context.watch<StockProvider>();
         final homeProvider = context.watch<HomeProivder>();

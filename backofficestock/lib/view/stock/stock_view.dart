@@ -23,7 +23,7 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => StockProvider(context),
+      create: (_) => StockProvider(),
       builder: (context, child) {
         final stockProvider = context.watch<StockProvider>();
         final homeProvider = context.watch<HomeProivder>();

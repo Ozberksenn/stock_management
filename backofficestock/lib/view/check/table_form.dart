@@ -43,7 +43,9 @@ class TableForm extends StatelessWidget {
         ),
         const CustomSizedBox.paddingWidth(widthValue: 12.0),
         CustomExpanded(
-          child: CheckOrder(provider: provider),
+          child: CheckOrder(
+            provider: provider,
+          ),
         )
       ],
     );

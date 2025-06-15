@@ -11,7 +11,6 @@ class Content extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CheckProvider checkProvider = context.watch<CheckProvider>();
-
     return CustomExpanded(
         child: GridView.builder(
             itemCount: checkProvider.tables.length,

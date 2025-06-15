@@ -1,11 +1,9 @@
 import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/product/utils/modal/custom_dialog.dart';
 import 'package:backofficestock/view/check/check_provider.dart';
-import 'package:backofficestock/view/check/widgets/check_order_provider.dart';
 import 'package:backofficestock/view/check/widgets/select_order_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../product/widgets/custom_icon.dart';
 
 class CheckOrder extends StatelessWidget {
@@ -17,7 +15,6 @@ class CheckOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CheckOrderProvider checkOrderProvider = context.watch<CheckOrderProvider>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -29,23 +26,26 @@ class CheckOrder extends StatelessWidget {
                   width: context.dynamicWidth(0.3),
                   height: context.dynamicHeight(0.8),
                   widget: SelectOrderDialog(
-                    provider: checkOrderProvider,
+                    provider: provider,
                   )))
         ]),
         const Divider(),
-        ListView.builder(
-            itemCount: provider.selectedTable?.products?.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(
-                    provider.selectedTable?.products?[index].productName ?? ""),
-                trailing: Text(
-                  "${provider.selectedTable?.products?[index].price.toString() ?? ""} TL",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              );
-            })
+        provider.isAdded == true
+            ? ListView.builder(
+                itemCount: provider.selectedTable?.products?.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                        provider.selectedTable?.products?[index].productName ??
+                            ""),
+                    trailing: Text(
+                      "${provider.selectedTable?.products?[index].price.toString() ?? ""} TL",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  );
+                })
+            : const SizedBox()
       ],
     );
   }

@@ -33,7 +33,6 @@ class FormView<T extends ChangeNotifier> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FormProvider formProvider = context.watch<FormProvider>();
-
     return FormBuilder(
       key: _formKey,
       initialValue: initialValue ?? {},
@@ -44,7 +43,8 @@ class FormView<T extends ChangeNotifier> extends StatelessWidget {
             FormTitle(title: title),
             const Divider(),
             CustomPaddings.customPadding(
-                value: 12.0, child: body(route ?? '', provider, initialValue))
+                value: 12.0,
+                child: body(route ?? '', provider, initialValue, dialogContext))
           ],
         ),
         FormFooter(
@@ -75,7 +75,7 @@ class FormView<T extends ChangeNotifier> extends StatelessWidget {
   }
 }
 
-body(String formName, provider, initialValue) {
+body(String formName, provider, initialValue, dialogContext) {
   switch (formName) {
     case 'menu':
       return MenuForm(
@@ -86,7 +86,9 @@ body(String formName, provider, initialValue) {
         initialValue: initialValue,
       );
     case 'table':
-      return TableForm(provider: provider);
+      return TableForm(
+        provider: provider,
+      );
     default:
       return const SizedBox();
   }

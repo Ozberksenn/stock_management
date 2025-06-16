@@ -38,6 +38,7 @@ class CheckProvider extends ChangeNotifier {
   }
 
   fetchProducts() async {
+    // todo : productslar başka bir yerde çekiliyor tekrar burada istek atmaya gerek yok.
     ApiResponse response = await AppService.instance.getData("/getProducts");
     if (response.success) {
       products = (response.data as List)

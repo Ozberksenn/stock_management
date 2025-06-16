@@ -30,7 +30,7 @@ class CheckOrder extends StatelessWidget {
                   )))
         ]),
         const Divider(),
-        provider.isAdded == true
+        provider.selectedTable?.products?.isNotEmpty ?? false
             ? ListView.builder(
                 itemCount: provider.selectedTable?.products?.length,
                 shrinkWrap: true,

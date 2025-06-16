@@ -16,10 +16,10 @@ class TableForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CustomExpanded(
+        CustomExpanded(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             FormLabel(text: "Table No"),
@@ -41,11 +41,9 @@ class TableForm extends StatelessWidget {
             FormTextField(name: "SPECIAL_TEXT"),
           ]),
         ),
-        const CustomSizedBox.paddingWidth(widthValue: 12.0),
+        CustomSizedBox.paddingWidth(widthValue: 12.0),
         CustomExpanded(
-          child: CheckOrder(
-            provider: provider,
-          ),
+          child: CheckOrder(),
         )
       ],
     );

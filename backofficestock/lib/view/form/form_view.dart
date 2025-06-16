@@ -1,4 +1,5 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/view/check/check_provider.dart';
 import 'package:backofficestock/view/check/table_form.dart';
 import 'package:backofficestock/view/form/form_provider.dart';
 import 'package:backofficestock/view/stock/stock_form/menu_form.dart';
@@ -86,8 +87,11 @@ body(String formName, provider, initialValue, dialogContext) {
         initialValue: initialValue,
       );
     case 'table':
-      return TableForm(
-        provider: provider,
+      return ChangeNotifierProvider<CheckProvider>.value(
+        value: provider as CheckProvider,
+        child: TableForm(
+          provider: provider,
+        ),
       );
     default:
       return const SizedBox();

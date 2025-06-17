@@ -41,8 +41,7 @@ class SelectOrderDialog extends StatelessWidget {
   Widget selectOrderList(CheckProvider? provider) {
     return CustomExpanded(
       child: ListView.separated(
-          itemCount: provider?.products.length ?? 0, // Use stockProvider here
-          //  provider?.products.length ?? 0,
+          itemCount: provider?.products.length ?? 0,
           separatorBuilder: (context, index) {
             return const Divider();
           },

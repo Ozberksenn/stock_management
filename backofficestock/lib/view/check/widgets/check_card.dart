@@ -19,12 +19,13 @@ class CheckCard extends StatelessWidget {
         provider.selectedTable = table;
         customDialog(context,
             widget: FormView(
-              apiUrl: "/", // todo put apisi yazılacak.
+              apiUrl: "/updateTable",
               dialogContext: context,
               provider: provider,
               title: "Edit Table",
               route: "table",
               initialValue: table?.toMap() ?? {},
+              parameters: {"ID": table?.id},
               edit: true,
             ));
       },

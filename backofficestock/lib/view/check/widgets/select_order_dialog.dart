@@ -49,7 +49,7 @@ class SelectOrderDialog extends StatelessWidget {
           itemBuilder: (context, index) {
             return ListTile(
               onTap: () {
-                provider?.handleAddNewItem(provider.products[index]);
+                provider?.handleAddNewItem(provider.products[index], context);
                 context.pop();
               },
               contentPadding: const EdgeInsets.all(0.0),

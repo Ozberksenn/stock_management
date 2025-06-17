@@ -1,5 +1,6 @@
 import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/product/service/app_service.dart';
+import 'package:backofficestock/product/utils/modal/error_popup.dart';
 import 'package:backofficestock/view/check/model/table_model.dart';
 import 'package:flutter/material.dart';
 
@@ -49,9 +50,16 @@ class CheckProvider extends ChangeNotifier {
     }
   }
 
-  handleAddNewItem(ProductModel product) {
+  handleAddNewItem(ProductModel product, BuildContext context) async {
     selectedTable?.products?.add(TableProductModel(
         productName: product.productName, price: product.price!));
+    ApiResponse response = await AppService.instance.postData(
+        "/createTableProduct", {"TABLE_ID": 2, "PRODUCT_ID": product.id});
+    if (response.success) {
+      // todo : ürün başarıyla eklendiyse bir şey yapalım.
+    } else {
+      errorPopup(context, message: response.message);
+    }
     notifyListeners();
   }
 }

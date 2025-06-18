@@ -1,6 +1,8 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/check/check_provider.dart';
 import 'package:backofficestock/view/check/model/table_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../product/constants/api_constants.dart';
@@ -14,21 +16,24 @@ class CheckCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CheckProvider provider = context.watch<CheckProvider>();
+
+    void handleTable() {
+      provider.selectedTable = table;
+      customDialog(context,
+          widget: FormView(
+            apiUrl: "/updateTable",
+            dialogContext: context,
+            provider: provider,
+            title: "Edit Table",
+            route: "table",
+            initialValue: table?.toMap() ?? {},
+            parameters: {"ID": table?.id},
+            edit: true,
+          ));
+    }
+
     return GestureDetector(
-      onTap: () {
-        provider.selectedTable = table;
-        customDialog(context,
-            widget: FormView(
-              apiUrl: "/updateTable",
-              dialogContext: context,
-              provider: provider,
-              title: "Edit Table",
-              route: "table",
-              initialValue: table?.toMap() ?? {},
-              parameters: {"ID": table?.id},
-              edit: true,
-            ));
-      },
+      onTap: () => handleTable(),
       child: Container(
         padding: const ConstEdgeInsets.padding4(),
         decoration: BoxDecoration(
@@ -49,9 +54,19 @@ class CheckCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(children: [
-              Text("Table No : ", style: Theme.of(context).textTheme.bodySmall),
-              Text(table?.tableNo ?? "", style: AppFonts.boldSmall),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Row(
+                children: [
+                  Text("Table No : ",
+                      style: Theme.of(context).textTheme.bodySmall),
+                  Text(table?.tableNo ?? "", style: AppFonts.boldSmall),
+                ],
+              ),
+              CustomIcon(
+                icon: CupertinoIcons.delete,
+                onTap: () => provider.deleteTable(table!.id, context),
+                size: 14,
+              )
             ]),
             Row(children: [
               Text("Status : ", style: Theme.of(context).textTheme.bodySmall),

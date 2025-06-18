@@ -12,15 +12,17 @@ class Content extends StatelessWidget {
   Widget build(BuildContext context) {
     CheckProvider checkProvider = context.watch<CheckProvider>();
     return CustomExpanded(
-        child: GridView.builder(
-            itemCount: checkProvider.tables.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 5,
-                childAspectRatio: 1.2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10),
-            itemBuilder: (context, index) {
-              return CheckCard(table: checkProvider.tables[index]);
-            }));
+        child: checkProvider.tables.isNotEmpty
+            ? GridView.builder(
+                itemCount: checkProvider.tables.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 5,
+                    childAspectRatio: 1.2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10),
+                itemBuilder: (context, index) {
+                  return CheckCard(table: checkProvider.tables[index]);
+                })
+            : const SizedBox());
   }
 }

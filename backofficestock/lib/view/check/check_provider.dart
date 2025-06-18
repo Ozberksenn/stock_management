@@ -24,6 +24,11 @@ class CheckProvider extends ChangeNotifier {
     fetchProducts();
   }
 
+  changeStep(bool value) {
+    isAdded = value;
+    notifyListeners();
+  }
+
   Future<void> fetchGetTables() async {
     ApiResponse response = await AppService.instance.getData("/getTables");
     if (response.success) {
@@ -38,7 +43,7 @@ class CheckProvider extends ChangeNotifier {
     } else {}
   }
 
-  fetchProducts() async {
+  void fetchProducts() async {
     // todo : productslar başka bir yerde çekiliyor tekrar burada istek atmaya gerek yok.
     ApiResponse response = await AppService.instance.getData("/getProducts");
     if (response.success) {
@@ -50,16 +55,33 @@ class CheckProvider extends ChangeNotifier {
     }
   }
 
-  handleAddNewItem(ProductModel product, BuildContext context) async {
+  void handleAddNewItem(ProductModel product, BuildContext context) async {
     selectedTable?.products?.add(TableProductModel(
         productName: product.productName, price: product.price!));
     ApiResponse response = await AppService.instance.postData(
         "/createTableProduct", {"TABLE_ID": 2, "PRODUCT_ID": product.id});
+    if (!context.mounted) return;
     if (response.success) {
       // todo : ürün başarıyla eklendiyse bir şey yapalım.
     } else {
       errorPopup(context, message: response.message);
     }
     notifyListeners();
+  }
+
+  void deleteTable(int id, BuildContext context) async {
+    ApiResponse response =
+        await AppService.instance.deleteData("/deleteTable", {"ID": id});
+    if (!context.mounted) return;
+    if (response.success) {
+      tables.removeWhere((table) => table.id == id);
+      allTable = tables.length;
+      activeTable = tables.where((table) => table.status == "Active").length;
+      reservedTable =
+          tables.where((table) => table.status == "Reserved").length;
+      notifyListeners();
+    } else {
+      errorPopup(context, message: response.message);
+    }
   }
 }

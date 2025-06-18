@@ -59,7 +59,8 @@ class CheckProvider extends ChangeNotifier {
     selectedTable?.products?.add(TableProductModel(
         productName: product.productName, price: product.price!));
     ApiResponse response = await AppService.instance.postData(
-        "/createTableProduct", {"TABLE_ID": 2, "PRODUCT_ID": product.id});
+        "/createTableProduct",
+        {"TABLE_ID": selectedTable?.id, "PRODUCT_ID": product.id});
     if (!context.mounted) return;
     if (response.success) {
       // todo : ürün başarıyla eklendiyse bir şey yapalım.

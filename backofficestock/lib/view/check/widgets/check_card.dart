@@ -17,7 +17,7 @@ class CheckCard extends StatelessWidget {
   Widget build(BuildContext context) {
     CheckProvider provider = context.watch<CheckProvider>();
 
-    void handleTable() {
+    handleTable() {
       provider.selectedTable = table;
       customDialog(context,
           widget: FormView(

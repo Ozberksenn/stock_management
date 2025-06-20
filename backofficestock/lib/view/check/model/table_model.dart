@@ -47,16 +47,19 @@ class TableModel {
 }
 
 class TableProductModel {
+  final int id; // Assuming ID is optional
   final String productName;
   final double price;
 
   TableProductModel({
+    required this.id,
     required this.productName,
     required this.price,
   });
 
   factory TableProductModel.fromMap(Map<String, dynamic> map) {
     return TableProductModel(
+      id: map['ID'],
       productName: map['PRODUCTNAME'],
       price: map['PRICE'].toDouble(),
     );
@@ -64,6 +67,7 @@ class TableProductModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'ID': id,
       'PRODUCTNAME': productName,
       'PRICE': price,
     };

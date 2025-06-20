@@ -1,4 +1,5 @@
 import 'package:backofficestock/core/extension/context_extension.dart';
+import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/utils/modal/custom_dialog.dart';
 import 'package:backofficestock/view/check/check_provider.dart';
 import 'package:backofficestock/view/check/widgets/select_order_dialog.dart';
@@ -38,6 +39,15 @@ class CheckOrder extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return ListTile(
+                        leading: CustomIcon(
+                          icon: CupertinoIcons.delete,
+                          size: 14.0,
+                          color: AppColors.red,
+                          onTap: () => provider.removeTableProdcut(
+                              provider.selectedTable!.products![index],
+                              index,
+                              context),
+                        ),
                         title: Text(provider
                                 .selectedTable?.products?[index].productName ??
                             ""),

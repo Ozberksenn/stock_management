@@ -3,7 +3,6 @@ import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/utils/modal/error_popup.dart';
 import 'package:backofficestock/view/check/model/table_model.dart';
 import 'package:flutter/material.dart';
-
 import '../../product/model/product_model.dart';
 
 class CheckProvider extends ChangeNotifier {
@@ -57,7 +56,9 @@ class CheckProvider extends ChangeNotifier {
 
   void handleAddNewItem(ProductModel product, BuildContext context) async {
     selectedTable?.products?.add(TableProductModel(
-        productName: product.productName, price: product.price!));
+        id: product.id,
+        productName: product.productName,
+        price: product.price!));
     ApiResponse response = await AppService.instance.postData(
         "/createTableProduct",
         {"TABLE_ID": selectedTable?.id, "PRODUCT_ID": product.id});
@@ -68,6 +69,19 @@ class CheckProvider extends ChangeNotifier {
       errorPopup(context, message: response.message);
     }
     notifyListeners();
+  }
+
+  void removeTableProdcut(
+      TableProductModel product, int index, BuildContext context) async {
+    ApiResponse response = await AppService.instance
+        .deleteData("/deleteTableProduct", {"ID": product.id});
+    if (!context.mounted) return;
+    if (response.success) {
+      selectedTable?.products?.removeAt(index);
+      notifyListeners();
+    } else {
+      errorPopup(context, message: response.message);
+    }
   }
 
   void deleteTable(int id, BuildContext context) async {

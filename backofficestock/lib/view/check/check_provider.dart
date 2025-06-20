@@ -1,6 +1,7 @@
 import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/utils/modal/error_popup.dart';
+import 'package:backofficestock/product/utils/modal/success_popup.dart';
 import 'package:backofficestock/view/check/model/table_model.dart';
 import 'package:flutter/material.dart';
 import '../../product/model/product_model.dart';
@@ -78,6 +79,7 @@ class CheckProvider extends ChangeNotifier {
     if (!context.mounted) return;
     if (response.success) {
       selectedTable?.products?.removeAt(index);
+      successPopup(context, message: "Product removed successfully");
       notifyListeners();
     } else {
       errorPopup(context, message: response.message);

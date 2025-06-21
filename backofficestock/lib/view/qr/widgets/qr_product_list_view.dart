@@ -42,7 +42,9 @@ class QrProductList extends StatelessWidget {
                     stockProvider.uiOrderUpdate(
                         oldIndex, newIndex, filterProducList);
                   })
-              : const NoItemWidget()
+              : const NoItemWidget(
+                  message: "There are no products in this menu",
+                )
           : Container(),
     );
   }

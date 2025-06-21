@@ -77,17 +77,13 @@ class CheckProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeTableProdcut(
-      TableProductModel product, int index, BuildContext context) async {
-    ApiResponse response = await AppService.instance
-        .deleteData("/deleteTableProduct", {"ID": product.id});
-    if (!context.mounted) return;
-    if (response.success) {
-      selectedTable?.products?.removeAt(index);
-      successPopup(context, message: "Product removed successfully");
-      notifyListeners();
+  void removeTableCondition(String status, BuildContext context, int id) {
+    if (status == "Active") {
+      errorPopup(context, message: "Cannot delete a Active table.");
+    } else if (status == "Reserved") {
+      errorPopup(context, message: "Cannot delete a reserved table.");
     } else {
-      errorPopup(context, message: response.message);
+      deleteTable(id, context);
     }
   }
 
@@ -101,6 +97,20 @@ class CheckProvider extends ChangeNotifier {
       activeTable = tables.where((table) => table.status == "Active").length;
       reservedTable =
           tables.where((table) => table.status == "Reserved").length;
+      notifyListeners();
+    } else {
+      errorPopup(context, message: response.message);
+    }
+  }
+
+  void removeTableProdcut(
+      TableProductModel product, int index, BuildContext context) async {
+    ApiResponse response = await AppService.instance
+        .deleteData("/deleteTableProduct", {"ID": product.id});
+    if (!context.mounted) return;
+    if (response.success) {
+      selectedTable?.products?.removeAt(index);
+      successPopup(context, message: "Product removed successfully");
       notifyListeners();
     } else {
       errorPopup(context, message: response.message);

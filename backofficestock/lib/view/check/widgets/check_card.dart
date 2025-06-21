@@ -64,7 +64,8 @@ class CheckCard extends StatelessWidget {
               ),
               CustomIcon(
                 icon: CupertinoIcons.delete,
-                onTap: () => provider.deleteTable(table!.id, context),
+                onTap: () => provider.removeTableCondition(
+                    table!.status, context, table!.id),
                 size: 14,
               )
             ]),

@@ -33,6 +33,7 @@ class HomeView extends StatelessWidget {
               child: CustomPaddings.customPadding(
                   value: 20,
                   child: Container(
+                      height: context.dynamicHeight(1),
                       padding: const ConstEdgeInsets.padding12(),
                       decoration: BoxDecoration(
                           color: AppColors.white,

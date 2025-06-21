@@ -32,6 +32,11 @@ class CompanyProvider extends ChangeNotifier {
     onInit();
   }
 
+  changeVisibility(bool value) {
+    isReady = value;
+    notifyListeners();
+  }
+
   void onInit() {
     fetchCompanyInfo();
     if (StorageService().role == 1) {
@@ -47,13 +52,16 @@ class CompanyProvider extends ChangeNotifier {
   }
 
   Future<void> fetchCompanyInfo() async {
-    isReady = false;
+    changeVisibility(false);
     ApiResponse response = await AppService.instance.getData("/getCompanyInfo");
     if (response.success) {
       companyInfo = response.data[0];
-      isReady = true;
-      notifyListeners();
+      changeVisibility(true);
+    } else {
+      changeVisibility(false);
+      debugPrint(response.message);
     }
+    notifyListeners();
   }
 
   Future<void> fetchCustomerContact() async {

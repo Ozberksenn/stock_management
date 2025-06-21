@@ -10,7 +10,7 @@ class CheckProvider extends ChangeNotifier {
   List<TableModel> tables = [];
   List<ProductModel> products = [];
   TableModel? selectedTable;
-  bool isAdded = true;
+  bool isTable = false;
   int activeTable = 0;
   int allTable = 0;
   int reservedTable = 0;
@@ -25,11 +25,12 @@ class CheckProvider extends ChangeNotifier {
   }
 
   changeStep(bool value) {
-    isAdded = value;
+    isTable = value;
     notifyListeners();
   }
 
   Future<void> fetchGetTables() async {
+    changeStep(false);
     ApiResponse response = await AppService.instance.getData("/getTables");
     if (response.success) {
       tables = (response.data as List)
@@ -39,8 +40,12 @@ class CheckProvider extends ChangeNotifier {
       activeTable = tables.where((table) => table.status == "Active").length;
       reservedTable =
           tables.where((table) => table.status == "Reserved").length;
-      notifyListeners();
-    } else {}
+      changeStep(true);
+    } else {
+      debugPrint(response.message);
+      changeStep(false);
+    }
+    notifyListeners();
   }
 
   void fetchProducts() async {

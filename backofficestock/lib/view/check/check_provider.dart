@@ -9,11 +9,13 @@ import '../../product/model/product_model.dart';
 class CheckProvider extends ChangeNotifier {
   List<TableModel> tables = [];
   List<ProductModel> products = [];
+  List<ProductModel> filtredProducts = [];
   TableModel? selectedTable;
   bool isTable = false;
   int activeTable = 0;
   int allTable = 0;
   int reservedTable = 0;
+  String? searchOrderValue = "";
 
   CheckProvider() {
     onInit();
@@ -115,5 +117,13 @@ class CheckProvider extends ChangeNotifier {
     } else {
       errorPopup(context, message: response.message);
     }
+  }
+
+  void filterProductList(String value) {
+    filtredProducts = products
+        .where((item) =>
+            item.productName.toLowerCase().contains(value.toLowerCase()))
+        .toList();
+    notifyListeners();
   }
 }

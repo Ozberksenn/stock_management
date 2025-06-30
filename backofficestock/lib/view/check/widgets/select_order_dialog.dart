@@ -5,6 +5,7 @@ import 'package:backofficestock/view/check/check_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SelectOrderDialog extends StatelessWidget {
   final CheckProvider? provider;
@@ -27,38 +28,62 @@ class SelectOrderDialog extends StatelessWidget {
         children: [
           selectOrderHeader(context),
           const CustomSizedBox.paddingHeight(heightValue: 12.0),
-          const TextField(
-              decoration: InputDecoration(
-            hintText: "Search Order",
-          )),
+          TextField(
+              onChanged: (value) {
+                provider?.searchOrderValue = value;
+                provider?.filterProductList(value);
+              },
+              decoration: const InputDecoration(
+                hintText: "Search Order",
+              )),
           const CustomSizedBox.paddingHeight(heightValue: 12.0),
-          selectOrderList(provider)
+          selectOrderList(context)
         ],
       ),
     );
   }
 
-  Widget selectOrderList(CheckProvider? provider) {
+  Widget selectOrderList(BuildContext context) {
+    CheckProvider? provider = context.watch<CheckProvider>();
     return CustomExpanded(
-      child: ListView.separated(
-          itemCount: provider?.products.length ?? 0,
-          separatorBuilder: (context, index) {
-            return const Divider();
-          },
-          itemBuilder: (context, index) {
-            return ListTile(
-              onTap: () {
-                provider?.handleAddNewItem(provider.products[index], context);
-                context.pop();
+      child: provider.filtredProducts.isNotEmpty
+          ? ListView.builder(
+              itemCount: provider.filtredProducts.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  onTap: () {
+                    provider.handleAddNewItem(
+                        provider.filtredProducts[index], context);
+                    context.pop();
+                  },
+                  contentPadding: const EdgeInsets.all(0.0),
+                  title: Text(
+                    provider.filtredProducts[index].productName,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  trailing: Text("${provider.filtredProducts[index].price} TL"),
+                );
+              })
+          : ListView.separated(
+              itemCount: provider.products.length,
+              separatorBuilder: (context, index) {
+                return const Divider();
               },
-              contentPadding: const EdgeInsets.all(0.0),
-              title: Text(
-                provider?.products[index].productName ?? "",
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              trailing: Text("${provider?.products[index].price} TL"),
-            );
-          }),
+              itemBuilder: (context, index) {
+                return ListTile(
+                  onTap: () {
+                    provider.handleAddNewItem(
+                        provider.products[index], context);
+                    context.pop();
+                  },
+                  contentPadding: const EdgeInsets.all(0.0),
+                  title: Text(
+                    provider.products[index].productName,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  trailing: Text("${provider.products[index].price} TL"),
+                );
+              }),
     );
   }
 
@@ -66,9 +91,11 @@ class SelectOrderDialog extends StatelessWidget {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text("Select Order", style: Theme.of(context).textTheme.titleMedium),
       CustomIcon(
-        icon: CupertinoIcons.xmark_circle_fill,
-        onTap: () => context.pop(),
-      )
+          icon: CupertinoIcons.xmark_circle_fill,
+          onTap: () {
+            context.pop();
+            provider?.filtredProducts.clear();
+          })
     ]);
   }
 }

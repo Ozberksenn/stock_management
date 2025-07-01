@@ -17,6 +17,12 @@ class CheckOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CheckProvider>(
       builder: (context, provider, _) {
+        // if(provider.selectedTable?.status == "reserved" ||
+        //    provider.selectedTable?.status == "deactive") {
+        //   return const Column(children: [
+        //     Text("To add products, make your table active.")
+        //   ]);
+        // }
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

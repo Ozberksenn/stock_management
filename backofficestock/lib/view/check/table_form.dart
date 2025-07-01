@@ -43,12 +43,14 @@ class TableForm extends StatelessWidget {
         ),
         const CustomSizedBox.paddingWidth(widthValue: 12.0),
         CustomExpanded(
-          child: provider.selectedTable?.status == "Reserved" ||
-                  provider.selectedTable?.status == "Deactive"
-              ? const Align(
-                  alignment: Alignment.center,
-                  child: Text("To add products, make your table active."))
-              : const CheckOrder(),
+          child: provider.selectedTable != null
+              ? provider.selectedTable?.status == "Reserved" ||
+                      provider.selectedTable?.status == "Deactive"
+                  ? const Align(
+                      alignment: Alignment.center,
+                      child: Text("To add an order, activate the status."))
+                  : const CheckOrder()
+              : const SizedBox(),
         )
       ],
     );

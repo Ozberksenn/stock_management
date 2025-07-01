@@ -33,14 +33,17 @@ class CheckHeader extends StatelessWidget {
           ]),
           CustomButton(
               text: "Add Table",
-              onTap: () => customDialog(context,
-                  widget: FormView(
-                    apiUrl: "/createTable",
-                    dialogContext: context,
-                    provider: provider,
-                    title: "New Table",
-                    route: "table",
-                  )))
+              onTap: () {
+                provider.selectedTable = null;
+                customDialog(context,
+                    widget: FormView(
+                      apiUrl: "/createTable",
+                      dialogContext: context,
+                      provider: provider,
+                      title: "New Table",
+                      route: "table",
+                    ));
+              })
         ],
       ),
     );

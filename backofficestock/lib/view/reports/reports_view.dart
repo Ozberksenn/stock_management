@@ -1,14 +1,23 @@
 import 'package:flutter/cupertino.dart';
-
-import '../../product/utils/undefined/undefined_module.dart';
+import 'package:provider/provider.dart';
+import '../../product/widgets/custom_page.dart';
+import '../home/home_proivder.dart';
+import '../home/widgets/content_header.dart';
 
 class ReportsView extends StatelessWidget {
   const ReportsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const UndefinedModule(
-      message: "Please, Contact Us for Reports Module",
-    );
+    HomeProivder homeProvider = context.read<HomeProivder>();
+    return CustomPage(
+        isLoading: true,
+        widget: Column(
+          children: [
+            ContentHeader(
+              title: homeProvider.menu.title ?? "",
+            ),
+          ],
+        ));
   }
 }

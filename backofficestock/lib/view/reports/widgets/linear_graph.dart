@@ -11,7 +11,7 @@ class LinearGraph extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         width: 450,
-        height: 300,
+        height: 250,
         child: LineChart(LineChartData(
           titlesData: FlTitlesData(
               rightTitles: const AxisTitles(

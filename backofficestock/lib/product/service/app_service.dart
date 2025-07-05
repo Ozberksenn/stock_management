@@ -44,11 +44,6 @@ class AppService {
       return ApiResponse(
           success: false, data: {}, message: e.response?.data['message']);
     }
-    // if (response.statusCode == 200) {
-    //   return response;
-    // } else {
-    //   return null;
-    // }
   }
 
   Future deleteData(String path, Map<String, dynamic> parameters) async {
@@ -83,16 +78,6 @@ class AppService {
     } catch (e) {
       return ApiResponse(success: false, data: {}, message: e.toString());
     }
-
-    // try {
-    //   if (response.statusCode == 200) {
-    //     return response;
-    //   } else {
-    //     return null;
-    //   }
-    // } catch (e) {
-    //   print(e);
-    // }
   }
 
   Future putData(String path, Map<String, dynamic> parameters) async {

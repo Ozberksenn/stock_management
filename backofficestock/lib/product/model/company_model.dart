@@ -5,6 +5,7 @@ class CompanyModel {
   final String? logo;
   final String? qrUrl;
   final String? address;
+  final String? contactMail;
   final String? instagram;
   final String? facebook;
   final String? x;
@@ -19,6 +20,7 @@ class CompanyModel {
       this.logo,
       this.qrUrl,
       this.address,
+      this.contactMail,
       this.instagram,
       this.facebook,
       this.x,
@@ -28,17 +30,18 @@ class CompanyModel {
 
   factory CompanyModel.fromMap(Map<String, dynamic> json) {
     return CompanyModel(
-        companyName: json['COMPANYNAME'],
-        mail: json['MAIL'],
-        phone: json['PHONE'],
-        logo: json['LOGO'],
-        qrUrl: json['QRURL'],
-        address: json['ADDRESS'],
+        companyName: json['CompanyName'],
+        mail: json['Mail'],
+        phone: json['Phone'],
+        logo: json['Logo'],
+        qrUrl: json['QrUrl'],
+        address: json['Address'],
+        contactMail: json['ContactMail'] ?? "",
         instagram: json['INSTAGRAM'],
         facebook: json['FACEBOOK'],
         x: json['X'],
         youtube: json['YOUTUBE'],
-        workingHours: json['WORKINGHOURS'],
-        socialMedia: json['SOCIALMEDIA']);
+        workingHours: json['WorkingHours'],
+        socialMedia: json['SocialMedia']);
   }
 }

@@ -35,7 +35,7 @@ class LoginProvider extends ChangeNotifier {
       setButton(false);
       try {
         ApiResponse response = await AppService.instance.postData("/login",
-            {"MAIL": mailController.text, "PASSWORD": passwordController.text});
+            {"Mail": mailController.text, "Password": passwordController.text});
         if (response.success) {
           await loginWriteStorage(response.data);
           await Provider.of<CompanyProvider>(context, listen: false)

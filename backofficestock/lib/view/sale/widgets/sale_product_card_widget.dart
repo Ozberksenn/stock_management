@@ -29,7 +29,7 @@ class SaleProductCard extends StatelessWidget {
         contentPadding: const ConstEdgeInsets.padding0(),
         title: Text(provider.productFounded?.productName ?? ""),
         subtitle: Text(provider.productFounded?.barcode ?? ""),
-        trailing: Text("Quantity: ${provider.productFounded?.count}"),
+        trailing: Text("Quantity: ${provider.productFounded?.quantity}"),
       ),
       const CustomSizedBox.paddingHeight(heightValue: 8.0),
     ]);

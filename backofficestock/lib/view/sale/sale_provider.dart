@@ -53,7 +53,7 @@ class SaleProvider extends ChangeNotifier {
   }
 
   void handlePlus(ProductModel product, context) {
-    if (product.basketQuantity < product.count) {
+    if (product.basketQuantity < product.quantity) {
       product.basketQuantity += 1;
       getTotalPrice();
       notifyListeners();
@@ -90,7 +90,7 @@ class SaleProvider extends ChangeNotifier {
     bool exists = productList.any((item) => item.id == productFounded!.id);
     if (exists) {
     } else {
-      if (productFounded?.count != 0) {
+      if (productFounded?.quantity != 0) {
         productList.add(productFounded!);
         getTotalPrice();
       } else {

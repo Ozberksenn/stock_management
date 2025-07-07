@@ -97,7 +97,7 @@ class BasketCard extends StatelessWidget {
             onTap: () => provider.handleDelete(product),
             icon: CupertinoIcons.delete),
         title: Text(product.productName),
-        subtitle: Text("Stock : ${product.count.toString()}"),
+        subtitle: Text("Stock : ${product.quantity.toString()}"),
         trailing: Container(
           width: 100,
           decoration: BoxDecoration(

@@ -69,7 +69,7 @@ class CheckProvider extends ChangeNotifier {
         price: product.price!));
     ApiResponse response = await AppService.instance.postData(
         "/createTableProduct",
-        {"TABLE_ID": selectedTable?.id, "PRODUCT_ID": product.id});
+        {"TableId": selectedTable?.id, "ProductId": product.id});
     // if (!context.mounted) return;
     if (response.success) {
     } else {
@@ -90,7 +90,7 @@ class CheckProvider extends ChangeNotifier {
 
   void deleteTable(int id, BuildContext context) async {
     ApiResponse response =
-        await AppService.instance.deleteData("/deleteTable", {"ID": id});
+        await AppService.instance.deleteData("/deleteTable", {"TableId": id});
     if (!context.mounted) return;
     if (response.success) {
       tables.removeWhere((table) => table.id == id);
@@ -107,7 +107,7 @@ class CheckProvider extends ChangeNotifier {
   void removeTableProdcut(
       TableProductModel product, int index, BuildContext context) async {
     ApiResponse response = await AppService.instance
-        .deleteData("/deleteTableProduct", {"ID": product.id});
+        .deleteData("/deleteTableProduct", {"TableId": product.id});
     if (!context.mounted) return;
     if (response.success) {
       selectedTable?.products?.removeAt(index);

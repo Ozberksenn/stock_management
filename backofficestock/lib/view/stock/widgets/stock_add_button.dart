@@ -42,7 +42,7 @@ class StockAddButton extends StatelessWidget {
                       title: "Add Product",
                       route: "product",
                       provider: stockProvider,
-                      parameters: {"MENUID": stockProvider.selectedTab?.menuId},
+                      parameters: {"MenuId": stockProvider.selectedTab?.menuId},
                     ))
                 : warningPopup(context,
                     message: "You must add at least one menu"),

@@ -15,9 +15,9 @@ class SocialMediaField extends StatelessWidget {
   Widget build(BuildContext context) {
     CompanyProvider provider = context.watch<CompanyProvider>();
     Map<String, dynamic> initalValueWorkingDays =
-        jsonDecode(provider.companyInfo['SOCIALMEDIA']);
+        jsonDecode(provider.companyInfo['SocialMedia']);
     return FormBuilderField<Map<String, dynamic>>(
-      name: "SOCIALMEDIA",
+      name: "SocialMedia",
       initialValue: initalValueWorkingDays,
       builder: (field) {
         return Column(

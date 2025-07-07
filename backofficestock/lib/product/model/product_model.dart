@@ -7,7 +7,7 @@ class ProductModel {
   final String productName;
   final String? productDescription;
   final double? price;
-  final int count;
+  final int quantity;
   final String? image;
   final bool? showStore;
   final String barcode;
@@ -22,7 +22,7 @@ class ProductModel {
       required this.productName,
       this.productDescription,
       this.price,
-      required this.count,
+      required this.quantity,
       this.image,
       this.showStore,
       required this.barcode,
@@ -32,18 +32,18 @@ class ProductModel {
 
   factory ProductModel.fromMap(Map<String, dynamic> json) {
     return ProductModel(
-        id: json['ID'],
-        companyId: json['COMPANYID'],
-        menuId: json['MENUID'],
-        productName: json['PRODUCTNAME'],
-        productDescription: json['PRODUCTDESCRIPTION'],
-        price: json['PRICE'],
-        count: json['COUNT'],
-        image: json['IMAGE'],
-        showStore: json["SHOWSTORE"] ?? true,
-        barcode: json['BARCODE'] ?? "",
-        prodcutVariation: json['PRODUCTVARIATION'],
-        sort: json['SORT'],
+        id: json['ProductId'],
+        companyId: json['CompanyId'],
+        menuId: json['MenuId'],
+        productName: json['ProductName'],
+        productDescription: json['ProductDescription'],
+        price: json['Price'],
+        quantity: json['Quantity'],
+        image: json['Image'],
+        showStore: json["ShowStore"] ?? true,
+        barcode: json['Barcode'] ?? "",
+        prodcutVariation: json['ProductVariation'],
+        sort: json['Sort'],
         basketQuantity: 1);
   }
 
@@ -53,25 +53,25 @@ class ProductModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'ID': id,
-      'COMPANYID': companyId,
-      'MENUID': menuId,
-      'PRODUCTNAME': productName,
-      'PRODUCTDESCRIPTION': productDescription,
-      'PRICE': price.toString(),
-      'COUNT': count.toString(),
-      'IMAGE': image,
-      'SHOWSTORE': showStore,
-      'BARCODE': barcode,
-      'SORT': sort,
-      'PRODUCTVARIATION': prodcutVariation,
+      'ProductId': id,
+      'CompanyId': companyId,
+      'MenuId': menuId,
+      'ProductName': productName,
+      'ProductDescription': productDescription,
+      'Price': price.toString(),
+      'Quantity': quantity.toString(),
+      'Image': image,
+      'ShowStore': showStore,
+      'Barcode': barcode,
+      'Sort': sort,
+      'ProductVariation': prodcutVariation,
     };
   }
 
   Map<String, dynamic> toJsonStock() {
     return {
       'ID': id,
-      'COUNT': count - basketQuantity,
+      'COUNT': quantity - basketQuantity,
     };
   }
 }

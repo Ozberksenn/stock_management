@@ -81,7 +81,7 @@ class LoginForm extends StatelessWidget {
                         InkWell(
                           onTap: () => provider.changeStep(1),
                           child: Text(
-                            " Sign up",
+                            "Sign up",
                             style: AppFonts.boldSmall,
                           ),
                         ),

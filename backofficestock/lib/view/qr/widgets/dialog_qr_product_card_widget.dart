@@ -70,7 +70,7 @@ class DialogProductCard extends StatelessWidget {
                           Text("${product.price}TL", style: AppFonts.boldSmall)
                         ]),
                     Text(
-                      "Count : ${product.count}",
+                      "Count : ${product.quantity}",
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     Text(

@@ -99,7 +99,7 @@ class StockProvider extends ChangeNotifier {
 
   Future deleteMenu(BuildContext context) async {
     ApiResponse response = await AppService.instance
-        .deleteData("/deleteMenu", {"MENUID": selectedTab?.menuId});
+        .deleteData("/deleteMenu", {"MenuId": selectedTab?.menuId});
     if (!context.mounted) return;
     if (response.success) {
       context.pop();
@@ -112,8 +112,8 @@ class StockProvider extends ChangeNotifier {
   }
 
   Future<void> deleteProduct(int id, context) async {
-    ApiResponse response =
-        await AppService.instance.deleteData("/deleteProduct", {"ID": id});
+    ApiResponse response = await AppService.instance
+        .deleteData("/deleteProduct", {"ProductId": id});
     if (response.success) {
       getProduct();
       successSnackbar(
@@ -127,8 +127,8 @@ class StockProvider extends ChangeNotifier {
       {required int productId, required int newOrder}) async {
     ApiResponse response =
         await AppService.instance.putData("/productOrderUpdate", {
-      "PRODUCTID": productId,
-      "NEWORDER": newOrder,
+      "ProductId": productId,
+      "NewOrder": newOrder,
     });
     if (!context.mounted) return;
     if (response.success) {

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:backofficestock/product/editors/form_image_picker_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,7 @@ class ProductForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> dataList = List<Map<String, dynamic>>.from(
-        jsonDecode(initialValue?['PRODUCTVARIATION'] ?? "[]"));
+        jsonDecode(initialValue?['ProductVariation'] ?? "[]"));
     return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,16 +24,16 @@ class ProductForm extends StatelessWidget {
           const CustomSizedBox.paddingHeight(heightValue: 8),
           const FormLabel(text: "Product Name"),
           FormTextField(
-            name: "PRODUCTNAME",
+            name: "ProductName",
             validator: FormBuilderValidators.required(),
           ),
           const CustomSizedBox.paddingHeight(heightValue: 8),
           const FormLabel(text: "Product Description"),
-          const FormTextField(name: "PRODUCTDESCRIPTION", maxLines: 3),
+          const FormTextField(name: "ProductDescription", maxLines: 3),
           const CustomSizedBox.paddingHeight(heightValue: 8),
           const FormLabel(text: "Barcode"),
           FormTextField(
-              name: "BARCODE",
+              name: "Barcode",
               maxLines: 1,
               validator: FormBuilderValidators.required()),
           const CustomSizedBox.paddingHeight(heightValue: 8),
@@ -45,7 +44,7 @@ class ProductForm extends StatelessWidget {
                   children: [
                     const FormLabel(text: "Price"),
                     FormTextField(
-                      name: "PRICE",
+                      name: "Price",
                       postDataType: "double",
                       validator: FormBuilderValidators.numeric(),
                     ),
@@ -56,9 +55,9 @@ class ProductForm extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const FormLabel(text: "Count"),
+                  const FormLabel(text: "Quantity"),
                   FormTextField(
-                    name: "COUNT",
+                    name: "Quantity",
                     postDataType: "int",
                     validator: FormBuilderValidators.numeric(),
                   ),
@@ -68,7 +67,7 @@ class ProductForm extends StatelessWidget {
           ]),
           const CustomSizedBox.paddingHeight(heightValue: 16),
           ProductVariation(
-              fieldName: "PRODUCTVARIATION", variationList: dataList)
+              fieldName: "ProductVariation", variationList: dataList)
         ]);
   }
 }

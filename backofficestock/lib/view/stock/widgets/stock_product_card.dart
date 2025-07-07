@@ -35,8 +35,8 @@ class StockProductCard extends StatelessWidget {
             apiUrl: "/updateProduct",
             provider: stockProvider,
             parameters: {
-              "ID": product.id,
-              "MENUID": stockProvider.selectedTab?.menuId
+              "ProductId": product.id,
+              "MenuId": stockProvider.selectedTab?.menuId
             },
             initialValue: product.toJson(),
           ));
@@ -62,7 +62,7 @@ class StockProductCard extends StatelessWidget {
               border: Border(
                   left: BorderSide(
                       width: 3,
-                      color: product.count < 3
+                      color: product.quantity < 3
                           ? AppColors.red
                           : AppColors.primaryColor)),
               boxShadow: const [
@@ -101,7 +101,7 @@ class StockProductCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${product.count} - ${product.productName}',
+                            '${product.quantity} - ${product.productName}',
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           SizedBox(

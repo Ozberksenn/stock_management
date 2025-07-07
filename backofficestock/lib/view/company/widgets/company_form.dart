@@ -30,13 +30,13 @@ class CompanyForm extends StatelessWidget {
             children: [
               CustomSizedBox.paddingHeight(heightValue: 8.0),
               FormLabel(text: "Company Name"),
-              FormTextField(name: "COMPANYNAME"),
+              FormTextField(name: "CompanyName"),
               CustomSizedBox.paddingHeight(heightValue: 8.0),
               FormLabel(text: "Logo Url"),
-              FormTextField(name: "LOGO"),
+              FormTextField(name: "Logo"),
               CustomSizedBox.paddingHeight(heightValue: 8.0),
               FormLabel(text: "QR Url"),
-              FormTextField(name: "QRURL"),
+              FormTextField(name: "QrUrl"),
               CustomSizedBox.paddingHeight(heightValue: 8.0),
             ],
           )
@@ -51,13 +51,13 @@ class CompanyForm extends StatelessWidget {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             CustomSizedBox.paddingHeight(heightValue: 8.0),
             FormLabel(text: "Address"),
-            FormTextField(name: "ADDRESS"),
+            FormTextField(name: "Address"),
             CustomSizedBox.paddingHeight(heightValue: 8.0),
             FormLabel(text: "Phone"),
-            FormTextField(name: "PHONE"),
+            FormTextField(name: "Phone"),
             CustomSizedBox.paddingHeight(heightValue: 8.0),
             FormLabel(text: "Contact Mail"),
-            FormTextField(name: "CONTACTMAIL"),
+            FormTextField(name: "ContactMail"),
             CustomSizedBox.paddingHeight(heightValue: 8.0),
           ])
         ],

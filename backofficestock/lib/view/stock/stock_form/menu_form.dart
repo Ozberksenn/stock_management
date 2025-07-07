@@ -21,15 +21,15 @@ class MenuForm extends StatelessWidget {
           const CustomSizedBox.paddingWidth(widthValue: 16.0),
           const FormLabel(text: "Menu Name"),
           FormTextField(
-              name: "MENUNAME", validator: FormBuilderValidators.required()),
+              name: "Name", validator: FormBuilderValidators.required()),
           const CustomSizedBox.paddingHeight(heightValue: 8),
           const FormLabel(text: "Menu Description"),
           const FormTextField(
-            name: "MENUDESCRIPTION",
+            name: "Description",
             maxLines: 3,
           ),
           const FormCheckboxField(
-            name: "SHOWSTORE",
+            name: "ShowStore",
             text: "Show Store",
           ),
           const CustomSizedBox.paddingHeight(heightValue: 16),

@@ -14,20 +14,20 @@ class MenuModel {
 
   factory MenuModel.fromMap(Map<String, dynamic> json) {
     return MenuModel(
-        menuId: json['MENUID'],
-        menuName: json['MENUNAME'],
-        menuDescription: json['MENUDESCRIPTION'],
-        menuImage: json['MENUIMAGE'],
-        showStore: json['SHOWSTORE'] ?? true);
+        menuId: json['MenuId'],
+        menuName: json['Name'],
+        menuDescription: json['Description'],
+        menuImage: json['Image'],
+        showStore: json['ShowStore'] ?? true);
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'MENUID': menuId,
-      'MENUNAME': menuName,
-      'MENUDESCRIPTION': menuDescription,
-      'MENUIMAGE': menuImage,
-      'SHOWSTORE': showStore
+      'MenuId': menuId,
+      'Name': menuName,
+      'Description': menuDescription,
+      'Image': menuImage,
+      'ShowStore': showStore
     };
   }
 }

@@ -13,9 +13,9 @@ class WorkingDaysField extends StatelessWidget {
   Widget build(BuildContext context) {
     CompanyProvider provider = context.watch<CompanyProvider>();
     Map<String, dynamic> initalValueWorkingDays =
-        jsonDecode(provider.companyInfo['WORKINGHOURS']);
+        jsonDecode(provider.companyInfo['WorkingHours']);
     return FormBuilderField<Map<String, dynamic>>(
-      name: "WORKINGHOURS",
+      name: "WorkingHours",
       initialValue: initalValueWorkingDays,
       builder: (field) {
         return Column(

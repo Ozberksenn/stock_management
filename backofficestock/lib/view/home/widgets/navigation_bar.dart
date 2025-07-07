@@ -67,13 +67,13 @@ class NavigationProfileCard extends StatelessWidget {
       child: provider.isReady == true
           ? Column(
               children: [
-                provider.companyInfo['LOGO'] != null &&
-                        provider.companyInfo['LOGO'] != ""
+                provider.companyInfo['Logo'] != null &&
+                        provider.companyInfo['Logo'] != ""
                     ? Container(
                         width: 80,
                         height: 80,
                         decoration: CustomDecoration.circularImageDecoration(
-                            imageUrl: provider.companyInfo['LOGO']),
+                            imageUrl: provider.companyInfo['Logo']),
                       )
                     : const NoImage(
                         width: 80,
@@ -81,9 +81,9 @@ class NavigationProfileCard extends StatelessWidget {
                         size: 40,
                       ),
                 const CustomSizedBox.paddingHeight(heightValue: 2),
-                provider.companyInfo['COMANYNAME'] != null &&
-                        provider.companyInfo['COMANYNAME'] != ""
-                    ? Text(provider.companyInfo['COMANYNAME'],
+                provider.companyInfo['CompanyName'] != null &&
+                        provider.companyInfo['CompanyName'] != ""
+                    ? Text(provider.companyInfo['CompanyName'],
                         style: AppFonts.whiteBodyMedium)
                     : const SizedBox(),
                 Text('Company: ${StorageService().companyId}',

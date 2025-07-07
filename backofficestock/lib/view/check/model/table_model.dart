@@ -19,13 +19,13 @@ class TableModel {
 
   factory TableModel.fromMap(Map<String, dynamic> json) {
     return TableModel(
-      id: json['ID'],
-      tableNo: json['TABLE_NO'],
-      status: json['STATUS'],
-      customerName: json['CUSTOMER_NAME'],
-      specialText: json['SPECIAL_TEXT'],
-      products: json['PRODUCTS'] != null
-          ? (jsonDecode(json['PRODUCTS']) as List)
+      id: json['TableId'],
+      tableNo: json['TableNo'],
+      status: json['Status'],
+      customerName: json['CustomerName'],
+      specialText: json['SpecialText'],
+      products: json['Products'] != null
+          ? (jsonDecode(json['Products']) as List)
               .map((e) => TableProductModel.fromMap(e))
               .toList()
           : null,
@@ -34,12 +34,12 @@ class TableModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'ID': id,
-      'TABLE_NO': tableNo,
-      'STATUS': status,
-      'CUSTOMER_NAME': customerName,
-      'SPECIAL_TEXT': specialText,
-      'PRODUCTS': products != null
+      'TableId': id,
+      'TableNo': tableNo,
+      'Status': status,
+      'CustomerName': customerName,
+      'SpecialText': specialText,
+      'Products': products != null
           ? jsonEncode(products!.map((e) => e.toMap()).toList())
           : null,
     };
@@ -59,17 +59,17 @@ class TableProductModel {
 
   factory TableProductModel.fromMap(Map<String, dynamic> map) {
     return TableProductModel(
-      id: map['ID'],
-      productName: map['PRODUCTNAME'],
-      price: map['PRICE'].toDouble(),
+      id: map['TableProductId'],
+      productName: map['ProductName'],
+      price: map['Price'].toDouble(),
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'ID': id,
-      'PRODUCTNAME': productName,
-      'PRICE': price,
+      'TableProductId': id,
+      'ProductName': productName,
+      'Price': price,
     };
   }
 }

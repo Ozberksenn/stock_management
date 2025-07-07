@@ -33,7 +33,7 @@ class SignupForm extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     FormTextField(
-                      name: "CONTACTMAIL",
+                      name: "ContactMail",
                       hintText: "Mail",
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.email(),
@@ -42,7 +42,7 @@ class SignupForm extends StatelessWidget {
                     ),
                     const CustomSizedBox.paddingHeight(heightValue: 10),
                     FormTextField(
-                      name: "PHONE",
+                      name: "Phone",
                       hintText: "Phone",
                       inputFormatters: [phoneFormatter],
                       validator: FormBuilderValidators.compose([
@@ -52,12 +52,12 @@ class SignupForm extends StatelessWidget {
                     ),
                     const CustomSizedBox.paddingHeight(heightValue: 10),
                     const FormTextField(
-                      name: "COMPANYNAME",
+                      name: "CompanyName",
                       hintText: "Company Name",
                     ),
                     const CustomSizedBox.paddingHeight(heightValue: 10),
                     const FormTextField(
-                      name: "DESCRIPTION",
+                      name: "Description",
                       maxLines: 4,
                       hintText: "Description",
                     ),

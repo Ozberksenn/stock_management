@@ -1,5 +1,5 @@
 class LogModel {
-  final int id;
+  final int logId;
   final String company;
   final String originalUrl;
   final String body;
@@ -8,7 +8,7 @@ class LogModel {
   final String createdAt;
 
   LogModel(
-      {required this.id,
+      {required this.logId,
       required this.company,
       required this.originalUrl,
       required this.body,
@@ -18,12 +18,12 @@ class LogModel {
 
   factory LogModel.fromMap(Map<String, dynamic> json) {
     return LogModel(
-        id: json['ID'],
-        company: json['COMPANY'],
-        originalUrl: json['ORIGINALURL'],
-        body: json['BODY'],
-        statusCode: json['STATUSCODE'],
-        statusMessage: json['STATUSMESSAGE'],
-        createdAt: json['CREATED_AT']);
+        logId: json['LogId'],
+        company: json['Company'],
+        originalUrl: json['OriginalUrl'],
+        body: json['Body'],
+        statusCode: json['StatusCode'],
+        statusMessage: json['StatusMessage'],
+        createdAt: json['CreatedAt']);
   }
 }

@@ -14,10 +14,10 @@ class CustomerContactModel {
 
   factory CustomerContactModel.fromMap(Map<String, dynamic> json) {
     return CustomerContactModel(
-        id: json['ID'],
-        companyName: json['COMPANYNAME'],
-        contactMail: json['CONTACTMAIL'],
-        description: json['DESCRIPTION'],
-        phone: json['PHONE']);
+        id: json['Id'],
+        companyName: json['CompanyName'],
+        contactMail: json['ContactMail'],
+        description: json['Description'],
+        phone: json['Phone']);
   }
 }

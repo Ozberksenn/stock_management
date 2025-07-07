@@ -47,8 +47,8 @@ class SearchListView extends StatelessWidget {
                   onTap: () => handleCard(provider.searchList[index]),
                   title: Text(provider.searchList[index].productName),
                   subtitle: Text(provider.searchList[index].barcode),
-                  trailing:
-                      Text("Quantity : ${provider.searchList[index].count} "),
+                  trailing: Text(
+                      "Quantity : ${provider.searchList[index].quantity} "),
                 ),
               );
             })

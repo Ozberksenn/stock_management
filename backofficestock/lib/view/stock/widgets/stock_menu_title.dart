@@ -73,7 +73,7 @@ class ActionIcon extends StatelessWidget {
                     initialValue: provider.selectedTab?.toJson(),
                     edit: true,
                     provider: provider,
-                    parameters: {"MENUID": provider.selectedTab?.menuId},
+                    parameters: {"MenuId": provider.selectedTab?.menuId},
                   )),
             ),
             PopupMenuItem(

@@ -23,11 +23,11 @@ class QrProductCard extends StatelessWidget {
     void visibleProduct(value) async {
       ApiResponse response =
           await AppService.instance.putData("/updateProduct", {
-        "PRODUCTNAME": product?.productName,
-        "ID": product?.id,
-        "MENUID": product?.menuId,
-        "BARCODE": product?.barcode,
-        "SHOWSTORE": value,
+        "ProductName": product?.productName,
+        "ProductId": product?.id,
+        "MenuId": product?.menuId,
+        "Barcode": product?.barcode,
+        "ShowStore": value,
       });
       if (response.success == true) {
         provider.getProduct();

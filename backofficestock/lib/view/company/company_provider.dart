@@ -97,7 +97,7 @@ class CompanyProvider extends ChangeNotifier {
       data.add({"id": i});
     }
     ApiResponse response = await AppService.instance
-        .deleteData("/deleteCustomerContact", {"CUSTOMERS": jsonEncode(data)});
+        .deleteData("/deleteCustomerContact", {"Customers": jsonEncode(data)});
     if (response.success) {
       context.pop();
       successSnackbar(context: context, message: response.message);
@@ -129,11 +129,11 @@ class CompanyProvider extends ChangeNotifier {
       final Map<String, dynamic> originalData =
           formKey.currentState?.value ?? {};
       final Map<String, dynamic> data = Map<String, dynamic>.from(originalData);
-      if (data.containsKey("WORKINGHOURS")) {
-        data["WORKINGHOURS"] = jsonEncode(data["WORKINGHOURS"]);
+      if (data.containsKey("WorkingHours")) {
+        data["WorkingHours"] = jsonEncode(data["WorkingHours"]);
       }
-      if (data.containsKey("SOCIALMEDIA")) {
-        data["SOCIALMEDIA"] = jsonEncode(data["SOCIALMEDIA"]);
+      if (data.containsKey("SocialMedia")) {
+        data["SocialMedia"] = jsonEncode(data["SocialMedia"]);
       }
       ApiResponse response =
           await AppService.instance.postData("/updateCompanyInfo", data);

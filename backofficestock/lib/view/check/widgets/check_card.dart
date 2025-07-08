@@ -27,7 +27,7 @@ class CheckCard extends StatelessWidget {
             title: "Edit Table",
             route: "table",
             initialValue: table?.toMap() ?? {},
-            parameters: {"ID": table?.id},
+            parameters: {"TableId": table?.id},
             edit: true,
           ));
     }

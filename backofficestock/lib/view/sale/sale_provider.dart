@@ -17,7 +17,7 @@ class SaleProvider extends ChangeNotifier {
   Future<void> searchBarcode(BuildContext context) async {
     isReady = false;
     ApiResponse response = await AppService.instance.postData(
-        "/findProductWithBarcode", {"BARCODE": barcodeTextController.text});
+        "/findProductWithBarcode", {"Barcode": barcodeTextController.text});
     if (response.success) {
       if ((response.data as List).isNotEmpty) {
         productFounded = ProductModel.fromMap(response.data[0]);
@@ -38,7 +38,7 @@ class SaleProvider extends ChangeNotifier {
           productList.map((product) => product.toJsonStock()).toList();
       var jsonProductList = jsonEncode(newList);
       ApiResponse response = await AppService.instance.postData(
-          "/updateProductQuantity", {"PRODUCTJSONDATA": jsonProductList});
+          "/updateProductQuantity", {"ProductJsonData": jsonProductList});
       if (!context.mounted) return;
       if (response.success) {
         productList.clear();

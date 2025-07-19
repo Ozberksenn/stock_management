@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:backofficestock/product/editors/form_image_picker_field.dart';
 import 'package:backofficestock/product/model/custom_response.dart';
+import 'package:backofficestock/view/check/check_provider.dart';
 import 'package:backofficestock/view/stock/stock_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +60,8 @@ class FormProvider extends ChangeNotifier {
       refreshProduct(provider);
     } else if (formName == "menu") {
       refreshMenu(provider);
+    } else if (formName == "table") {
+      refrestTable(provider);
     }
   }
 
@@ -71,6 +74,12 @@ class FormProvider extends ChangeNotifier {
   refreshMenu(provider) {
     if (provider is StockProvider) {
       provider.refreshMenu();
+    }
+  }
+
+  refrestTable(provider) {
+    if (provider is CheckProvider) {
+      provider.fetchGetTables();
     }
   }
 

@@ -32,6 +32,7 @@ class CheckProvider extends ChangeNotifier {
   }
 
   Future<void> fetchGetTables() async {
+    tables.clear();
     changeStep(false);
     ApiResponse response = await AppService.instance.getData("/getTables");
     if (response.success) {

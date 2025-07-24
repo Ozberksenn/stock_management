@@ -19,7 +19,7 @@ class ReportsView extends StatelessWidget {
     return ChangeNotifierProvider(
         create: (_) => ReportsProvider(),
         builder: (context, child) {
-          ReportsProvider reportsProvider = context.watch<ReportsProvider>();
+          context.watch<ReportsProvider>();
           return CustomPage(
               isLoading: true,
               widget: ListView(

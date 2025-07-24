@@ -19,6 +19,7 @@ class StockProvider extends ChangeNotifier {
   MenuModel? selectedTab; // seçili tab bilgisi burada tutuluyor.
   TickerProvider? vsync;
   // BuildContext? context;
+  bool editTab = false;
 
   // StockProvider(BuildContext buildContext) {
   //   context = buildContext;
@@ -34,6 +35,11 @@ class StockProvider extends ChangeNotifier {
 
   handleTab(MenuModel tab) {
     selectedTab = tab;
+    notifyListeners();
+  }
+
+  changeTabStatus() {
+    editTab = !editTab;
     notifyListeners();
   }
 

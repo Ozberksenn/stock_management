@@ -13,21 +13,21 @@ class ProductVariationProvider extends ChangeNotifier {
       variationsList.add({
         "nameTextEditingController":
             TextEditingController(text: variation['name']),
+        "barcodeTextEditingController":
+            TextEditingController(text: variation['barcode']),
+        "quantityTextEditingController":
+            TextEditingController(text: variation['quantity']),
         "priceTextEditingController":
             TextEditingController(text: variation['price'])
       });
     }
-    // variationsList.add({
-    //   "nameTextEditingController":
-    //       TextEditingController(text: jsonDecode(list[0])),
-    //   "priceTextEditingController":
-    //       TextEditingController(text: jsonDecode(list[1]))
-    // });
   }
 
   void addVariation() {
     variationsList.add({
       "nameTextEditingController": TextEditingController(),
+      "barcodeTextEditingController": TextEditingController(),
+      "quantityTextEditingController": TextEditingController(),
       "priceTextEditingController": TextEditingController()
     });
     notifyListeners();

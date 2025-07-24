@@ -7,12 +7,16 @@ import '../../../../core/widget/padding.dart';
 class NamePriceField extends StatelessWidget {
   final TextEditingController nameController;
   final TextEditingController priceController;
+  final TextEditingController barcodeController;
+  final TextEditingController quantityController;
   final dynamic Function()? handleDelete;
   final void Function(PointerDownEvent) onTapOutside;
   const NamePriceField(
       {super.key,
       required this.nameController,
       required this.priceController,
+      required this.barcodeController,
+      required this.quantityController,
       required this.onTapOutside,
       this.handleDelete});
 
@@ -28,14 +32,32 @@ class NamePriceField extends StatelessWidget {
         ),
         const CustomSizedBox.paddingWidth(widthValue: 16.0),
         CustomExpanded(
-            flex: 6,
+            flex: 3,
             child: TextFormField(
+              decoration: const InputDecoration(labelText: "Product Name"),
               controller: nameController,
             )),
-        const CustomSizedBox.paddingWidth(widthValue: 16.0),
+        const CustomSizedBox.paddingWidth(widthValue: 4.0),
         CustomExpanded(
             flex: 1,
             child: TextFormField(
+              decoration: const InputDecoration(labelText: "Barcode"),
+              controller: barcodeController,
+              onTapOutside: onTapOutside,
+            )),
+        const CustomSizedBox.paddingWidth(widthValue: 4.0),
+        CustomExpanded(
+            flex: 1,
+            child: TextFormField(
+              decoration: const InputDecoration(labelText: "quantity"),
+              controller: quantityController,
+              onTapOutside: onTapOutside,
+            )),
+        const CustomSizedBox.paddingWidth(widthValue: 4.0),
+        CustomExpanded(
+            flex: 1,
+            child: TextFormField(
+              decoration: const InputDecoration(labelText: "Price"),
               controller: priceController,
               onTapOutside: onTapOutside,
             ))

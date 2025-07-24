@@ -33,9 +33,14 @@ class _QrViewState extends State<QrView> with TickerProviderStateMixin {
               child: homeProvider.searchText.length > 1
                   ? const SearchListView()
                   : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const CustomSizedBox.paddingHeight(heightValue: 10),
                         QrMenuTitle(selectedTab: stockProvider.selectedTab),
+                        const CustomSizedBox.paddingHeight(heightValue: 10),
+                        TextButton(
+                            onPressed: () => stockProvider.changeTabStatus(),
+                            child: const Text("Order All Categories")),
                         const CustomSizedBox.paddingHeight(heightValue: 10),
                         stockProvider.isMenuReady == true
                             ? TabBarWidget(stockProvider: stockProvider)

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:backofficestock/view/form/components/product_variation/product_variation_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +45,10 @@ class ProductVariation extends StatelessWidget {
                       return NamePriceField(
                         nameController: provider.variationsList[index]
                             ['nameTextEditingController'],
+                        barcodeController: provider.variationsList[index]
+                            ['barcodeTextEditingController'],
+                        quantityController: provider.variationsList[index]
+                            ['quantityTextEditingController'],
                         priceController: provider.variationsList[index]
                             ['priceTextEditingController'],
                         handleDelete: () {
@@ -54,7 +57,9 @@ class ProductVariation extends StatelessWidget {
                               provider.variationsList.map((e) {
                             return {
                               "name": e['nameTextEditingController'].text,
-                              "price": e['priceTextEditingController'].text
+                              "barcode": e['nameTextEditingController'].text,
+                              "price": e['priceTextEditingController'].text,
+                              "quantity": e['nameTextEditingController'].text
                             };
                           }).toList();
                           field.didChange(jsonEncode(variations).toString());
@@ -64,7 +69,9 @@ class ProductVariation extends StatelessWidget {
                               provider.variationsList.map((e) {
                             return {
                               "name": e['nameTextEditingController'].text,
-                              "price": e['priceTextEditingController'].text
+                              "barcode": e['nameTextEditingController'].text,
+                              "price": e['priceTextEditingController'].text,
+                              "quantity": e['nameTextEditingController'].text
                             };
                           }).toList();
                           field.didChange(jsonEncode(variations).toString());

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:backofficestock/product/model/product_variation_model.dart';
+
 class ProductModel {
   final int id;
   final int companyId;
@@ -11,7 +13,7 @@ class ProductModel {
   final String? image;
   final bool? showStore;
   final String barcode;
-  final String? prodcutVariation;
+  final List<ProductVariantModel>? variants;
   final int? sort; // todo required
   int basketQuantity;
 
@@ -26,7 +28,7 @@ class ProductModel {
       this.image,
       this.showStore,
       required this.barcode,
-      this.prodcutVariation,
+      this.variants,
       this.sort,
       this.basketQuantity = 1});
 
@@ -42,7 +44,11 @@ class ProductModel {
         image: json['Image'],
         showStore: json["ShowStore"] ?? true,
         barcode: json['Barcode'] ?? "",
-        prodcutVariation: json['ProductVariation'],
+        variants: json['Variants'] != null
+            ? (jsonDecode(json["Variants"]) as List)
+                .map((e) => ProductVariantModel.fromMap(e))
+                .toList()
+            : null,
         sort: json['Sort'],
         basketQuantity: 1);
   }
@@ -64,7 +70,7 @@ class ProductModel {
       'ShowStore': showStore,
       'Barcode': barcode,
       'Sort': sort,
-      'ProductVariation': prodcutVariation,
+      'Variants': variants
     };
   }
 

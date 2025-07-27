@@ -1,4 +1,4 @@
-import 'dart:convert';
+// import 'dart:convert';
 import 'package:backofficestock/product/editors/form_image_picker_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +14,6 @@ class ProductForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> dataList = List<Map<String, dynamic>>.from(
-        jsonDecode(initialValue?['ProductVariation'] ?? "[]"));
     return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +65,9 @@ class ProductForm extends StatelessWidget {
           ]),
           const CustomSizedBox.paddingHeight(heightValue: 16),
           ProductVariation(
-              fieldName: "ProductVariation", variationList: dataList)
+              mainBarcode: initialValue?['Barcode'],
+              fieldName: "ProductVariants",
+              variationList: initialValue?['Variants'])
         ]);
   }
 }

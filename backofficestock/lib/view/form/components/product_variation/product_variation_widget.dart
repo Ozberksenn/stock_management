@@ -5,24 +5,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import '../../../../product/constants/api_constants.dart';
+import '../../../../product/model/product_variation_model.dart';
 import '../../../../product/widgets/custom_icon.dart';
 import 'name_price_field.dart';
 
 class ProductVariation extends StatelessWidget {
   final String fieldName;
-  final List<Map<String, dynamic>>? variationList;
+  final String? mainBarcode;
+  final List<ProductVariantModel>? variationList;
   const ProductVariation(
-      {super.key, required this.fieldName, this.variationList});
+      {super.key,
+      required this.fieldName,
+      this.mainBarcode,
+      this.variationList});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (_) => ProductVariationProvider(variationList ?? [{}]),
+        create: (_) =>
+            ProductVariationProvider(variationList ?? [], mainBarcode ?? ""),
         builder: (context, child) {
           final provider = Provider.of<ProductVariationProvider>(context);
           return Column(children: [
             InkWell(
-              onTap: () => provider.addVariation(),
+              onTap: () =>
+                  provider.addVariation(provider.variationsList.length),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -43,6 +50,20 @@ class ProductVariation extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return NamePriceField(
+                        onChanged: () {
+                          List<Map<String, dynamic>> variations =
+                              provider.variationsList.map((e) {
+                            return {
+                              "id": e['id'],
+                              "name": e['nameTextEditingController'].text,
+                              "barcode": e['barcodeTextEditingController'].text,
+                              "price": e['priceTextEditingController'].text,
+                              "quantity":
+                                  e['quantityTextEditingController'].text,
+                            };
+                          }).toList();
+                          field.didChange(jsonEncode(variations).toString());
+                        },
                         nameController: provider.variationsList[index]
                             ['nameTextEditingController'],
                         barcodeController: provider.variationsList[index]
@@ -56,22 +77,12 @@ class ProductVariation extends StatelessWidget {
                           List<Map<String, dynamic>> variations =
                               provider.variationsList.map((e) {
                             return {
+                              "id": e['id'],
                               "name": e['nameTextEditingController'].text,
-                              "barcode": e['nameTextEditingController'].text,
+                              "barcode": e['barcodeTextEditingController'].text,
                               "price": e['priceTextEditingController'].text,
-                              "quantity": e['nameTextEditingController'].text
-                            };
-                          }).toList();
-                          field.didChange(jsonEncode(variations).toString());
-                        },
-                        onTapOutside: (p0) {
-                          List<Map<String, dynamic>> variations =
-                              provider.variationsList.map((e) {
-                            return {
-                              "name": e['nameTextEditingController'].text,
-                              "barcode": e['nameTextEditingController'].text,
-                              "price": e['priceTextEditingController'].text,
-                              "quantity": e['nameTextEditingController'].text
+                              "quantity":
+                                  e['quantityTextEditingController'].text
                             };
                           }).toList();
                           field.didChange(jsonEncode(variations).toString());

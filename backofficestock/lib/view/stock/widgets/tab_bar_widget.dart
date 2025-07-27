@@ -27,7 +27,13 @@ class TabBarWidget extends StatelessWidget {
                       text: menu.menuName,
                     )
                 ],
-                onReorder: (oldIndex, newIndex) {}),
+                onReorder: (oldIndex, newIndex) {
+                  if (newIndex > oldIndex) {
+                    newIndex -= 1;
+                  }
+                  stockProvider.uiOrderMenuUpdate(
+                      oldIndex, newIndex, stockProvider.menuTabList);
+                }),
           )
         : TabBar(
             tabAlignment: TabAlignment.start,

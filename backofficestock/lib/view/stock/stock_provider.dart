@@ -156,4 +156,34 @@ class StockProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future<void> updateMenuOrder(BuildContext context,
+      {required int productId, required int newOrder}) async {
+    // ApiResponse response =
+    //     await AppService.instance.putData("/", {
+    //   "ProductId": productId,
+    //   "NewOrder": newOrder,
+    // });
+    // if (!context.mounted) return;
+    // if (response.success) {
+    //   successSnackbar(context: context, message: "Success");
+    // } else {
+    //   errorSnackbar(context: context, message: "Error");
+    // }
+  }
+
+  void uiOrderMenuUpdate(oldIndex, newIndex, List<MenuModel> filterList) {
+    final movedItem = filterList[oldIndex];
+    final actualOldIndex =
+        menuTabList.indexWhere((e) => e.menuId == movedItem.menuId);
+
+    final newItem = filterList[newIndex];
+    final actualNewIndex =
+        menuTabList.indexWhere((e) => e.menuId == newItem.menuId);
+
+    final moved = menuTabList.removeAt(actualOldIndex);
+    menuTabList.insert(actualNewIndex, moved);
+
+    notifyListeners();
+  }
 }

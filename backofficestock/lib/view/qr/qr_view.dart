@@ -1,4 +1,5 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/product/widgets/custom_elevated_button.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:backofficestock/view/search/search_list_view.dart';
 import 'package:flutter/material.dart';
@@ -33,14 +34,17 @@ class _QrViewState extends State<QrView> with TickerProviderStateMixin {
               child: homeProvider.searchText.length > 1
                   ? const SearchListView()
                   : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const CustomSizedBox.paddingHeight(heightValue: 10),
-                        QrMenuTitle(selectedTab: stockProvider.selectedTab),
+                        Align(
+                            alignment: Alignment.topRight,
+                            child: CustomElevatedButton(
+                                onPressed: () =>
+                                    stockProvider.changeTabStatus(),
+                                text: "Order Categories")),
                         const CustomSizedBox.paddingHeight(heightValue: 10),
-                        TextButton(
-                            onPressed: () => stockProvider.changeTabStatus(),
-                            child: const Text("Order All Categories")),
+                        QrMenuTitle(selectedTab: stockProvider.selectedTab),
                         const CustomSizedBox.paddingHeight(heightValue: 10),
                         stockProvider.isMenuReady == true
                             ? TabBarWidget(stockProvider: stockProvider)

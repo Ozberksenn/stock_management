@@ -30,6 +30,7 @@ class ProductsList extends StatelessWidget {
                   },
                   itemBuilder: (context, index) {
                     return StockProductCard(
+                      isDeleteIcon: stockProvider.editTab,
                       product: filterProducList[index],
                     );
                   })

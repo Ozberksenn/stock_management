@@ -1,8 +1,11 @@
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/utils/modal/warning_popup.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:backofficestock/view/search/search_list_view.dart';
+import 'package:backofficestock/view/stock/widgets/product_reordable_list.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +36,8 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
             child: Column(
               children: [
                 const CustomSizedBox.paddingHeight(heightValue: 10),
+                editListTile(stockProvider, context),
+                const CustomSizedBox.paddingHeight(heightValue: 10),
                 stockProvider.isMenuReady == true &&
                         stockProvider.menuTabList.isNotEmpty
                     ? StockMenuTitle(provider: stockProvider)
@@ -41,7 +46,9 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
                     ? TabBarWidget(stockProvider: stockProvider)
                     : const SizedBox(),
                 const CustomSizedBox.paddingHeight(heightValue: 10),
-                ProductsList(stockProvider: stockProvider),
+                stockProvider.editTab == true
+                    ? ProductReordableList(stockProvider: stockProvider)
+                    : ProductsList(stockProvider: stockProvider),
               ],
             ),
           );
@@ -67,6 +74,19 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
               : stockContent(stockProvider)
         ]);
       },
+    );
+  }
+
+  Widget editListTile(StockProvider stockProvider, BuildContext context) {
+    return ListTile(
+      onTap: () => stockProvider.changeTabStatus(),
+      contentPadding: EdgeInsets.zero,
+      dense: true,
+      leading: const CustomIcon(icon: CupertinoIcons.pen),
+      title: Text("Edit Order",
+          style: stockProvider.editTab == false
+              ? Theme.of(context).textTheme.bodySmall
+              : AppFonts.boldSmall),
     );
   }
 }

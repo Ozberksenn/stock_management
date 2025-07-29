@@ -6,7 +6,6 @@ import 'package:backofficestock/view/check/check_view.dart';
 import 'package:backofficestock/view/company/company_view.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:backofficestock/view/home/widgets/navigation_bar.dart';
-import 'package:backofficestock/view/qr/qr_view.dart';
 import 'package:backofficestock/view/reports/reports_view.dart';
 import 'package:backofficestock/view/sale/sale_view.dart';
 import 'package:backofficestock/view/stock/stock_view.dart';
@@ -49,8 +48,8 @@ content(int menuId) {
   switch (menuId) {
     case 1:
       return const StockView();
-    case 2:
-      return const QrView();
+    // case 2:
+    //   return const QrView();
     case 3:
       return const SaleView();
     case 4:

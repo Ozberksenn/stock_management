@@ -12,14 +12,16 @@ import 'package:provider/provider.dart';
 import '../../../core/widget/padding.dart';
 import '../../../core/widget/radius.dart';
 import '../../../product/constants/api_constants.dart';
+import '../../../product/editors/switch.dart';
+import '../../../product/model/custom_response.dart';
 import '../../../product/utils/modal/custom_dialog.dart';
+import '../../../product/widgets/snackbar_widgets.dart';
 
 class StockProductCard extends StatelessWidget {
   final ProductModel product;
-  const StockProductCard({
-    super.key,
-    required this.product,
-  });
+  final bool isDeleteIcon;
+  const StockProductCard(
+      {super.key, required this.product, required this.isDeleteIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +55,22 @@ class StockProductCard extends StatelessWidget {
           text: "Delete The Product ?");
     }
 
+    void visibleProduct(value) async {
+      ApiResponse response =
+          await AppService.instance.putData("/updateProduct", {
+        "ProductName": product.productName,
+        "ProductId": product.id,
+        "MenuId": product.menuId,
+        "Barcode": product.barcode,
+        "ShowStore": value,
+      });
+      if (response.success == true) {
+        stockProvider.getProduct();
+      } else {
+        errorSnackbar(context: context, message: response.message);
+      }
+    }
+
     return GestureDetector(
       onTap: () => handleCard(),
       child: Container(
@@ -82,8 +100,8 @@ class StockProductCard extends StatelessWidget {
                   children: [
                     product.image != null && product.image != ""
                         ? Container(
-                            width: 50,
-                            height: 50,
+                            width: 100,
+                            height: 100,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
@@ -92,7 +110,7 @@ class StockProductCard extends StatelessWidget {
                                         "${AppService.cdnUrl}/${product.image}"))),
                           )
                         : const NoImage(
-                            width: 60,
+                            width: 100,
                             size: 36,
                           ),
                     const CustomSizedBox.paddingWidth(widthValue: 8),
@@ -100,10 +118,22 @@ class StockProductCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '${product.quantity} - ${product.productName}',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
+                          Row(children: [
+                            Text(
+                              '${product.productName} - ${product.price} TL',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            Container(
+                              height: 16,
+                              padding: const ConstEdgeInsets.paddingOnly(
+                                  left: 12.0, bottom: 2.0),
+                              child: SwitchWidget(
+                                  value: product.showStore ?? true,
+                                  onChanged: (value) => visibleProduct(value)),
+                            )
+                          ]),
+                          Text("Quantity: ${product.quantity}",
+                              style: Theme.of(context).textTheme.titleSmall),
                           SizedBox(
                             child: Text(product.productDescription ?? '',
                                 maxLines: 1,
@@ -118,10 +148,12 @@ class StockProductCard extends StatelessWidget {
               ),
               CustomPaddings.customPadding(
                   value: 6,
-                  child: CustomIcon(
-                      icon: Iconsax.trash,
-                      color: AppColors.red,
-                      onTap: () => handleDelete()))
+                  child: isDeleteIcon == false
+                      ? CustomIcon(
+                          icon: Iconsax.trash,
+                          color: AppColors.red,
+                          onTap: () => handleDelete())
+                      : const SizedBox())
             ],
           )),
     );

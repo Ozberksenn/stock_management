@@ -4,13 +4,16 @@ class MenuModel {
   final String? menuDescription;
   final String? menuImage;
   final bool showStore;
+  final int? sort;
 
-  MenuModel(
-      {required this.menuId,
-      this.menuName,
-      this.menuDescription,
-      this.menuImage,
-      required this.showStore});
+  MenuModel({
+    required this.menuId,
+    this.menuName,
+    this.menuDescription,
+    this.menuImage,
+    required this.showStore,
+    this.sort,
+  });
 
   factory MenuModel.fromMap(Map<String, dynamic> json) {
     return MenuModel(
@@ -18,7 +21,8 @@ class MenuModel {
         menuName: json['Name'],
         menuDescription: json['Description'],
         menuImage: json['Image'],
-        showStore: json['ShowStore'] ?? true);
+        showStore: json['ShowStore'] ?? true,
+        sort: json['Sort']);
   }
 
   Map<String, dynamic> toJson() {
@@ -27,7 +31,8 @@ class MenuModel {
       'Name': menuName,
       'Description': menuDescription,
       'Image': menuImage,
-      'ShowStore': showStore
+      'ShowStore': showStore,
+      'Sort': sort
     };
   }
 }

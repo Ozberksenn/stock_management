@@ -31,6 +31,11 @@ class TabBarWidget extends StatelessWidget {
                   if (newIndex > oldIndex) {
                     newIndex -= 1;
                   }
+                  stockProvider.updateMenuOrder(
+                    context,
+                    menuId: stockProvider.menuTabList[oldIndex].menuId,
+                    newOrder: stockProvider.menuTabList[newIndex].sort!,
+                  );
                   stockProvider.uiOrderMenuUpdate(
                       oldIndex, newIndex, stockProvider.menuTabList);
                 }),

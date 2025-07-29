@@ -158,18 +158,18 @@ class StockProvider extends ChangeNotifier {
   }
 
   Future<void> updateMenuOrder(BuildContext context,
-      {required int productId, required int newOrder}) async {
-    // ApiResponse response =
-    //     await AppService.instance.putData("/", {
-    //   "ProductId": productId,
-    //   "NewOrder": newOrder,
-    // });
-    // if (!context.mounted) return;
-    // if (response.success) {
-    //   successSnackbar(context: context, message: "Success");
-    // } else {
-    //   errorSnackbar(context: context, message: "Error");
-    // }
+      {required int menuId, required int newOrder}) async {
+    ApiResponse response =
+        await AppService.instance.putData("/menuOrderUpdate", {
+      "MenuId": menuId,
+      "NewOrder": newOrder,
+    });
+    if (!context.mounted) return;
+    if (response.success) {
+      successSnackbar(context: context, message: "Success");
+    } else {
+      errorSnackbar(context: context, message: "Error");
+    }
   }
 
   void uiOrderMenuUpdate(oldIndex, newIndex, List<MenuModel> filterList) {

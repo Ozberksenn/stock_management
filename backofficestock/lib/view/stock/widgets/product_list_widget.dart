@@ -25,8 +25,13 @@ class ProductsList extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: filterProducList.length,
                   separatorBuilder: (context, index) {
-                    return const CustomSizedBox.paddingHeight(
-                        heightValue: 16.0);
+                    return const Padding(
+                      padding:
+                          ConstEdgeInsets.paddingSymetric(verticalPad: 12.0),
+                      child: Divider(
+                        thickness: 0.2,
+                      ),
+                    );
                   },
                   itemBuilder: (context, index) {
                     return StockProductCard(

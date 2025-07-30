@@ -10,7 +10,6 @@ import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../../core/widget/padding.dart';
-import '../../../core/widget/radius.dart';
 import '../../../product/constants/api_constants.dart';
 import '../../../product/editors/switch.dart';
 import '../../../product/model/custom_response.dart';
@@ -75,7 +74,6 @@ class StockProductCard extends StatelessWidget {
       onTap: () => handleCard(),
       child: Container(
           decoration: BoxDecoration(
-              borderRadius: CustomRadius.radius8,
               color: AppColors.white,
               border: Border(
                   left: BorderSide(
@@ -83,14 +81,7 @@ class StockProductCard extends StatelessWidget {
                       color: product.quantity < 3
                           ? AppColors.red
                           : AppColors.primaryColor)),
-              boxShadow: const [
-                BoxShadow(
-                  color: AppColors.lightGrey,
-                  spreadRadius: 2,
-                  blurRadius: 2,
-                  offset: Offset(0, 1),
-                ),
-              ]),
+              boxShadow: const []),
           padding: const ConstEdgeInsets.padding12(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

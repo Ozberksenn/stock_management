@@ -46738,7 +46738,7 @@ A.aJz.prototype={
 $2(a,b){return B.IR},
 $S:682}
 A.a7Z.prototype={
-a9u(){var s="application/json",r=A.aPE(A.aOX("https://vertically-quick-crappie.ngrok-free.app",A.aj(["Accept",s,"Content-Type",s,"ngrok-skip-browser-warning","true"],t.N,t.z)))
+a9u(){var s="application/json",r=A.aPE(A.aOX("https://vertically-quick-crappie.ngrok-free.app",A.aj(["Accept",s,"Content-Type",s],t.N,t.z)))
 this.a!==$&&A.bh()
 this.a=r
 r=r.a_r$

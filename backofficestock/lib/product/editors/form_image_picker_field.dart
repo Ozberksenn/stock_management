@@ -2,7 +2,6 @@ import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/core/widget/padding.dart';
 import 'package:backofficestock/core/widget/radius.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
-import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,9 +30,7 @@ class FormImagePicker extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: CustomRadius.radius6,
                   image: DecorationImage(
-                      fit: BoxFit.contain,
-                      image:
-                          NetworkImage("${AppService.cdnUrl}/$initialValue"))),
+                      fit: BoxFit.contain, image: NetworkImage(initialValue!))),
             );
     }
 
@@ -48,7 +45,8 @@ class FormImagePicker extends StatelessWidget {
               image: DecorationImage(
                   fit: BoxFit.contain,
                   colorFilter: ColorFilter.mode(
-                      AppColors.white.withOpacity(0.5), BlendMode.modulate),
+                      AppColors.white.withValues(alpha: 0.5),
+                      BlendMode.modulate),
                   image: MemoryImage(provider.imageFile.first.bytes!))),
           child: Align(
             alignment: Alignment.topRight,

@@ -97,8 +97,7 @@ class StockProductCard extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        "${AppService.cdnUrl}/${product.image}"))),
+                                    image: NetworkImage(product.image!))),
                           )
                         : const NoImage(
                             width: 100,

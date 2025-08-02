@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 
 class AppService {
   // static const String serviceUrl = "http://192.168.1.33:8080";
-  static const String serviceUrl =
-      "https://stock-management-nodejs.onrender.com";
+  static const String serviceUrl = "http://192.168.1.43:8080";
+  // "https://stock-management-nodejs.onrender.com";
   // "https://vertically-quick-crappie.ngrok-free.app";
   // static const String cdnUrl = "http://192.168.1.34:8080/uploads";
   static const String cdnUrl = "$serviceUrl/uploads";

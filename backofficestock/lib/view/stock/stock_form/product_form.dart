@@ -1,4 +1,3 @@
-// import 'dart:convert';
 import 'package:backofficestock/product/editors/form_image_picker_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,9 @@ class ProductForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const FormImagePicker(),
+          FormImagePicker(
+            initialValue: initialValue?["Image"],
+          ),
           const CustomSizedBox.paddingHeight(heightValue: 8),
           const FormLabel(text: "Product Name"),
           FormTextField(

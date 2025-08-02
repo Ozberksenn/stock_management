@@ -41,7 +41,7 @@ class CompanyProvider extends ChangeNotifier {
     fetchCompanyInfo();
     if (StorageService().role == 1) {
       fetchCustomerContact();
-      fetchLogs();
+      // fetchLogs();
     }
     notifyListeners();
   }
@@ -107,21 +107,21 @@ class CompanyProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> fetchLogs() async {
-    isLogs = false;
-    ApiResponse response = await AppService.instance.getData("/getLogs");
-    if (response.success) {
-      List<Map<String, dynamic>> dataList =
-          List<Map<String, dynamic>>.from(response.data);
-      logKeys = dataList.first.keys.toList();
-      logs = (response.data as List)
-          .map((item) => LogModel.fromMap(item))
-          .toList()
-          .cast<LogModel>();
-    }
-    notifyListeners();
-    isLogs = true;
-  }
+  // Future<void> fetchLogs() async {
+  //   isLogs = false;
+  //   ApiResponse response = await AppService.instance.getData("/getLogs");
+  //   if (response.success) {
+  //     List<Map<String, dynamic>> dataList =
+  //         List<Map<String, dynamic>>.from(response.data);
+  //     logKeys = dataList.first.keys.toList();
+  //     logs = (response.data as List)
+  //         .map((item) => LogModel.fromMap(item))
+  //         .toList()
+  //         .cast<LogModel>();
+  //   }
+  //   notifyListeners();
+  //   isLogs = true;
+  // }
 
   Future<void> handleSendButton(
       GlobalKey<FormBuilderState> formKey, context) async {

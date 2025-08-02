@@ -95,7 +95,7 @@ class FormProvider extends ChangeNotifier {
         Provider.of<FormImagePickerProvider>(context, listen: false);
     if (imageProvider.imageFile.isNotEmpty) {
       var imageData = FormData.fromMap({
-        "image": MultipartFile.fromBytes(imageProvider.imageFile.first.bytes!,
+        "file": MultipartFile.fromBytes(imageProvider.imageFile.first.bytes!,
             filename: imageProvider.imageFile.first.name),
       });
       Dio dio = Dio();
@@ -104,16 +104,16 @@ class FormProvider extends ChangeNotifier {
         data: imageData,
         options: Options(
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "image/png",
             "Accept": "application/json",
           },
         ),
       );
       if (response.statusCode == 200) {
         if (formName == "menu") {
-          formData.addAll({"MENUIMAGE": response.data['file']['filename']});
+          formData.addAll({"Image": response.data['blobUrl']});
         } else if (formName == "product") {
-          formData.addAll({"PRODUCTIMAGE": response.data['file']['filename']});
+          formData.addAll({"Image": response.data['blobUrl']});
         }
       } else {
         errorSnackbar(context: context, message: response.statusMessage);

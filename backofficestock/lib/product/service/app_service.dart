@@ -1,13 +1,15 @@
 import 'package:backofficestock/product/model/custom_response.dart';
 import 'package:backofficestock/product/storage/app_storage.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AppService {
   // static const String serviceUrl = "http://192.168.1.33:8080";
-  static final String serviceUrl = dotenv.env['SERVICEURL'].toString();
+  static const String serviceUrl =
+      "https://stock-management-nodejs.onrender.com";
+  // "http://192.168.1.43:8080";
+  //
+  //  dotenv.env['SERVICEURL'].toString();
   //  "http://192.168.1.43:8080";
-  // "https://stock-management-nodejs.onrender.com";
   // "https://vertically-quick-crappie.ngrok-free.app";
   // static const String cdnUrl = "http://192.168.1.34:8080/uploads";
   static String cdnUrl = "$serviceUrl/uploads";

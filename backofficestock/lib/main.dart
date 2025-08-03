@@ -11,7 +11,6 @@ import 'product/routes/router.dart';
 import 'product/storage/app_storage.dart';
 
 void main() async {
-  // await dotenv.load();
   await Hive.initFlutter();
   try {
     await StorageService().init();

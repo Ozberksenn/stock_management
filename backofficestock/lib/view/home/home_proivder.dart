@@ -20,11 +20,11 @@ class HomeProivder extends ChangeNotifier {
   Future<void> search() async {
     if (searchText.length > 1) {
       ApiResponse response = await AppService.instance
-          .postData("/searchProduct", {"PRODUCTNAME": searchText});
+          .postData("/searchProduct", {"ProductName": searchText});
       if (response.success) {
         for (var e in response.data) {
           if (!searchList
-              .any((element) => element.productName == e['PRODUCTNAME'])) {
+              .any((element) => element.productName == e['ProductName'])) {
             searchList.add(ProductModel.fromMap(e));
           }
         }

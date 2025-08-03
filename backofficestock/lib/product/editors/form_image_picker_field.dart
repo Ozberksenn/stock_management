@@ -15,7 +15,7 @@ class FormImagePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FormImagePickerProvider provider = context.watch();
+    final provider = context.watch<FormImagePickerProvider>();
 
     Widget noImage() {
       return initialValue == null || initialValue == ""
@@ -24,13 +24,17 @@ class FormImagePicker extends StatelessWidget {
               size: 48,
               color: AppColors.blue,
             )
-          : Container(
-              width: context.dynamicWidth(0.2),
-              height: context.dynamicHeight(0.3),
-              decoration: BoxDecoration(
-                  borderRadius: CustomRadius.radius6,
-                  image: DecorationImage(
-                      fit: BoxFit.contain, image: NetworkImage(initialValue!))),
+          : Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: context.dynamicWidth(0.2),
+                height: context.dynamicHeight(0.3),
+                decoration: BoxDecoration(
+                    borderRadius: CustomRadius.radius6,
+                    image: DecorationImage(
+                        fit: BoxFit.contain,
+                        image: NetworkImage(initialValue!))),
+              ),
             );
     }
 

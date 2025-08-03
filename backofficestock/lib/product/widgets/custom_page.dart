@@ -13,6 +13,7 @@ class CustomPage extends StatelessWidget {
             child: widget,
           )
         : const Align(
+            alignment: Alignment.center,
             child: CircularProgressIndicator(color: AppColors.primaryColor));
   }
 }

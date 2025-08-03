@@ -4,12 +4,8 @@ import 'package:dio/dio.dart';
 
 class AppService {
   static const String serviceUrl =
-      // "https://stock-management-nodejs.onrender.com";
-      "http://192.168.1.43:8080";
+      "https://stock-management-nodejs.onrender.com";
   //  dotenv.env['SERVICEURL'].toString();
-  //  "http://192.168.1.43:8080";
-  // "https://vertically-quick-crappie.ngrok-free.app";
-  static String cdnUrl = "$serviceUrl/uploads";
 
   late final Dio dio;
   AppService._init() {

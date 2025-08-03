@@ -2,6 +2,7 @@ import 'package:backofficestock/core/widget/padding.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
 import 'package:backofficestock/product/utils/modal/warning_popup.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
+import 'package:backofficestock/product/widgets/custom_page.dart';
 import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:backofficestock/view/search/search_list_view.dart';
 import 'package:backofficestock/view/stock/widgets/product_reordable_list.dart';
@@ -32,26 +33,28 @@ class _StockViewState extends State<StockView> with TickerProviderStateMixin {
         final homeProvider = context.watch<HomeProivder>();
         stockProvider.init(tabVsync: this, context: context);
         Widget stockContent(StockProvider stockProvider) {
-          return CustomExpanded(
-            child: Column(
-              children: [
-                const CustomSizedBox.paddingHeight(heightValue: 10),
-                editListTile(stockProvider, context),
-                const CustomSizedBox.paddingHeight(heightValue: 10),
-                stockProvider.isMenuReady == true &&
-                        stockProvider.menuTabList.isNotEmpty
-                    ? StockMenuTitle(provider: stockProvider)
-                    : const SizedBox(),
-                stockProvider.isMenuReady == true
-                    ? TabBarWidget(stockProvider: stockProvider)
-                    : const SizedBox(),
-                const CustomSizedBox.paddingHeight(heightValue: 10),
-                stockProvider.editTab == true
-                    ? ProductReordableList(stockProvider: stockProvider)
-                    : ProductsList(stockProvider: stockProvider),
-              ],
-            ),
-          );
+          return CustomPage(
+              isLoading: stockProvider.isProductReady,
+              widget: CustomExpanded(
+                child: Column(
+                  children: [
+                    const CustomSizedBox.paddingHeight(heightValue: 10),
+                    editListTile(stockProvider, context),
+                    const CustomSizedBox.paddingHeight(heightValue: 10),
+                    stockProvider.isMenuReady == true &&
+                            stockProvider.menuTabList.isNotEmpty
+                        ? StockMenuTitle(provider: stockProvider)
+                        : const SizedBox(),
+                    stockProvider.isMenuReady == true
+                        ? TabBarWidget(stockProvider: stockProvider)
+                        : const SizedBox(),
+                    const CustomSizedBox.paddingHeight(heightValue: 10),
+                    stockProvider.editTab == true
+                        ? ProductReordableList(stockProvider: stockProvider)
+                        : ProductsList(stockProvider: stockProvider),
+                  ],
+                ),
+              ));
         }
 
         return Column(children: [

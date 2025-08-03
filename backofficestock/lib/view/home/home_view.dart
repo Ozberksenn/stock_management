@@ -48,8 +48,6 @@ content(int menuId) {
   switch (menuId) {
     case 1:
       return const StockView();
-    // case 2:
-    //   return const QrView();
     case 3:
       return const SaleView();
     case 4:

@@ -21,17 +21,6 @@ class StockAddButton extends StatelessWidget {
         ),
         items: [
           popupItem(
-            name: "Menu",
-            onTap: () => customDialog(context,
-                widget: FormView(
-                    dialogContext: context,
-                    apiUrl: "/postMenu",
-                    edit: false,
-                    title: "Add Menu",
-                    provider: stockProvider,
-                    route: "menu")),
-          ),
-          popupItem(
             name: "Product",
             onTap: () => stockProvider.menuTabList.isNotEmpty
                 ? customDialog(context,
@@ -46,6 +35,17 @@ class StockAddButton extends StatelessWidget {
                     ))
                 : warningPopup(context,
                     message: "You must add at least one menu"),
+          ),
+          popupItem(
+            name: "Menu",
+            onTap: () => customDialog(context,
+                widget: FormView(
+                    dialogContext: context,
+                    apiUrl: "/postMenu",
+                    edit: false,
+                    title: "Add Menu",
+                    provider: stockProvider,
+                    route: "menu")),
           )
         ]);
   }

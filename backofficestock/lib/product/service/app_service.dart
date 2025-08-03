@@ -3,8 +3,8 @@ import 'package:backofficestock/product/storage/app_storage.dart';
 import 'package:dio/dio.dart';
 
 class AppService {
-  static const String serviceUrl =
-      "https://stock-management-nodejs.onrender.com";
+  static const String serviceUrl = "http://192.168.1.43:8080";
+  // "https://stock-management-nodejs.onrender.com";
   //  dotenv.env['SERVICEURL'].toString();
 
   late final Dio dio;

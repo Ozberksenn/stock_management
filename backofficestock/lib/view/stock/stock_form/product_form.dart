@@ -2,6 +2,7 @@ import 'package:backofficestock/product/editors/form_image_picker_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:provider/provider.dart';
 import '../../../core/widget/padding.dart';
 import '../../../product/editors/form_text_field.dart';
 import '../../form/components/product_variation/product_variation_widget.dart';
@@ -17,9 +18,10 @@ class ProductForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FormImagePicker(
-            initialValue: initialValue?["Image"],
-          ),
+          ChangeNotifierProvider(
+              create: (_) => FormImagePickerProvider(
+                  initialImageValue: initialValue?["Image"]),
+              child: const FormImagePicker()),
           const CustomSizedBox.paddingHeight(heightValue: 8),
           const FormLabel(text: "Product Name"),
           FormTextField(

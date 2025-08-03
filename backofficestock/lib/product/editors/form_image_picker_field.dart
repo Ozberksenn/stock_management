@@ -10,15 +10,14 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 
 class FormImagePicker extends StatelessWidget {
-  final String? initialValue;
-  const FormImagePicker({super.key, this.initialValue});
+  const FormImagePicker({super.key});
 
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<FormImagePickerProvider>();
-
     Widget noImage() {
-      return initialValue == null || initialValue == ""
+      return provider.initialImageValue == null ||
+              provider.initialImageValue == ""
           ? const CustomIcon(
               icon: Iconsax.camera,
               size: 48,
@@ -26,15 +25,22 @@ class FormImagePicker extends StatelessWidget {
             )
           : Align(
               alignment: Alignment.center,
-              child: Container(
-                width: context.dynamicWidth(0.2),
-                height: context.dynamicHeight(0.3),
-                decoration: BoxDecoration(
-                    borderRadius: CustomRadius.radius6,
-                    image: DecorationImage(
-                        fit: BoxFit.contain,
-                        image: NetworkImage(initialValue!))),
-              ),
+              child: Stack(children: [
+                Container(
+                  width: context.dynamicWidth(0.2),
+                  height: context.dynamicHeight(0.3),
+                  decoration: BoxDecoration(
+                      borderRadius: CustomRadius.radius6,
+                      image: DecorationImage(
+                          fit: BoxFit.contain,
+                          image: NetworkImage(provider.initialImageValue!))),
+                ),
+                Positioned(
+                    right: 0,
+                    child: CustomIcon(
+                        onTap: () => provider.setInitialImage(null),
+                        icon: CupertinoIcons.xmark))
+              ]),
             );
     }
 
@@ -80,23 +86,32 @@ class FormImagePicker extends StatelessWidget {
 
 class FormImagePickerProvider extends ChangeNotifier {
   List<PlatformFile> imageFile = [];
+  String? _initialImageValue;
+
+  String? get initialImageValue => _initialImageValue;
+
+  FormImagePickerProvider({String? initialImageValue}) {
+    setInitialImage(initialImageValue);
+  }
+
+  void setInitialImage(String? value) {
+    _initialImageValue = value;
+    notifyListeners();
+  }
 
   void uploadImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: [
-        'jpg',
-        'png',
-        'jpeg',
-      ],
+      allowedExtensions: ['jpg', 'png', 'jpeg'],
       withData: true,
     );
     if (result == null) return;
+
     imageFile = result.files;
     notifyListeners();
   }
 
-  void deleteSelectedImage() async {
+  void deleteSelectedImage() {
     imageFile = [];
     notifyListeners();
   }

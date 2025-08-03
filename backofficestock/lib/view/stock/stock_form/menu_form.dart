@@ -6,6 +6,7 @@ import 'package:backofficestock/view/form/widgets/form_label.dart';
 import 'package:backofficestock/view/stock/stock_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:provider/provider.dart';
 
 class MenuForm extends StatelessWidget {
   final StockProvider provider;
@@ -17,7 +18,10 @@ class MenuForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FormImagePicker(initialValue: provider.selectedTab?.menuImage ?? ""),
+          ChangeNotifierProvider(
+              create: (_) => FormImagePickerProvider(
+                  initialImageValue: provider.selectedTab?.menuImage ?? ""),
+              child: const FormImagePicker()),
           const CustomSizedBox.paddingWidth(widthValue: 16.0),
           const FormLabel(text: "Menu Name"),
           FormTextField(

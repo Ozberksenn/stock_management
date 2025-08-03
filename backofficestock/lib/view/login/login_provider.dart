@@ -43,7 +43,7 @@ class LoginProvider extends ChangeNotifier {
           await successSnackbar(context: context, message: "Login Success");
           context.go("/home");
         } else {
-          errorPopup(context, message: "Error Message");
+          errorPopup(context, message: response.message);
         }
       } finally {
         setButton(true);

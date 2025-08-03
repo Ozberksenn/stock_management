@@ -6,6 +6,7 @@ import 'package:backofficestock/view/home/home_proivder.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'product/editors/form_image_picker_field.dart';
 import 'product/routes/router.dart';
 import 'product/storage/app_storage.dart';
 
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => FormProvider()),
         ChangeNotifierProvider(create: (context) => CheckProvider()),
         ChangeNotifierProvider(create: (context) => CompanyProvider()),
+        ChangeNotifierProvider(create: (_) => FormImagePickerProvider()),
       ],
       child: MaterialApp.router(
         title: 'Stock Management',

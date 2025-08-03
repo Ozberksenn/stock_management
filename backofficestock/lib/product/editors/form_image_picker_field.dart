@@ -14,72 +14,79 @@ class FormImagePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<FormImagePickerProvider>();
-    Widget noImage() {
-      return provider.initialImageValue == null ||
-              provider.initialImageValue == ""
-          ? const CustomIcon(
-              icon: Iconsax.camera,
-              size: 48,
-              color: AppColors.blue,
-            )
-          : Align(
-              alignment: Alignment.center,
-              child: Stack(children: [
-                Container(
+    return InkWell(
+      onTap: () => context.read<FormImagePickerProvider>().uploadImage(),
+      child: Container(
+        height: context.dynamicHeight(0.25),
+        width: context.dynamicWidth(1),
+        padding: const ConstEdgeInsets.padding20(),
+        child: Consumer<FormImagePickerProvider>(
+          builder: (context, provider, _) {
+            if (provider.imageFile.isEmpty) {
+              return provider.initialImageValue == null ||
+                      provider.initialImageValue == ""
+                  ? const CustomIcon(
+                      icon: Iconsax.camera,
+                      size: 48,
+                      color: AppColors.blue,
+                    )
+                  : Align(
+                      alignment: Alignment.center,
+                      child: Stack(children: [
+                        Container(
+                          width: context.dynamicWidth(0.2),
+                          height: context.dynamicHeight(0.3),
+                          decoration: BoxDecoration(
+                            borderRadius: CustomRadius.radius6,
+                            image: DecorationImage(
+                              fit: BoxFit.contain,
+                              image: NetworkImage(provider.initialImageValue!),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          right: 0,
+                          child: CustomIcon(
+                            onTap: () =>
+                                provider.setInitialImage(null), // Silme
+                            icon: CupertinoIcons.xmark,
+                          ),
+                        )
+                      ]),
+                    );
+            } else {
+              return Align(
+                child: Container(
                   width: context.dynamicWidth(0.2),
                   height: context.dynamicHeight(0.3),
                   decoration: BoxDecoration(
-                      borderRadius: CustomRadius.radius6,
-                      image: DecorationImage(
-                          fit: BoxFit.contain,
-                          image: NetworkImage(provider.initialImageValue!))),
+                    border: Border.all(width: 1, color: AppColors.lightGrey),
+                    borderRadius: CustomRadius.radius6,
+                    image: DecorationImage(
+                      fit: BoxFit.contain,
+                      colorFilter: ColorFilter.mode(
+                          AppColors.white.withAlpha(120), BlendMode.modulate),
+                      image: MemoryImage(provider.imageFile.first.bytes!),
+                    ),
+                  ),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: CustomPaddings.customPadding(
+                      value: 4.0,
+                      child: CustomIcon(
+                        icon: CupertinoIcons.xmark,
+                        size: 28,
+                        color: AppColors.black,
+                        onTap: () => provider.deleteSelectedImage(),
+                      ),
+                    ),
+                  ),
                 ),
-                Positioned(
-                    right: 0,
-                    child: CustomIcon(
-                        onTap: () => provider.setInitialImage(null),
-                        icon: CupertinoIcons.xmark))
-              ]),
-            );
-    }
-
-    Widget selectedImage() {
-      return Align(
-        child: Container(
-          width: context.dynamicWidth(0.2),
-          height: context.dynamicHeight(0.3),
-          decoration: BoxDecoration(
-              border: Border.all(width: 1, color: AppColors.lightGrey),
-              borderRadius: CustomRadius.radius6,
-              image: DecorationImage(
-                  fit: BoxFit.contain,
-                  colorFilter: ColorFilter.mode(
-                      AppColors.white.withValues(alpha: 0.5),
-                      BlendMode.modulate),
-                  image: MemoryImage(provider.imageFile.first.bytes!))),
-          child: Align(
-            alignment: Alignment.topRight,
-            child: CustomPaddings.customPadding(
-                value: 4.0,
-                child: CustomIcon(
-                  icon: CupertinoIcons.xmark,
-                  size: 28,
-                  color: AppColors.black,
-                  onTap: () => provider.deleteSelectedImage(),
-                )),
-          ),
+              );
+            }
+          },
         ),
-      );
-    }
-
-    return InkWell(
-      onTap: () => provider.uploadImage(),
-      child: Container(
-          height: context.dynamicHeight(0.25),
-          width: context.dynamicWidth(1),
-          padding: const ConstEdgeInsets.padding20(),
-          child: provider.imageFile.isEmpty ? noImage() : selectedImage()),
+      ),
     );
   }
 }
@@ -102,7 +109,7 @@ class FormImagePickerProvider extends ChangeNotifier {
   void uploadImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['jpg', 'png', 'jpeg'],
+      allowedExtensions: ['jpg', 'png', 'jpeg', 'webp'],
       withData: true,
     );
     if (result == null) return;

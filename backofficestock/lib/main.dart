@@ -9,8 +9,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'product/routes/router.dart';
 import 'product/storage/app_storage.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+  await dotenv.load();
   await Hive.initFlutter();
   try {
     await StorageService().init();

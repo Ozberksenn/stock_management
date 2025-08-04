@@ -45719,7 +45719,7 @@ A.aFV.prototype={
 $2(a,b){return B.HU},
 $S:285}
 A.a5z.prototype={
-a8m(){var s="application/json",r=A.aLO(A.aL4("http://192.168.1.43:8080",A.ah(["Accept",s,"Content-Type",s],t.N,t.z)))
+a8m(){var s="application/json",r=A.aLO(A.aL4("https://stock-management-nodejs.onrender.com",A.ah(["Accept",s,"Content-Type",s],t.N,t.z)))
 this.a!==$&&A.bn()
 this.a=r
 r=r.Zy$
@@ -46727,7 +46727,7 @@ q=A.ah(["file",A.aZY(q,J.eZ(l.a).b)],p,o)
 n=new A.CP(A.b([],t.Iq),A.b([],t.cS))
 n.ahd(q,B.ki)
 s=4
-return A.H(A.aLO(null).a0z("http://192.168.1.43:8080/uploadImage",n,A.aNP(A.ah(["Content-Type","image/png","Accept","application/json"],p,o)),o),$async$E3)
+return A.H(A.aLO(null).a0z("https://stock-management-nodejs.onrender.com/uploadImage",n,A.aNP(A.ah(["Content-Type","image/png","Accept","application/json"],p,o)),o),$async$E3)
 case 4:m=e
 if(m.c===200){if(c==="menu")b.R(0,A.ah(["Image",J.aN(m.a,"blobUrl")],p,o))
 else if(c==="product")b.R(0,A.ah(["Image",J.aN(m.a,"blobUrl")],p,o))}else A.uI(a,m.d)

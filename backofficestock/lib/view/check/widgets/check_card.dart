@@ -33,7 +33,7 @@ class CheckCard extends StatelessWidget {
     }
 
     return GestureDetector(
-      onTap: () => handleTable(),
+      onTap: () => provider.handleSelectTable(table!),
       child: Container(
         padding: const ConstEdgeInsets.padding4(),
         decoration: BoxDecoration(
@@ -63,11 +63,14 @@ class CheckCard extends StatelessWidget {
                 ],
               ),
               CustomIcon(
-                icon: CupertinoIcons.delete,
-                onTap: () => provider.removeTableCondition(
-                    table!.status, context, table!.id),
-                size: 14,
-              )
+                  onTap: () => handleTable(),
+                  icon: CupertinoIcons.pencil_circle)
+              // CustomIcon(
+              //   icon: CupertinoIcons.delete,
+              //   onTap: () => provider.removeTableCondition(
+              //       table!.status, context, table!.id),
+              //   size: 14,
+              // )
             ]),
             Row(children: [
               Text("Status : ", style: Theme.of(context).textTheme.bodySmall),
@@ -77,27 +80,27 @@ class CheckCard extends StatelessWidget {
               ),
             ]),
             Text(table?.customerName ?? ""),
-            table?.products != null
-                ? Text("Products", style: Theme.of(context).textTheme.bodySmall)
-                : const SizedBox(),
-            table?.products != null
-                ? CustomExpanded(
-                    child: ListView.builder(
-                        itemCount: table?.products?.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            color: AppColors.lightGrey,
-                            padding: const ConstEdgeInsets.padding2(),
-                            margin: const ConstEdgeInsets.paddingSymetric(
-                                verticalPad: 2.0),
-                            child: Text(
-                                "${table?.products?[index].productName} - "
-                                "${table?.products?[index].price} TL",
-                                style: Theme.of(context).textTheme.bodySmall),
-                          );
-                        }),
-                  )
-                : const SizedBox()
+            // table?.products != null
+            //     ? Text("Products", style: Theme.of(context).textTheme.bodySmall)
+            //     : const SizedBox(),
+            // table?.products != null
+            //     ? CustomExpanded(
+            //         child: ListView.builder(
+            //             itemCount: table?.products?.length,
+            //             itemBuilder: (context, index) {
+            //               return Container(
+            //                 color: AppColors.lightGrey,
+            //                 padding: const ConstEdgeInsets.padding2(),
+            //                 margin: const ConstEdgeInsets.paddingSymetric(
+            //                     verticalPad: 2.0),
+            //                 child: Text(
+            //                     "${table?.products?[index].productName} - "
+            //                     "${table?.products?[index].price} TL",
+            //                     style: Theme.of(context).textTheme.bodySmall),
+            //               );
+            //             }),
+            //       )
+            //     : const SizedBox()
           ],
         ),
       ),

@@ -31,6 +31,11 @@ class CheckProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void handleSelectTable(TableModel value) {
+    selectedTable = value;
+    notifyListeners();
+  }
+
   Future<void> fetchGetTables() async {
     tables.clear();
     changeStep(false);

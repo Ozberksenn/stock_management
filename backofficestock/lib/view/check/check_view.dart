@@ -21,9 +21,9 @@ class CheckView extends StatelessWidget {
           ContentHeader(
             title: homeProvider.menu.title ?? "",
           ),
-          const CustomSizedBox.paddingHeight(heightValue: 18.0),
+          const CustomSizedBox.paddingHeight(heightValue: 12.0),
           const CheckHeader(),
-          const CustomSizedBox.paddingHeight(heightValue: 18.0),
+          const CustomSizedBox.paddingHeight(heightValue: 8.0),
           const Content()
         ]));
   }

@@ -5,7 +5,6 @@ import 'package:backofficestock/view/check/check_provider.dart';
 import 'package:backofficestock/view/form/widgets/form_label.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'widgets/check_order_widget.dart';
 
 class TableForm extends StatelessWidget {
   final CheckProvider provider;
@@ -42,16 +41,16 @@ class TableForm extends StatelessWidget {
           ]),
         ),
         const CustomSizedBox.paddingWidth(widthValue: 12.0),
-        CustomExpanded(
-          child: provider.selectedTable != null
-              ? provider.selectedTable?.status == "Reserved" ||
-                      provider.selectedTable?.status == "Deactive"
-                  ? const Align(
-                      alignment: Alignment.center,
-                      child: Text("To add an order, activate the status."))
-                  : const CheckOrder()
-              : const SizedBox(),
-        )
+        // CustomExpanded(
+        //   child: provider.selectedTable != null
+        //       ? provider.selectedTable?.status == "Reserved" ||
+        //               provider.selectedTable?.status == "Deactive"
+        //           ? const Align(
+        //               alignment: Alignment.center,
+        //               child: Text("To add an order, activate the status."))
+        //           : const CheckOrder()
+        //       : const SizedBox(),
+        // )
       ],
     );
   }

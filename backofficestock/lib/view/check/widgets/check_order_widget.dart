@@ -1,8 +1,5 @@
-import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/product/constants/api_constants.dart';
-import 'package:backofficestock/product/utils/modal/custom_dialog.dart';
 import 'package:backofficestock/view/check/check_provider.dart';
-import 'package:backofficestock/view/check/widgets/select_order_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,18 +23,18 @@ class CheckOrder extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text("Order Detail",
-                  style: Theme.of(context).textTheme.titleMedium),
-              CustomIcon(
-                  icon: CupertinoIcons.add_circled,
-                  onTap: () => customDialog(context,
-                      width: context.dynamicWidth(0.3),
-                      height: context.dynamicHeight(0.8),
-                      widget: SelectOrderDialog(
-                        provider: provider,
-                      )))
-            ]),
+            // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            //   Text("Order Detail",
+            //       style: Theme.of(context).textTheme.titleMedium),
+            //   CustomIcon(
+            //       icon: CupertinoIcons.add_circled,
+            //       onTap: () => customDialog(context,
+            //           width: context.dynamicWidth(0.3),
+            //           height: context.dynamicHeight(0.8),
+            //           widget: SelectOrderDialog(
+            //             provider: provider,
+            //           )))
+            // ]),
             const Divider(),
             provider.selectedTable?.products?.isNotEmpty ?? false
                 ? ListView.builder(

@@ -50,13 +50,13 @@ class TableProductModel {
   final int id;
   final String productName;
   final double price;
-  final List<TableProductVariantModel>? variants;
+  final List<TableProductVariantModel> variants;
 
   TableProductModel(
       {required this.id,
       required this.productName,
       required this.price,
-      this.variants});
+      required this.variants});
 
   factory TableProductModel.fromMap(Map<String, dynamic> json) {
     return TableProductModel(
@@ -76,8 +76,7 @@ class TableProductModel {
       'TableProductId': id,
       'ProductName': productName,
       'Price': price,
-      'Variants':
-          variants != null ? variants!.map((e) => e.toMap()).toList() : [],
+      'Variants': variants.map((e) => e.toMap()).toList()
     };
   }
 }

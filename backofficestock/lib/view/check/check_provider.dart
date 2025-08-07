@@ -73,6 +73,7 @@ class CheckProvider extends ChangeNotifier {
     selectedTable?.products?.add(TableProductModel(
         id: product.id,
         productName: product.productName,
+        variants: [],
         price: product.price!));
     ApiResponse response = await AppService.instance.postData(
         "/createTableProduct",

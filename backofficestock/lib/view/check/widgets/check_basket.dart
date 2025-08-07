@@ -1,5 +1,6 @@
 import 'package:backofficestock/product/widgets/custom_elevated_button.dart';
 import 'package:backofficestock/view/check/check_provider.dart';
+import 'package:backofficestock/view/check/model/table_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,18 +47,18 @@ class CheckBasket extends StatelessWidget {
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
                                     var item = provider.selectedTable?.products;
-                                    if (item![index].variants!.isNotEmpty) {
+                                    if (item![index].variants.isNotEmpty) {
                                       return ListView.builder(
                                           shrinkWrap: true,
                                           itemCount:
-                                              item[index].variants?.length,
+                                              item[index].variants.length,
                                           itemBuilder: (context, variantIndex) {
                                             return checkBasketItem(
                                                 item[index]
-                                                    .variants![variantIndex]
+                                                    .variants[variantIndex]
                                                     .variantName,
                                                 item[index]
-                                                    .variants![variantIndex]
+                                                    .variants[variantIndex]
                                                     .price,
                                                 context,
                                                 onTap: () =>
@@ -81,7 +82,8 @@ class CheckBasket extends StatelessWidget {
                     ]),
                   ),
                   const CustomSizedBox.paddingHeight(heightValue: 12.0),
-                  checkBasketFooter(context)
+                  checkBasketFooter(context,
+                      tableProducts: provider.selectedTable?.products)
                 ],
               ),
       ),
@@ -95,18 +97,30 @@ class CheckBasket extends StatelessWidget {
           icon: CupertinoIcons.delete,
           size: 14.0,
           color: AppColors.red,
-          onTap: onTap
-          // provider.removeTableProdcut(item[index], index, context),
-          ),
-      title: Text(name),
+          onTap: onTap),
+      title: Text(name, style: Theme.of(context).textTheme.bodySmall),
       trailing: Text(
-        "${price.toString()} TL",
-        style: Theme.of(context).textTheme.titleMedium,
+        "${price.toString()} ₺",
+        style: AppFonts.boldSmall,
       ),
     );
   }
 
-  Widget checkBasketFooter(BuildContext context) {
+  Widget checkBasketFooter(BuildContext context,
+      {List<TableProductModel>? tableProducts}) {
+    double totalPrice = 0.0;
+    if (tableProducts != null) {
+      for (TableProductModel i in tableProducts) {
+        if (i.variants.isNotEmpty) {
+          for (TableProductVariantModel variant in i.variants) {
+            totalPrice += variant.price;
+          }
+        } else {
+          totalPrice += i.price;
+        }
+      }
+    }
+
     return Container(
       decoration: const BoxDecoration(
           color: AppColors.reservedCardColor,
@@ -117,7 +131,7 @@ class CheckBasket extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "1050 TL",
+            '${totalPrice.toStringAsFixed(2)} ₺',
             style: AppFonts.whiteBodyMedium,
           ),
           const CustomElevatedButton(text: "Completed")

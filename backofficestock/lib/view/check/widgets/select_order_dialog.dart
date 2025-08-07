@@ -1,5 +1,7 @@
 import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/product/model/product_model.dart';
+import 'package:backofficestock/product/model/product_variation_model.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/check/check_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -70,20 +72,52 @@ class SelectOrderDialog extends StatelessWidget {
                 return const Divider();
               },
               itemBuilder: (context, index) {
-                return ListTile(
-                  onTap: () {
-                    provider.handleAddNewItem(
-                        provider.products[index], context);
-                    context.pop();
-                  },
-                  contentPadding: const EdgeInsets.all(0.0),
-                  title: Text(
-                    provider.products[index].productName,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  trailing: Text("${provider.products[index].price} TL"),
-                );
+                return provider.products[index].variants != null &&
+                        provider.products[index].variants!.isNotEmpty
+                    ? ListView.separated(
+                        shrinkWrap: true,
+                        separatorBuilder: (context, index) {
+                          return const Divider();
+                        },
+                        itemCount: provider.products[index].variants!.length,
+                        itemBuilder: (context, variantIndex) {
+                          return selectOrderVariantItem(
+                              provider.products[index].variants![variantIndex],
+                              context);
+                        })
+                    : selectOrderItem(provider.products[index], context);
               }),
+    );
+  }
+
+  ListTile selectOrderVariantItem(
+      ProductVariantModel product, BuildContext context) {
+    return ListTile(
+      onTap: () {
+        provider?.handleAddNewVariant(product, context);
+        context.pop();
+      },
+      contentPadding: const EdgeInsets.all(0.0),
+      title: Text(
+        product.variantName,
+        style: Theme.of(context).textTheme.bodySmall,
+      ),
+      trailing: Text("${product.price} TL"),
+    );
+  }
+
+  ListTile selectOrderItem(ProductModel product, BuildContext context) {
+    return ListTile(
+      onTap: () {
+        provider?.handleAddNewItem(product, context);
+        context.pop();
+      },
+      contentPadding: const EdgeInsets.all(0.0),
+      title: Text(
+        product.productName,
+        style: Theme.of(context).textTheme.bodySmall,
+      ),
+      trailing: Text("${product.price} TL"),
     );
   }
 

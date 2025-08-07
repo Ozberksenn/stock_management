@@ -1,7 +1,10 @@
+import 'package:backofficestock/core/extension/context_extension.dart';
 import 'package:backofficestock/core/widget/padding.dart';
+import 'package:backofficestock/product/widgets/custom_elevated_button.dart';
 import 'package:backofficestock/product/widgets/custom_icon.dart';
 import 'package:backofficestock/view/check/check_provider.dart';
 import 'package:backofficestock/view/check/model/table_model.dart';
+import 'package:backofficestock/view/check/widgets/select_order_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +41,9 @@ class CheckCard extends StatelessWidget {
         padding: const ConstEdgeInsets.padding4(),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
+            border: table?.id == provider.selectedTable?.id
+                ? Border.all(width: 2, color: AppColors.dark)
+                : null,
             color: table?.status == "Active"
                 ? AppColors.activeCardColor
                 : table?.status == "Reserved"
@@ -80,27 +86,17 @@ class CheckCard extends StatelessWidget {
               ),
             ]),
             Text(table?.customerName ?? ""),
-            // table?.products != null
-            //     ? Text("Products", style: Theme.of(context).textTheme.bodySmall)
-            //     : const SizedBox(),
-            // table?.products != null
-            //     ? CustomExpanded(
-            //         child: ListView.builder(
-            //             itemCount: table?.products?.length,
-            //             itemBuilder: (context, index) {
-            //               return Container(
-            //                 color: AppColors.lightGrey,
-            //                 padding: const ConstEdgeInsets.padding2(),
-            //                 margin: const ConstEdgeInsets.paddingSymetric(
-            //                     verticalPad: 2.0),
-            //                 child: Text(
-            //                     "${table?.products?[index].productName} - "
-            //                     "${table?.products?[index].price} TL",
-            //                     style: Theme.of(context).textTheme.bodySmall),
-            //               );
-            //             }),
-            //       )
-            //     : const SizedBox()
+            const CustomSizedBox.paddingHeight(heightValue: 24.0),
+            table?.status == "Active"
+                ? Align(
+                    alignment: Alignment.center,
+                    child: CustomElevatedButton(
+                        text: "Add Order",
+                        onPressed: () => customDialog(
+                            width: context.dynamicWidth(0.3),
+                            context,
+                            widget: SelectOrderDialog(provider: provider))))
+                : const SizedBox()
           ],
         ),
       ),

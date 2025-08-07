@@ -47,21 +47,27 @@ class TableModel {
 }
 
 class TableProductModel {
-  final int id; // Assuming ID is optional
+  final int id;
   final String productName;
   final double price;
+  final List<TableProductVariantModel>? variants;
 
-  TableProductModel({
-    required this.id,
-    required this.productName,
-    required this.price,
-  });
+  TableProductModel(
+      {required this.id,
+      required this.productName,
+      required this.price,
+      this.variants});
 
-  factory TableProductModel.fromMap(Map<String, dynamic> map) {
+  factory TableProductModel.fromMap(Map<String, dynamic> json) {
     return TableProductModel(
-      id: map['TableProductId'],
-      productName: map['ProductName'],
-      price: map['Price'].toDouble(),
+      id: json['TableProductId'],
+      productName: json['ProductName'],
+      price: json['Price'].toDouble(),
+      variants: json['Variants'] != null
+          ? (json['Variants'] as List)
+              .map((e) => TableProductVariantModel.fromMap(e))
+              .toList()
+          : [],
     );
   }
 
@@ -69,6 +75,36 @@ class TableProductModel {
     return {
       'TableProductId': id,
       'ProductName': productName,
+      'Price': price,
+      'Variants':
+          variants != null ? variants!.map((e) => e.toMap()).toList() : [],
+    };
+  }
+}
+
+class TableProductVariantModel {
+  final int variantId;
+  final String variantName;
+  final double price;
+
+  TableProductVariantModel({
+    required this.variantId,
+    required this.variantName,
+    required this.price,
+  });
+
+  factory TableProductVariantModel.fromMap(Map<String, dynamic> map) {
+    return TableProductVariantModel(
+      variantId: map['VariantId'],
+      variantName: map['VariantName'],
+      price: map['Price'].toDouble(),
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'VariantId': variantId,
+      'VariantName': variantName,
       'Price': price,
     };
   }

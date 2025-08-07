@@ -14,27 +14,9 @@ class CheckOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CheckProvider>(
       builder: (context, provider, _) {
-        // if(provider.selectedTable?.status == "reserved" ||
-        //    provider.selectedTable?.status == "deactive") {
-        //   return const Column(children: [
-        //     Text("To add products, make your table active.")
-        //   ]);
-        // }
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            //   Text("Order Detail",
-            //       style: Theme.of(context).textTheme.titleMedium),
-            //   CustomIcon(
-            //       icon: CupertinoIcons.add_circled,
-            //       onTap: () => customDialog(context,
-            //           width: context.dynamicWidth(0.3),
-            //           height: context.dynamicHeight(0.8),
-            //           widget: SelectOrderDialog(
-            //             provider: provider,
-            //           )))
-            // ]),
             const Divider(),
             provider.selectedTable?.products?.isNotEmpty ?? false
                 ? ListView.builder(

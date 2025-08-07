@@ -1,4 +1,5 @@
 import 'package:backofficestock/product/model/custom_response.dart';
+import 'package:backofficestock/product/model/product_variation_model.dart';
 import 'package:backofficestock/product/service/app_service.dart';
 import 'package:backofficestock/product/utils/modal/error_popup.dart';
 import 'package:backofficestock/product/utils/modal/success_popup.dart';
@@ -76,7 +77,33 @@ class CheckProvider extends ChangeNotifier {
     ApiResponse response = await AppService.instance.postData(
         "/createTableProduct",
         {"TableId": selectedTable?.id, "ProductId": product.id});
-    // if (!context.mounted) return;
+    if (!context.mounted) return;
+    if (response.success) {
+    } else {
+      errorPopup(context, message: response.message);
+    }
+    notifyListeners();
+  }
+
+  void handleAddNewVariant(
+      ProductVariantModel product, BuildContext context) async {
+    selectedTable?.products?.add(TableProductModel(
+        id: product.productId,
+        productName: "",
+        price: 0.0,
+        variants: [
+          TableProductVariantModel(
+              variantId: product.variantId,
+              variantName: product.variantName,
+              price: product.price.toDouble())
+        ]));
+    ApiResponse response =
+        await AppService.instance.postData("/createTableProduct", {
+      "TableId": selectedTable?.id,
+      "ProductId": product.productId,
+      "VariantId": product.variantId
+    });
+    if (!context.mounted) return;
     if (response.success) {
     } else {
       errorPopup(context, message: response.message);
@@ -111,9 +138,9 @@ class CheckProvider extends ChangeNotifier {
   }
 
   void removeTableProdcut(
-      TableProductModel product, int index, BuildContext context) async {
+      TableProductModel tableProduct, int index, BuildContext context) async {
     ApiResponse response = await AppService.instance
-        .deleteData("/deleteTableProduct", {"TableId": product.id});
+        .deleteData("/deleteTableProduct", {"TableProductId": tableProduct.id});
     if (!context.mounted) return;
     if (response.success) {
       selectedTable?.products?.removeAt(index);

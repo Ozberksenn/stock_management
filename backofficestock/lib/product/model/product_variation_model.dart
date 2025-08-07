@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class ProductVariantModel {
   final int variantId;
+  final int productId;
   final String variantName;
   final String barcode;
   final int quantity;
@@ -9,6 +10,7 @@ class ProductVariantModel {
 
   ProductVariantModel({
     required this.variantId,
+    required this.productId,
     required this.variantName,
     required this.barcode,
     required this.quantity,
@@ -18,6 +20,7 @@ class ProductVariantModel {
   factory ProductVariantModel.fromMap(Map<String, dynamic> json) {
     return ProductVariantModel(
         variantId: json['VariantId'],
+        productId: json['ProductId'],
         variantName: json['VariantName'],
         barcode: json['Barcode'],
         quantity: json["Quantity"],
